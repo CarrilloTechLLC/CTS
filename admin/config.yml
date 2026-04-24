@@ -5,7 +5,7 @@
 
 backend:
   name: github
-  repo: carrillotechllc/carrillotech   # ← YOUR GitHub user/repo
+  repo: CarrilloTechLLC/CTS   # ← YOUR GitHub user/repo
   branch: main
   base_url: https://api.netlify.com     # Required for GitHub OAuth via Netlify
 
@@ -19,7 +19,7 @@ media_folder: "assets/uploads"          # Where uploaded images are stored
 public_folder: "/assets/uploads"        # Public URL prefix for images
 
 # ── Site URL (update to your domain) ──
-site_url: https://carrillotechllc.github.io/carrillotech
+site_url: https://cts-cleveland.netlify.app/
 
 # ─────────────────────────────────────
 # COLLECTIONS

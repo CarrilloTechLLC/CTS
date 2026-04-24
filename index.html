@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Carrillo Tech Solutions | Elite IT Infrastructure</title>
+  <meta name="description" content="Carrillo Tech Solutions engineers uncompromising digital environments. Elite IT infrastructure, hardware architecture, and precision system deployments in Cleveland, Ohio." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Animated Background Canvas -->
+  <canvas id="bgCanvas"></canvas>
+
+  <!-- Scanline Overlay -->
+  <div class="scanlines"></div>
+
+  <!-- ═══════════════ NAVIGATION ═══════════════ -->
+  <header class="nav-header" id="mainNav">
+    <nav class="nav-container">
+      <a href="#" class="nav-logo" aria-label="Carrillo Tech Solutions Home">
+        <img src="assets/cts-logo.png" alt="CTS Logo" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+        <div class="logo-fallback">
+          <span class="logo-icon">⬡</span>
+          <div class="logo-text">
+            <span class="logo-cts">CTS</span>
+            <span class="logo-sub">Carrillo Tech Solutions</span>
+          </div>
+        </div>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#services" class="nav-link">Enterprise Services</a></li>
+        <li><a href="#portfolio" class="nav-link">Infrastructure Portfolio</a></li>
+        <li><a href="#architect" class="nav-link">The Architect</a></li>
+        <li><a href="#intel" class="nav-link">Intelligence Hub</a></li>
+        <li><a href="#contact" class="nav-cta">
+          <i class="fas fa-terminal"></i> Deploy Support
+        </a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ═══════════════ HERO ═══════════════ -->
+    <section class="hero" id="home">
+      <div class="hero-grid-overlay"></div>
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="badge-dot"></span>
+          <span>SYSTEMS ONLINE // CLEVELAND, OHIO</span>
+        </div>
+        <h1 class="hero-headline">
+          Elite IT Infrastructure<br />
+          <span class="headline-accent">&amp; Precision Hardware</span><br />
+          Architecture.
+        </h1>
+        <p class="hero-subheadline">
+          Operating out of Cleveland, Ohio, Carrillo Tech Solutions engineers uncompromising digital environments. From forensic-level system diagnostics and liquid-cooled broadcasting rigs to intelligent network deployments, we eliminate hardware bottlenecks and accelerate your technological capabilities.
+        </p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn btn-primary">
+            <i class="fas fa-ticket"></i>
+            Initialize Support Ticket
+          </a>
+          <a href="#portfolio" class="btn btn-outline">
+            <i class="fas fa-folder-open"></i>
+            Access the Portfolio
+          </a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat">
+            <span class="stat-val">6+</span>
+            <span class="stat-label">Certifications</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat">
+            <span class="stat-val">24/7</span>
+            <span class="stat-label">Remote Support</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat">
+            <span class="stat-val">5+</span>
+            <span class="stat-label">Service Domains</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hex-ring">
+          <div class="hex-core">
+            <img src="assets/cts-logo.png" alt="CTS" class="hero-logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+            <span class="hero-logo-fallback">CTS</span>
+          </div>
+          <div class="hex-orbit hex-orbit-1">
+            <div class="hex-node" style="--i:0"><i class="fas fa-microchip"></i></div>
+            <div class="hex-node" style="--i:1"><i class="fas fa-network-wired"></i></div>
+            <div class="hex-node" style="--i:2"><i class="fas fa-shield-halved"></i></div>
+          </div>
+          <div class="hex-orbit hex-orbit-2">
+            <div class="hex-node hex-node-sm" style="--i:0"></div>
+            <div class="hex-node hex-node-sm" style="--i:1"></div>
+            <div class="hex-node hex-node-sm" style="--i:2"></div>
+            <div class="hex-node hex-node-sm" style="--i:3"></div>
+            <div class="hex-node hex-node-sm" style="--i:4"></div>
+            <div class="hex-node hex-node-sm" style="--i:5"></div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-scroll-hint">
+        <span>SCROLL TO INITIALIZE</span>
+        <div class="scroll-arrow"></div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ SERVICES ═══════════════ -->
+    <section class="services" id="services">
+      <div class="section-container">
+        <div class="section-header">
+          <div class="section-eyebrow">
+            <span class="eyebrow-line"></span>
+            <span>ENTERPRISE SERVICES</span>
+            <span class="eyebrow-line"></span>
+          </div>
+          <h2 class="section-title">Precision-Engineered<br /><span class="title-accent">IT Deployments.</span></h2>
+        </div>
+
+        <div class="services-grid">
+          <div class="service-card" data-index="01">
+            <div class="card-glow"></div>
+            <div class="card-header">
+              <div class="card-icon-wrap">
+                <i class="fas fa-server"></i>
+              </div>
+              <span class="card-number">01</span>
+            </div>
+            <h3>Extreme Hardware Architecture &amp; Repair</h3>
+            <p>From diagnosing failing micro-components to assembling ultra-high-end workstations. Whether you require a Lenovo LOQ customized for heavy rendering, or a dedicated dual-PC streaming environment, I spec and build with absolute precision.</p>
+            <div class="card-tags">
+              <span>Workstations</span><span>Streaming Rigs</span><span>Component Repair</span>
+            </div>
+          </div>
+
+          <div class="service-card featured" data-index="02">
+            <div class="card-glow"></div>
+            <div class="card-header">
+              <div class="card-icon-wrap">
+                <i class="fas fa-stethoscope"></i>
+              </div>
+              <span class="card-number">02</span>
+            </div>
+            <h3>Deep-Level System Diagnostics</h3>
+            <p>Leveraging Google certification in Technical Support Fundamentals, I execute forensic-level diagnostics. Operating system crashes, thermal throttling, and software conflicts are isolated and eradicated to restore peak performance.</p>
+            <div class="card-tags">
+              <span>OS Recovery</span><span>Thermal Analysis</span><span>Performance Tuning</span>
+            </div>
+          </div>
+
+          <div class="service-card" data-index="03">
+            <div class="card-glow"></div>
+            <div class="card-header">
+              <div class="card-icon-wrap">
+                <i class="fas fa-chart-line"></i>
+              </div>
+              <span class="card-number">03</span>
+            </div>
+            <h3>Data Analysis &amp; Intelligence</h3>
+            <p>Backed by credentials in Data Analysis, AI, and advanced Excel functions, I offer robust data processing solutions. I transform chaotic, raw information into organized, actionable business intelligence.</p>
+            <div class="card-tags">
+              <span>Excel Analytics</span><span>AI Integration</span><span>Business Intel</span>
+            </div>
+          </div>
+
+          <div class="service-card" data-index="04">
+            <div class="card-glow"></div>
+            <div class="card-header">
+              <div class="card-icon-wrap">
+                <i class="fas fa-lock"></i>
+              </div>
+              <span class="card-number">04</span>
+            </div>
+            <h3>Network Hardening &amp; Infrastructure</h3>
+            <p>Enterprise-grade router configuration, switch deployment, and localized security hardening to ensure your data remains encrypted and your throughput remains flawless.</p>
+            <div class="card-tags">
+              <span>Router Config</span><span>Security Hardening</span><span>Switch Deploy</span>
+            </div>
+          </div>
+
+          <div class="service-card" data-index="05">
+            <div class="card-glow"></div>
+            <div class="card-header">
+              <div class="card-icon-wrap">
+                <i class="fas fa-headset"></i>
+              </div>
+              <span class="card-number">05</span>
+            </div>
+            <h3>Client-Centric IT Consulting</h3>
+            <p>Technology should not be frustrating. Utilizing certified background in Customer Service Foundations, I provide transparent, digestible consulting that bridges complex engineering and user-friendly operation.</p>
+            <div class="card-tags">
+              <span>Remote Support</span><span>Consultation</span><span>Training</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ THE ARCHITECT ═══════════════ -->
+    <section class="architect" id="architect">
+      <div class="section-container">
+        <div class="architect-layout">
+          <div class="architect-left">
+            <div class="section-eyebrow">
+              <span class="eyebrow-line"></span>
+              <span>THE ARCHITECT</span>
+              <span class="eyebrow-line"></span>
+            </div>
+            <h2 class="section-title">Bridging Extreme Engineering<br /><span class="title-accent">with Practical Implementation.</span></h2>
+            <div class="architect-bio">
+              <p>Welcome to Carrillo Tech Solutions. I am <strong>Giovanni Carrillo</strong>, Owner and Lead Systems Technician. My expertise is forged in the trenches of hardware optimization, network security, and advanced system configurations. I do not just troubleshoot technology; I engineer scalable digital ecosystems designed to push past factory limitations safely and efficiently.</p>
+            </div>
+
+            <div class="architect-profile-card">
+              <div class="profile-avatar">
+                <div class="avatar-hex">
+                  <span>GC</span>
+                </div>
+                <div class="profile-status">
+                  <span class="status-dot"></span>
+                  <span>Available for Deployment</span>
+                </div>
+              </div>
+              <div class="profile-meta">
+                <div class="meta-row">
+                  <i class="fas fa-map-marker-alt"></i>
+                  <span>Cleveland, Ohio</span>
+                </div>
+                <div class="meta-row">
+                  <i class="fas fa-building"></i>
+                  <span>Carrillo Tech Solutions LLC</span>
+                </div>
+                <div class="meta-row">
+                  <i class="fas fa-graduation-cap"></i>
+                  <span>A.A.S. Human Services — Tri-C (In Progress)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="architect-right">
+            <div class="cred-panel">
+              <div class="cred-panel-header">
+                <i class="fas fa-id-badge"></i>
+                <span>CREDENTIAL MATRIX</span>
+                <span class="cred-count">6 VERIFIED</span>
+              </div>
+              <div class="credentials-list">
+                <div class="cred-item">
+                  <div class="cred-icon google">
+                    <i class="fab fa-google"></i>
+                  </div>
+                  <div class="cred-info">
+                    <span class="cred-name">Technical Support Fundamentals</span>
+                    <span class="cred-issuer">Google / Coursera</span>
+                    <span class="cred-date">Apr 14, 2026</span>
+                  </div>
+                  <a href="https://coursera.org/verify/KGVILQA8QBT4" target="_blank" rel="noopener" class="cred-verify" title="Verify Certificate">
+                    <i class="fas fa-external-link-alt"></i>
+                  </a>
+                </div>
+                <div class="cred-item">
+                  <div class="cred-icon ai">
+                    <i class="fas fa-brain"></i>
+                  </div>
+                  <div class="cred-info">
+                    <span class="cred-name">Introduction to Artificial Intelligence</span>
+                    <span class="cred-issuer">Edovo</span>
+                    <span class="cred-date">Nov 15, 2025</span>
+                  </div>
+                </div>
+                <div class="cred-item">
+                  <div class="cred-icon excel">
+                    <i class="fas fa-table"></i>
+                  </div>
+                  <div class="cred-info">
+                    <span class="cred-name">Using Basic Formulas &amp; Functions in Excel</span>
+                    <span class="cred-issuer">Coursera</span>
+                    <span class="cred-date">Mar 13, 2026</span>
+                  </div>
+                  <a href="https://coursera.org/verify/AFHMFERJ6U86" target="_blank" rel="noopener" class="cred-verify" title="Verify Certificate">
+                    <i class="fas fa-external-link-alt"></i>
+                  </a>
+                </div>
+                <div class="cred-item">
+                  <div class="cred-icon excel">
+                    <i class="fas fa-chart-bar"></i>
+                  </div>
+                  <div class="cred-info">
+                    <span class="cred-name">Introduction to Data Analysis — Excel</span>
+                    <span class="cred-issuer">Coursera</span>
+                    <span class="cred-date">Mar 12, 2026</span>
+                  </div>
+                  <a href="https://coursera.org/verify/4MRGBOEK6BHW" target="_blank" rel="noopener" class="cred-verify" title="Verify Certificate">
+                    <i class="fas fa-external-link-alt"></i>
+                  </a>
+                </div>
+                <div class="cred-item">
+                  <div class="cred-icon excel">
+                    <i class="fas fa-file-excel"></i>
+                  </div>
+                  <div class="cred-info">
+                    <span class="cred-name">Getting Started with Microsoft Excel</span>
+                    <span class="cred-issuer">Coursera</span>
+                    <span class="cred-date">Mar 12, 2026</span>
+                  </div>
+                  <a href="https://coursera.org/verify/Y55648VE7ZHL" target="_blank" rel="noopener" class="cred-verify" title="Verify Certificate">
+                    <i class="fas fa-external-link-alt"></i>
+                  </a>
+                </div>
+                <div class="cred-item">
+                  <div class="cred-icon linkedin">
+                    <i class="fab fa-linkedin"></i>
+                  </div>
+                  <div class="cred-info">
+                    <span class="cred-name">Customer Service Foundations</span>
+                    <span class="cred-issuer">LinkedIn Learning</span>
+                    <span class="cred-date">Apr 07, 2026</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="creator-panel">
+              <div class="creator-header">
+                <i class="fas fa-broadcast-tower"></i>
+                <span>THE DIGITAL CREATOR</span>
+              </div>
+              <p>Beyond the hardware bench, Giovanni is a multidimensional digital creator. As a Twitch Affiliate at <strong>supergman2155</strong>, he live-tests the boundaries of modern broadcasting software, OBS configurations, and hardware limits. He also engages in advanced virtual environment modding (FiveM/LSPDFR) and digital audio production.</p>
+              <div class="creator-platforms">
+                <a href="https://twitch.tv/supergman2155" target="_blank" rel="noopener" class="platform-badge twitch">
+                  <i class="fab fa-twitch"></i> Twitch Affiliate
+                </a>
+                <a href="https://youtube.com/@supergman215" target="_blank" rel="noopener" class="platform-badge youtube">
+                  <i class="fab fa-youtube"></i> YouTube
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ PORTFOLIO ═══════════════ -->
+    <section class="portfolio" id="portfolio">
+      <div class="section-container">
+        <div class="section-header">
+          <div class="section-eyebrow">
+            <span class="eyebrow-line"></span>
+            <span>INFRASTRUCTURE PORTFOLIO</span>
+            <span class="eyebrow-line"></span>
+          </div>
+          <h2 class="section-title">Deployed <span class="title-accent">Operations.</span></h2>
+          <p class="section-desc">Completed engagements and live infrastructure builds. Portfolio entries are updated dynamically via the CMS.</p>
+        </div>
+
+        <div class="portfolio-grid" id="portfolioGrid">
+          <!-- CMS-managed content loads here; static placeholders below -->
+          <div class="portfolio-card">
+            <div class="portfolio-card-top">
+              <span class="portfolio-tag">Hardware</span>
+              <span class="portfolio-status active">Active</span>
+            </div>
+            <h4>Dual-PC Streaming Infrastructure Build</h4>
+            <p>Custom-specced dual-PC broadcast environment with dedicated capture card pipeline, OBS scene management, and thermal optimization for sustained 1080p60 output.</p>
+            <div class="portfolio-tech">
+              <span>OBS Studio</span><span>Capture Card</span><span>Liquid Cooling</span>
+            </div>
+          </div>
+          <div class="portfolio-card">
+            <div class="portfolio-card-top">
+              <span class="portfolio-tag">Data</span>
+              <span class="portfolio-status active">Active</span>
+            </div>
+            <h4>Business Intelligence Dashboard</h4>
+            <p>Transformed raw operational data into structured Excel dashboards with automated formulas, pivot analysis, and visual reporting for small business decision-making.</p>
+            <div class="portfolio-tech">
+              <span>Microsoft Excel</span><span>Data Analysis</span><span>Automation</span>
+            </div>
+          </div>
+          <div class="portfolio-card">
+            <div class="portfolio-card-top">
+              <span class="portfolio-tag">Network</span>
+              <span class="portfolio-status complete">Complete</span>
+            </div>
+            <h4>Home Lab Network Hardening</h4>
+            <p>Full network segmentation deployment with enterprise router configuration, VLAN isolation, and security audit to eliminate unauthorized access vectors.</p>
+            <div class="portfolio-tech">
+              <span>Router Config</span><span>VLANs</span><span>Firewall Rules</span>
+            </div>
+          </div>
+          <div class="portfolio-card cms-placeholder">
+            <div class="placeholder-inner">
+              <i class="fas fa-plus"></i>
+              <span>More Projects via CMS</span>
+              <a href="/admin" class="placeholder-link">Open Admin Portal</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ INTEL HUB ═══════════════ -->
+    <section class="intel-hub" id="intel">
+      <div class="section-container">
+        <div class="section-header">
+          <div class="section-eyebrow">
+            <span class="eyebrow-line"></span>
+            <span>INTELLIGENCE HUB</span>
+            <span class="eyebrow-line"></span>
+          </div>
+          <h2 class="section-title">Field <span class="title-accent">Dispatches.</span></h2>
+          <p class="section-desc">Technical writeups, hardware tear-downs, and industry intelligence. Managed via Decap CMS.</p>
+        </div>
+
+        <div class="blog-grid" id="blogGrid">
+          <article class="blog-card featured-blog">
+            <div class="blog-tag">Hardware</div>
+            <h4>Thermal Throttling: Why Your CPU Is Lying to You</h4>
+            <p>A forensic breakdown of thermal management failures in modern laptops — and how to surgically fix them without voiding your warranty.</p>
+            <div class="blog-meta">
+              <span><i class="fas fa-calendar"></i> Apr 2026</span>
+              <a href="#" class="blog-read">Read Dispatch <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </article>
+          <article class="blog-card">
+            <div class="blog-tag">Networking</div>
+            <h4>VLAN Segmentation for the Home Lab</h4>
+            <p>How to build enterprise-grade network isolation in your home environment using consumer hardware and open-source tools.</p>
+            <div class="blog-meta">
+              <span><i class="fas fa-calendar"></i> Mar 2026</span>
+              <a href="#" class="blog-read">Read Dispatch <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </article>
+          <article class="blog-card">
+            <div class="blog-tag">Data</div>
+            <h4>Excel as a BI Tool: Advanced Pivot Techniques</h4>
+            <p>Transforming raw spreadsheets into interactive dashboards using pivot tables, dynamic named ranges, and conditional formatting.</p>
+            <div class="blog-meta">
+              <span><i class="fas fa-calendar"></i> Mar 2026</span>
+              <a href="#" class="blog-read">Read Dispatch <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ CONTACT ═══════════════ -->
+    <section class="contact" id="contact">
+      <div class="section-container">
+        <div class="contact-layout">
+          <div class="contact-left">
+            <div class="section-eyebrow">
+              <span class="eyebrow-line"></span>
+              <span>SECURE TICKETING</span>
+              <span class="eyebrow-line"></span>
+            </div>
+            <h2 class="section-title">Initiate a Technical<br /><span class="title-accent">Deployment.</span></h2>
+            <p class="contact-desc">Whether you require emergency system diagnostics, a secure network overhaul, or a custom hardware commission, initiate a ticket below. Existing clients receive priority routing.</p>
+            <div class="contact-info-items">
+              <div class="contact-info-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <div>
+                  <span class="info-label">Operations Base</span>
+                  <span class="info-val">Cleveland, Ohio</span>
+                </div>
+              </div>
+              <div class="contact-info-item">
+                <i class="fas fa-globe"></i>
+                <div>
+                  <span class="info-label">Web Presence</span>
+                  <span class="info-val">carrillotech.com</span>
+                </div>
+              </div>
+              <div class="contact-info-item">
+                <i class="fas fa-clock"></i>
+                <div>
+                  <span class="info-label">Response Window</span>
+                  <span class="info-val">Within 24 Hours</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-right">
+            <div class="ticket-form-wrap">
+              <div class="form-header">
+                <span class="form-status"><span class="status-dot"></span> SECURE CHANNEL OPEN</span>
+              </div>
+              <div class="ticket-form" id="ticketForm">
+                <div class="form-group">
+                  <label for="contactName">Operator Name</label>
+                  <input type="text" id="contactName" placeholder="Full Name" autocomplete="name" />
+                </div>
+                <div class="form-group">
+                  <label for="contactVerify">Contact Verification</label>
+                  <input type="email" id="contactVerify" placeholder="Email or Phone" autocomplete="email" />
+                </div>
+                <div class="form-group">
+                  <label for="missionType">Mission Objective</label>
+                  <select id="missionType">
+                    <option value="">— Select Deployment Type —</option>
+                    <option value="hardware">Hardware Architecture &amp; Repair</option>
+                    <option value="network">Network Hardening &amp; Infrastructure</option>
+                    <option value="data">Data Analytics &amp; Intelligence</option>
+                    <option value="ai">AI Consultation</option>
+                    <option value="diagnostics">System Diagnostics</option>
+                    <option value="consulting">IT Consulting</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="systemSpecs">Current System Specifications</label>
+                  <input type="text" id="systemSpecs" placeholder="e.g., Windows 11, Intel i7, 16GB RAM..." />
+                </div>
+                <div class="form-group">
+                  <label for="missionBrief">Detailed Mission Brief</label>
+                  <textarea id="missionBrief" rows="4" placeholder="Describe your issue or project in detail..."></textarea>
+                </div>
+                <button class="btn btn-primary btn-submit" id="submitBtn" onclick="handleFormSubmit(event)">
+                  <i class="fas fa-paper-plane"></i>
+                  Submit Deployment Request
+                </button>
+                <div id="formMsg" class="form-message" style="display:none;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ═══════════════ FOOTER ═══════════════ -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="#" class="footer-logo-link">
+            <img src="assets/cts-logo.png" alt="CTS" class="footer-logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+            <span class="footer-logo-fallback">CTS</span>
+          </a>
+          <p class="footer-tagline">Carrillo Tech Solutions.<br />Engineered for Performance. Secured for the Future.</p>
+        </div>
+
+        <div class="footer-nav-col">
+          <h5>Command Links</h5>
+          <ul>
+            <li><a href="#services">Enterprise Services</a></li>
+            <li><a href="#portfolio">Infrastructure Portfolio</a></li>
+            <li><a href="#architect">The Architect</a></li>
+            <li><a href="#intel">Intelligence Hub</a></li>
+            <li><a href="#contact">Deploy Support</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-nav-col">
+          <h5>Legal</h5>
+          <ul>
+            <li><a href="/privacy">Privacy Policy</a></li>
+            <li><a href="/terms">Terms of Service</a></li>
+            <li><a href="/admin">Admin Portal</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-social-col">
+          <h5>Social Nodes</h5>
+          <div class="social-links">
+            <a href="https://twitch.tv/supergman2155" target="_blank" rel="noopener" class="social-node" aria-label="Twitch">
+              <i class="fab fa-twitch"></i>
+            </a>
+            <a href="https://youtube.com/@supergman215" target="_blank" rel="noopener" class="social-node" aria-label="YouTube">
+              <i class="fab fa-youtube"></i>
+            </a>
+            <a href="https://instagram.com/G.io215" target="_blank" rel="noopener" class="social-node" aria-label="Instagram">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://linkedin.com/in/giovanni-carrillo" target="_blank" rel="noopener" class="social-node" aria-label="LinkedIn">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2026 Carrillo Tech Solutions LLC. All rights reserved.</span>
+        <span class="footer-sig">// CLEVELAND, OH // SYSTEMS NOMINAL</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>

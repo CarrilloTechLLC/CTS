@@ -1,0 +1,131 @@
+# ═══════════════════════════════════════════════════════
+# CARRILLO TECH SOLUTIONS — Decap CMS Configuration
+# Replace YOUR_GITHUB_USERNAME and YOUR_REPO_NAME below
+# ═══════════════════════════════════════════════════════
+
+backend:
+  name: github
+  repo: carrillotechllc/carrillotech   # ← YOUR GitHub user/repo
+  branch: main
+  base_url: https://api.netlify.com     # Required for GitHub OAuth via Netlify
+
+# When hosting on GitHub Pages without Netlify OAuth,
+# use the git-gateway backend instead:
+# backend:
+#   name: git-gateway
+#   branch: main
+
+media_folder: "assets/uploads"          # Where uploaded images are stored
+public_folder: "/assets/uploads"        # Public URL prefix for images
+
+# ── Site URL (update to your domain) ──
+site_url: https://carrillotechllc.github.io/carrillotech
+
+# ─────────────────────────────────────
+# COLLECTIONS
+# ─────────────────────────────────────
+collections:
+
+  # ── BLOG / INTELLIGENCE HUB ──────────────────────────
+  - name: "blog"
+    label: "Intelligence Hub — Blog"
+    label_singular: "Post"
+    folder: "_posts"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    preview_path: "intel/{{slug}}"
+    fields:
+      - { label: "Title",       name: "title",       widget: "string",   hint: "Post headline" }
+      - { label: "Publish Date",name: "date",        widget: "datetime", date_format: "YYYY-MM-DD", time_format: false }
+      - label: "Category"
+        name: "category"
+        widget: "select"
+        options: ["Hardware", "Networking", "Data", "AI", "Security", "Tutorial"]
+      - { label: "Excerpt",     name: "excerpt",     widget: "text",     hint: "Short summary shown in the hub grid (1-2 sentences)" }
+      - { label: "Featured Image", name: "image",   widget: "image",    required: false }
+      - { label: "Body",        name: "body",        widget: "markdown" }
+      - label: "Draft"
+        name: "draft"
+        widget: "boolean"
+        default: false
+        hint: "Toggle to save without publishing"
+
+  # ── PORTFOLIO ─────────────────────────────────────────
+  - name: "portfolio"
+    label: "Infrastructure Portfolio"
+    label_singular: "Project"
+    folder: "_portfolio"
+    create: true
+    slug: "{{slug}}"
+    preview_path: "portfolio/{{slug}}"
+    fields:
+      - { label: "Project Name",  name: "title",      widget: "string" }
+      - { label: "Category",      name: "category",   widget: "select", options: ["Hardware", "Network", "Data", "AI", "Security", "Consulting"] }
+      - label: "Status"
+        name: "status"
+        widget: "select"
+        options:
+          - { label: "Active",    value: "active" }
+          - { label: "Complete",  value: "complete" }
+          - { label: "Archived",  value: "archived" }
+      - { label: "Short Summary", name: "summary",    widget: "text",   hint: "2-3 sentence overview for the card" }
+      - { label: "Full Description", name: "body",   widget: "markdown" }
+      - label: "Tech Stack Tags"
+        name: "tags"
+        widget: "list"
+        allow_add: true
+        hint: "e.g. OBS Studio, Capture Card, Python"
+      - { label: "Cover Image",   name: "image",      widget: "image",  required: false }
+      - label: "Featured"
+        name: "featured"
+        widget: "boolean"
+        default: false
+        hint: "Pin to top of portfolio grid"
+
+  # ── ENTERPRISE SERVICES ──────────────────────────────
+  - name: "services"
+    label: "Enterprise Services"
+    label_singular: "Service"
+    folder: "_services"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Service Name",      name: "title",       widget: "string" }
+      - { label: "Sort Order",        name: "order",       widget: "number", value_type: "int", min: 1 }
+      - { label: "Icon (FontAwesome class)", name: "icon", widget: "string", hint: "e.g. fas fa-server" }
+      - { label: "Short Description", name: "summary",     widget: "text",   hint: "Shown on service card" }
+      - { label: "Full Details",      name: "body",        widget: "markdown" }
+      - label: "Tags"
+        name: "tags"
+        widget: "list"
+        allow_add: true
+        hint: "e.g. Workstations, Component Repair"
+      - label: "Featured (Highlighted Card)"
+        name: "featured"
+        widget: "boolean"
+        default: false
+
+  # ── SITE SETTINGS (singleton) ────────────────────────
+  - name: "settings"
+    label: "Site Settings"
+    files:
+      - name: "general"
+        label: "General Settings"
+        file: "_data/settings.yml"
+        fields:
+          - { label: "Site Title",   name: "site_title",   widget: "string",   default: "Carrillo Tech Solutions" }
+          - { label: "Tagline",      name: "tagline",      widget: "string",   default: "Engineered for Performance. Secured for the Future." }
+          - { label: "Owner Name",   name: "owner",        widget: "string",   default: "Giovanni Carrillo" }
+          - { label: "Location",     name: "location",     widget: "string",   default: "Cleveland, Ohio" }
+          - { label: "Email",        name: "email",        widget: "string" }
+          - { label: "Twitch Handle",name: "twitch",       widget: "string",   default: "supergman2155" }
+          - { label: "YouTube Handle",name: "youtube",     widget: "string",   default: "supergman215" }
+          - { label: "Instagram",    name: "instagram",    widget: "string",   default: "G.io215" }
+          - { label: "LinkedIn URL", name: "linkedin",     widget: "string" }
+          - { label: "Hero Headline",name: "hero_headline",widget: "string" }
+          - { label: "Hero Subheadline", name: "hero_sub", widget: "text" }
+          - label: "Availability Status"
+            name: "available"
+            widget: "boolean"
+            default: true
+            hint: "Controls the 'Available for Deployment' badge"

@@ -6,17 +6,6 @@
 [build]
   publish = "."        # Root of project is the publish dir
 
-# ── Redirect rules ──────────────────────────────────
-[[redirects]]
-  from = "/admin"
-  to   = "/admin/index.html"
-  status = 200
-
-[[redirects]]
-  from = "/admin/*"
-  to   = "/admin/index.html"
-  status = 200
-
 # ── Security & performance headers ──────────────────
 [[headers]]
   for = "/*"

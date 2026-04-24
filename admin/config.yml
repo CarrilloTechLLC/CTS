@@ -7,25 +7,11 @@ backend:
   name: git-gateway
   branch: main
 
-# When hosting on GitHub Pages without Netlify OAuth,
-# use the git-gateway backend instead:
-# backend:
-#   name: git-gateway
-#   branch: main
+media_folder: "assets/uploads"
+public_folder: "/assets/uploads"
 
-media_folder: "assets/uploads"          # Where uploaded images are stored
-
-# When hosting on GitHub Pages without Netlify OAuth,
-# use the git-gateway backend instead:
-# backend:
-#   name: git-gateway
-#   branch: main
-
-media_folder: "assets/uploads"          # Where uploaded images are stored
-public_folder: "/assets/uploads"        # Public URL prefix for images
-
-# ── Site URL (update to your domain) ──
-site_url: https://cts-cleveland.netlify.app/
+# ── Site URL ──
+site_url: https://cts-cleveland.netlify.app
 
 # ─────────────────────────────────────
 # COLLECTIONS

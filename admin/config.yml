@@ -4,10 +4,16 @@
 # ═══════════════════════════════════════════════════════
 
 backend:
-  name: github
-  repo: CarrilloTechLLC/CTS   # ← YOUR GitHub user/repo
+  name: git-gateway
   branch: main
-  base_url: https://api.netlify.com     # Required for GitHub OAuth via Netlify
+
+# When hosting on GitHub Pages without Netlify OAuth,
+# use the git-gateway backend instead:
+# backend:
+#   name: git-gateway
+#   branch: main
+
+media_folder: "assets/uploads"          # Where uploaded images are stored
 
 # When hosting on GitHub Pages without Netlify OAuth,
 # use the git-gateway backend instead:

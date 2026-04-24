@@ -549,24 +549,13 @@ section { position: relative; z-index: 2; }
 }
 
 .services-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 1.5rem;
 }
-.services-grid .service-card:nth-child(4),
-.services-grid .service-card:nth-child(5) {
-  grid-column: span 1;
-}
-.services-grid .service-card:nth-child(4) { grid-column: 1 / 2; margin-left: calc(50% + 0.75rem); }
-.services-grid .service-card:nth-child(5) { }
-
-/* Simpler layout: last two cards centered */
-@supports (display: grid) {
-  .services-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-  .services-grid > *:nth-child(4) { grid-column: 1; }
-  .services-grid > *:nth-child(5) { grid-column: 2; }
+.services-grid > .service-card {
+  width: calc(33.333% - 1rem);
 }
 
 .service-card {

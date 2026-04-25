@@ -5,7 +5,7 @@ date: 2026-04-14
 category: Hardware
 excerpt: A forensic breakdown of thermal management failures in modern laptops —
   and how to surgically fix them without voiding your warranty.
-draft: true
+draft: false
 ---
 Have you ever noticed your gaming laptop or workstation slowing down exactly when the action gets intense? You aren’t imagining it; your hardware is intentionally sabotaging itself to survive. This is **Thermal Throttling.**
 

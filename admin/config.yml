@@ -7,6 +7,7 @@ backend:
   name: github
   repo: CarrilloTechLLC/CTS
   branch: main
+  base_url: https://sveltia-cms-auth.pages.dev
 
 media_folder: "assets/uploads"
 public_folder: "/assets/uploads"

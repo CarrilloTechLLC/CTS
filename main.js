@@ -270,6 +270,17 @@ document.addEventListener("DOMContentLoaded", () => {
       modal.style.opacity = '1';
       modal.style.visibility = 'visible';
       modal.classList.add('active');
+
+      // Wire a dedicated kill switch to the X button
+      const closeBtn = modal.querySelector('.modal-close');
+      if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+          modal.style.display = 'none';
+          modal.style.opacity = '0';
+          modal.style.visibility = 'hidden';
+          modal.classList.remove('active');
+        });
+      }
     }
     
     // Clean the URL so the pop-up doesn't happen again on refresh

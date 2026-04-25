@@ -287,3 +287,64 @@ document.addEventListener("DOMContentLoaded", () => {
     window.history.replaceState({}, document.title, window.location.pathname);
   }
 });
+
+
+
+// ── DYNAMIC DISPATCH LOADER ──────────────────────
+let allPosts = [];
+const POSTS_PER_PAGE = 3;
+
+async function loadAutoDispatches() {
+    const blogGrid = document.getElementById('blogGrid');
+    const expandContainer = document.getElementById('blogExpandContainer');
+    const loadMoreBtn = document.getElementById('loadMoreBtn');
+    if (!blogGrid) return;
+
+    try {
+        const response = await fetch('https://api.github.com/repos/CarrilloTechLLC/CTS/contents/_posts');
+        const files = await response.json();
+        
+        allPosts = files.filter(f => f.name.endsWith('.md')).reverse();
+
+        if (allPosts.length > POSTS_PER_PAGE) {
+            expandContainer.style.display = 'block';
+        }
+
+        renderPosts(allPosts.slice(0, POSTS_PER_PAGE));
+
+        loadMoreBtn.addEventListener('click', () => {
+            renderPosts(allPosts.slice(POSTS_PER_PAGE)); 
+            expandContainer.style.display = 'none'; 
+        });
+
+    } catch (error) {
+        console.error("Auto-load failed.", error);
+    }
+}
+
+function renderPosts(postsToRender) {
+    const blogGrid = document.getElementById('blogGrid');
+    
+    postsToRender.forEach(post => {
+        const fileName = post.name.replace('.md', '');
+        const displayTitle = fileName.split('-').slice(3).join(' ').toUpperCase() || "NEW DISPATCH";
+        const displayDate = fileName.split('-').slice(0, 3).join('-');
+
+        const card = document.createElement('article');
+        card.className = 'blog-card';
+        card.innerHTML = `
+            <div class="blog-tag">Intelligence</div>
+            <h4>${displayTitle}</h4>
+            <p>Field dispatch retrieved from secure storage.</p>
+            <div class="blog-meta">
+                <span><i class="fas fa-calendar"></i> ${displayDate}</span>
+                <a href="javascript:void(0)" onclick="openDispatch('${fileName}')" class="blog-read">
+                    Read Dispatch <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        `;
+        blogGrid.appendChild(card);
+    });
+}
+
+document.addEventListener('DOMContentLoaded', loadAutoDispatches);

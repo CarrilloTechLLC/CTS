@@ -211,26 +211,25 @@ window.addEventListener('load', () => {
   if (!headline) return;
   headline.style.animation = 'fadeSlideUp 1s ease both';
 });
-// ── Intel Hub Router ────────────────────────────────
+// ── Intel Hub Router (Loop-Fixed Version) ─────────────
 (function initRouter() {
   window.addEventListener('load', () => {
     const path = window.location.pathname;
 
-    // Check if the URL starts with /intel/
     if (path.includes('/intel/')) {
-      // Extract the post name (slug) from the URL
+      // Prevent the loop by stopping the browser from treating this as a new navigation
       const slug = path.split('/').filter(Boolean).pop();
       
-      console.log("Routing to dispatch: " + slug);
-
-      // Give the CMS 1 second to initialize data before opening the modal
+      // Stop the auto-refresh by overriding the default link behavior
       setTimeout(() => {
-        // This looks for the "Read Dispatch" button that matches the URL
         const targetBtn = document.querySelector(`a[href*="${slug}"]`);
         if (targetBtn) {
+          // Manually trigger the modal without reloading the page
           targetBtn.click();
+          // Clean up the URL in the address bar so it doesn't loop on refresh
+          window.history.replaceState({}, '', '/');
         }
-      }, 1000);
+      }, 500);
     }
   });
 })();

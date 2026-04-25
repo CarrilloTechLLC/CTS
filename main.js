@@ -218,17 +218,70 @@ function openDispatch(slug) {
   modal.classList.add('active');
   body.innerHTML = '<p style="text-align:center; color:#00F5D4;"><i class="fas fa-spinner fa-spin"></i> DECRYPTING DISPATCH...</p>';
 
-  // Fetch the raw text file from your _posts folder
   fetch(`/_posts/${slug}.md`)
     .then(response => {
       if (!response.ok) throw new Error('File not found');
       return response.text();
     })
     .then(markdown => {
-      // Strip out the YAML frontmatter (the hidden config stuff at the top of the file)
+      // Extract the CMS Frontmatter
+      const fmMatch = markdown.match(/^---\n([\s\S]*?)\n---/);
+      let title = slug.split('-').slice(3).join(' ').toUpperCase();
+      let date = slug.split('-').slice(0,3);
+      let formattedDate = `${date[1]}/${date[2]}/${date[0]}`;
+      let category = "Intelligence";
+      let excerpt = "";
+
+      if (fmMatch && fmMatch[1]) {
+        const fmText = fmMatch[1];
+        const titleMatch = fmText.match(/title:\s*(.+)/i);
+        const dateMatch = fmText.match(/date:\s*(.+)/i);
+        const catMatch = fmText.match(/category:\s*(.+)/i);
+        const excerptMatch = fmText.match(/excerpt:\s*(.+)/i);
+
+        if (titleMatch) title = titleMatch[1].replace(/^['"]|['"]$/g, '').trim();
+        if (catMatch) category = catMatch[1].replace(/^['"]|['"]$/g, '').trim();
+        if (excerptMatch) excerpt = excerptMatch[1].replace(/^['"]|['"]$/g, '').trim();
+        if (dateMatch) {
+            const rawDate = dateMatch[1].replace(/^['"]|['"]$/g, '').trim().split('T')[0].split('-');
+            if (rawDate.length >= 3) formattedDate = `${rawDate[1]}/${rawDate[2]}/${rawDate[0]}`;
+        }
+      }
+
+      // Get just the body text
       const content = markdown.replace(/^---[\s\S]*?---/, '');
-      // Translate the Markdown to HTML
-      body.innerHTML = marked.parse(content);
+
+      // Inject the structured layout
+      body.innerHTML = `
+        <div style="margin-bottom: 25px; border-bottom: 1px solid #333; padding-bottom: 20px;">
+          <p style="color: #a0a0a0; font-size: 0.8rem; text-transform: uppercase; margin: 0 0 5px 0;">Title</p>
+          <h2 style="color: #00f0ff; margin: 0 0 20px 0; font-family: 'Orbitron', sans-serif;">${title}</h2>
+          
+          <div style="display: flex; gap: 30px; margin-bottom: 20px;">
+            <div>
+              <p style="color: #a0a0a0; font-size: 0.8rem; text-transform: uppercase; margin: 0 0 5px 0;">Publish Date</p>
+              <p style="color: #e0e0e0; margin: 0; font-family: 'Share Tech Mono', monospace;">${formattedDate}</p>
+            </div>
+            <div>
+              <p style="color: #a0a0a0; font-size: 0.8rem; text-transform: uppercase; margin: 0 0 5px 0;">Category</p>
+              <p style="color: #b026ff; margin: 0; font-weight: bold;">${category}</p>
+            </div>
+          </div>
+
+          ${excerpt ? `
+          <div style="margin-bottom: 20px;">
+            <p style="color: #a0a0a0; font-size: 0.8rem; text-transform: uppercase; margin: 0 0 5px 0;">Excerpt</p>
+            <p style="color: #e0e0e0; font-style: italic; margin: 0;">${excerpt}</p>
+          </div>` : ''}
+        </div>
+        
+        <div>
+          <p style="color: #a0a0a0; font-size: 0.8rem; text-transform: uppercase; margin: 0 0 10px 0;">Body</p>
+          <div class="dispatch-markdown-content" style="color: #e0e0e0;">
+            ${marked.parse(content)}
+          </div>
+        </div>
+      `;
     })
     .catch(err => {
       body.innerHTML = `<h3 style="color:#ef4444;">ERROR: 404 DATA NOT FOUND</h3><p>The requested file could not be decrypted.</p>`;
@@ -327,13 +380,20 @@ function renderPosts(postsToRender) {
     
     postsToRender.forEach(post => {
         const fileName = post.name.replace('.md', '');
+        
+        // Format Date to MM/DD/YYYY
+        const dateParts = fileName.split('-').slice(0, 3);
+        let displayDate = "UNKNOWN";
+        if (dateParts.length === 3) {
+            displayDate = `${dateParts[1]}/${dateParts[2]}/${dateParts[0]}`;
+        }
+
         const displayTitle = fileName.split('-').slice(3).join(' ').toUpperCase() || "NEW DISPATCH";
-        const displayDate = fileName.split('-').slice(0, 3).join('-');
 
         const card = document.createElement('article');
         card.className = 'blog-card';
         card.innerHTML = `
-            <div class="blog-tag">Intelligence</div>
+            <div class="blog-tag" id="tag-${fileName}">Intelligence</div>
             <h4>${displayTitle}</h4>
             <p id="desc-${fileName}">Decrypting secure data...</p>
             <div class="blog-meta">
@@ -345,26 +405,27 @@ function renderPosts(postsToRender) {
         `;
         blogGrid.appendChild(card);
 
-        // Fetch the actual file to grab the description
+        // Fetch the file to grab the exact CMS Excerpt and Category
         fetch(`/_posts/${post.name}`)
             .then(res => res.text())
             .then(text => {
                 let excerpt = "Field dispatch retrieved from secure storage.";
+                let category = "Intelligence";
 
-                // 1. Try to find a "description" tag from the CMS
-                const descMatch = text.match(/description:\s*(.*)/i);
-                if (descMatch && descMatch[1]) {
-                    excerpt = descMatch[1].replace(/['"]/g, '').trim();
-                } else {
-                    // 2. Fallback: Strip formatting and grab the first 120 characters of the blog
-                    const cleanText = text.replace(/^---[\s\S]*?---/, '').replace(/[#*`_\[\]]/g, '').trim();
-                    if (cleanText) {
-                        excerpt = cleanText.substring(0, 120) + '...';
-                    }
+                // Grab Excerpt (Strictly from the CMS field)
+                const excerptMatch = text.match(/excerpt:\s*(.+)/i);
+                if (excerptMatch && excerptMatch[1]) {
+                    excerpt = excerptMatch[1].replace(/^['"]|['"]$/g, '').trim();
                 }
-                
-                // Inject the real description into the card
+
+                // Grab Category to update the tag
+                const catMatch = text.match(/category:\s*(.+)/i);
+                if (catMatch && catMatch[1]) {
+                    category = catMatch[1].replace(/^['"]|['"]$/g, '').trim();
+                }
+
                 document.getElementById(`desc-${fileName}`).textContent = excerpt;
+                document.getElementById(`tag-${fileName}`).textContent = category;
             })
             .catch(err => console.error("Decryption failed", err));
     });

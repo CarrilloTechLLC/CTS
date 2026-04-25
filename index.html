@@ -504,41 +504,41 @@
               <div class="form-header">
                 <span class="form-status"><span class="status-dot"></span> SECURE CHANNEL OPEN</span>
               </div>
-              <div class="ticket-form" id="ticketForm">
+              <form class="ticket-form" id="ticketForm" action="/api/submit" method="POST">
                 <div class="form-group">
                   <label for="contactName">Operator Name</label>
-                  <input type="text" id="contactName" placeholder="Full Name" autocomplete="name" />
+                  <input type="text" id="contactName" name="operator_name" placeholder="Full Name" autocomplete="name" required />
                 </div>
                 <div class="form-group">
                   <label for="contactVerify">Contact Verification</label>
-                  <input type="email" id="contactVerify" placeholder="Email or Phone" autocomplete="email" />
+                  <input type="email" id="contactVerify" name="contact_verification" placeholder="Email or Phone" autocomplete="email" required />
                 </div>
                 <div class="form-group">
                   <label for="missionType">Mission Objective</label>
-                  <select id="missionType">
+                  <select id="missionType" name="objective" required>
                     <option value="">— Select Deployment Type —</option>
-                    <option value="hardware">Hardware Architecture &amp; Repair</option>
-                    <option value="network">Network Hardening &amp; Infrastructure</option>
-                    <option value="data">Data Analytics &amp; Intelligence</option>
-                    <option value="ai">AI Consultation</option>
-                    <option value="diagnostics">System Diagnostics</option>
-                    <option value="consulting">IT Consulting</option>
+                    <option value="Hardware Architecture">Hardware Architecture &amp; Repair</option>
+                    <option value="Network Hardening">Network Hardening &amp; Infrastructure</option>
+                    <option value="Data Analytics">Data Analytics &amp; Intelligence</option>
+                    <option value="AI Consultation">AI Consultation</option>
+                    <option value="System Diagnostics">System Diagnostics</option>
+                    <option value="IT Consulting">IT Consulting</option>
                   </select>
                 </div>
                 <div class="form-group">
                   <label for="systemSpecs">Current System Specifications</label>
-                  <input type="text" id="systemSpecs" placeholder="e.g., Windows 11, Intel i7, 16GB RAM..." />
+                  <input type="text" id="systemSpecs" name="specs" placeholder="e.g., Windows 11, Intel i7, 16GB RAM..." />
                 </div>
                 <div class="form-group">
                   <label for="missionBrief">Detailed Mission Brief</label>
-                  <textarea id="missionBrief" rows="4" placeholder="Describe your issue or project in detail..."></textarea>
+                  <textarea id="missionBrief" name="brief" rows="4" placeholder="Describe your issue or project in detail..." required></textarea>
                 </div>
-                <button class="btn btn-primary btn-submit" id="submitBtn" onclick="handleFormSubmit(event)">
+                <button type="submit" class="btn btn-primary btn-submit" id="submitBtn">
                   <i class="fas fa-paper-plane"></i>
                   Submit Deployment Request
                 </button>
                 <div id="formMsg" class="form-message" style="display:none;"></div>
-              </div>
+              </form>
             </div>
           </div>
         </div>

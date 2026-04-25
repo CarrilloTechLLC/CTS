@@ -4,14 +4,15 @@
 # ═══════════════════════════════════════════════════════
 
 backend:
-  name: git-gateway
+  name: github
+  repo: CarrilloTechLLC/CTS
   branch: main
 
 media_folder: "assets/uploads"
 public_folder: "/assets/uploads"
 
 # ── Site URL ──
-site_url: https://cts-cleveland.netlify.app
+site_url: https://carrillotech.pages.dev
 
 # ─────────────────────────────────────
 # COLLECTIONS

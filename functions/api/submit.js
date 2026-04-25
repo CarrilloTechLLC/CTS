@@ -32,7 +32,8 @@ export async function onRequestPost({ request, env }) {
       return Response.redirect("https://carrillotech.pages.dev/?status=signal_received", 303);
     }
     
-    return new Response("Signal Failure. API Rejected.", { status: 500 });
+    const errorData = await response.text();
+    return new Response(`Signal Failure. Resend says: ${errorData}`, { status: 500 });
 
   } catch (err) {
     return new Response("Critical System Error during decryption.", { status: 400 });

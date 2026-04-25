@@ -346,6 +346,7 @@ document.addEventListener("DOMContentLoaded", () => {
 // ── DYNAMIC DISPATCH LOADER ──────────────────────
 let allPosts = [];
 const POSTS_PER_PAGE = 3;
+let isExpanded = false; // Memory switch to track if it's open or closed
 
 async function loadAutoDispatches() {
     const blogGrid = document.getElementById('blogGrid');
@@ -363,11 +364,28 @@ async function loadAutoDispatches() {
             expandContainer.style.display = 'block';
         }
 
+        // Render the initial batch
+        blogGrid.innerHTML = ''; 
         renderPosts(allPosts.slice(0, POSTS_PER_PAGE));
 
+        // The Smart Toggle Logic
         loadMoreBtn.addEventListener('click', () => {
-            renderPosts(allPosts.slice(POSTS_PER_PAGE)); 
-            expandContainer.style.display = 'none'; 
+            blogGrid.innerHTML = ''; // Wipe the current grid clean
+            
+            if (!isExpanded) {
+                // ACTION: Expand the grid
+                renderPosts(allPosts); // Render all files
+                loadMoreBtn.innerHTML = '<i class="fas fa-minus-square"></i> MINIMIZE FIELD DISPATCHES';
+                isExpanded = true;
+            } else {
+                // ACTION: Minimize the grid
+                renderPosts(allPosts.slice(0, POSTS_PER_PAGE)); // Render just the first 3 again
+                loadMoreBtn.innerHTML = '<i class="fas fa-plus-square"></i> EXTEND FIELD DISPATCHES';
+                isExpanded = false;
+                
+                // Smoothly scroll the user back to the top of the Intelligence Hub
+                document.getElementById('intel').scrollIntoView({ behavior: 'smooth' });
+            }
         });
 
     } catch (error) {

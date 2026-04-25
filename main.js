@@ -249,3 +249,27 @@ window.addEventListener('load', () => {
     setTimeout(() => openDispatch(dispatch), 300); // Open the modal
   }
 });
+// Intercept success signal and trigger custom HTML modal
+document.addEventListener("DOMContentLoaded", () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  
+  if (urlParams.get('status') === 'signal_received') {
+    const modal = document.getElementById('dispatchModal');
+    const modalBody = document.getElementById('dispatchBody');
+    
+    if (modal && modalBody) {
+      // Inject the custom styled success message
+      modalBody.innerHTML = `
+        <h3 style="color: #b026ff; margin-bottom: 15px;">[ SIGNAL RECEIVED ]</h3>
+        <p>Thank you for your submission.</p>
+        <p>Carrillo Tech Solutions will review your deployment request and respond within <strong>24-48 hours</strong>.</p>
+      `;
+      
+      // Force the modal to open
+      modal.style.display = 'flex'; 
+    }
+    
+    // Clean the URL so the pop-up doesn't happen again on refresh
+    window.history.replaceState({}, document.title, window.location.pathname);
+  }
+});

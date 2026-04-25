@@ -211,3 +211,26 @@ window.addEventListener('load', () => {
   if (!headline) return;
   headline.style.animation = 'fadeSlideUp 1s ease both';
 });
+// ── Intel Hub Router ────────────────────────────────
+(function initRouter() {
+  window.addEventListener('load', () => {
+    const path = window.location.pathname;
+
+    // Check if the URL starts with /intel/
+    if (path.includes('/intel/')) {
+      // Extract the post name (slug) from the URL
+      const slug = path.split('/').filter(Boolean).pop();
+      
+      console.log("Routing to dispatch: " + slug);
+
+      // Give the CMS 1 second to initialize data before opening the modal
+      setTimeout(() => {
+        // This looks for the "Read Dispatch" button that matches the URL
+        const targetBtn = document.querySelector(`a[href*="${slug}"]`);
+        if (targetBtn) {
+          targetBtn.click();
+        }
+      }, 1000);
+    }
+  });
+})();

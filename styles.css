@@ -1341,3 +1341,35 @@ section { position: relative; z-index: 2; }
   .stat-val { font-size: 1.35rem; }
   .architect-profile-card { flex-direction: column; }
 }
+/* ══════════════════════════════════════
+   DISPATCH MODAL (MARKDOWN RENDERER)
+══════════════════════════════════════ */
+.modal-overlay {
+  position: fixed; inset: 0; background: rgba(11, 12, 16, 0.95);
+  backdrop-filter: blur(10px); z-index: 9999; display: none;
+  align-items: center; justify-content: center; padding: 2rem;
+  opacity: 0; transition: opacity 0.3s ease;
+}
+.modal-overlay.active { display: flex; opacity: 1; animation: fadeSlideUp 0.4s ease forwards; }
+.modal-content {
+  background: var(--bg-2); border: 1px solid var(--cyan);
+  border-radius: var(--r-md); padding: 2.5rem; width: 100%; max-width: 800px;
+  max-height: 85vh; overflow-y: auto; position: relative;
+  box-shadow: 0 0 40px var(--cyan-glow);
+}
+.modal-close {
+  position: absolute; top: 1.5rem; right: 1.5rem; background: transparent;
+  border: none; color: var(--cyan); font-size: 1.5rem; cursor: pointer;
+  transition: all 0.2s;
+}
+.modal-close:hover { color: var(--purple); transform: scale(1.1); }
+
+/* Markdown Typography Fixes */
+.markdown-body h1, .markdown-body h2 { color: var(--cyan); margin-bottom: 1rem; font-family: var(--font-head); margin-top: 1.5rem; }
+.markdown-body p { margin-bottom: 1.5rem; line-height: 1.8; color: var(--text); }
+.markdown-body blockquote { 
+  border-left: 3px solid var(--purple); padding-left: 1rem; margin-bottom: 1.5rem; 
+  font-style: italic; color: var(--text-muted); background: var(--purple-dim); padding: 1rem;
+}
+.markdown-body ul, .markdown-body ol { margin-left: 2rem; margin-bottom: 1.5rem; color: var(--text); line-height: 1.8; }
+.markdown-body strong { color: var(--purple); }

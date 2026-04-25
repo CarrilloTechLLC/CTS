@@ -211,23 +211,41 @@ window.addEventListener('load', () => {
   if (!headline) return;
   headline.style.animation = 'fadeSlideUp 1s ease both';
 });
-// ── Intel Hub Deployment Router ──────────────────────
+// ── INTEL HUB: MODAL & MARKDOWN RENDERER ──────────────────────
+function openDispatch(slug) {
+  const modal = document.getElementById('dispatchModal');
+  const body = document.getElementById('dispatchBody');
+  modal.classList.add('active');
+  body.innerHTML = '<p style="text-align:center; color:#00F5D4;"><i class="fas fa-spinner fa-spin"></i> DECRYPTING DISPATCH...</p>';
+
+  // Fetch the raw text file from your _posts folder
+  fetch(`/_posts/${slug}.md`)
+    .then(response => {
+      if (!response.ok) throw new Error('File not found');
+      return response.text();
+    })
+    .then(markdown => {
+      // Strip out the YAML frontmatter (the hidden config stuff at the top of the file)
+      const content = markdown.replace(/^---[\s\S]*?---/, '');
+      // Translate the Markdown to HTML
+      body.innerHTML = marked.parse(content);
+    })
+    .catch(err => {
+      body.innerHTML = `<h3 style="color:#ef4444;">ERROR: 404 DATA NOT FOUND</h3><p>The requested file could not be decrypted.</p>`;
+    });
+}
+
+function closeDispatch() {
+  document.getElementById('dispatchModal').classList.remove('active');
+}
+
+// Catch the Cloudflare redirect and open the modal safely
 window.addEventListener('load', () => {
   const urlParams = new URLSearchParams(window.location.search);
   const dispatch = urlParams.get('dispatch');
 
   if (dispatch) {
-    console.log("Initializing Dispatch: " + dispatch);
-    
-    // 1. Clean the URL immediately so it looks professional
-    window.history.replaceState({}, '', '/');
-
-    // 2. Trigger the modal
-    setTimeout(() => {
-      const targetBtn = document.querySelector(`a[href*="${dispatch}"]`);
-      if (targetBtn) {
-        targetBtn.click();
-      }
-    }, 400);
+    window.history.replaceState({}, '', '/'); // Clean the URL instantly
+    setTimeout(() => openDispatch(dispatch), 300); // Open the modal
   }
 });

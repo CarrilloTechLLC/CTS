@@ -13,7 +13,7 @@ export async function onRequestPost({ request, env }) {
       },
       body: JSON.stringify({
         from: "CTS Command <onboarding@resend.dev>",
-        to: to: "carrillo.giovanni215+carrillotech@outlook.com", 
+        to: "carrillo.giovanni215+carrillotech@outlook.com", 
         subject: `[CTS Deployment] ${data.objective || 'New Ticket'}`,
         html: `
           <h2>Secure Dispatch Received</h2>

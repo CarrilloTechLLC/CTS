@@ -211,25 +211,26 @@ window.addEventListener('load', () => {
   if (!headline) return;
   headline.style.animation = 'fadeSlideUp 1s ease both';
 });
-// ── Intel Hub Router (Loop-Fixed Version) ─────────────
-(function initRouter() {
-  window.addEventListener('load', () => {
-    const path = window.location.pathname;
+// ── Intel Hub Router (Zero-Loop Version) ─────────────
+window.addEventListener('load', () => {
+  const params = new URLSearchParams(window.location.search);
+  const path = window.location.pathname;
 
-    if (path.includes('/intel/')) {
-      // Prevent the loop by stopping the browser from treating this as a new navigation
-      const slug = path.split('/').filter(Boolean).pop();
-      
-      // Stop the auto-refresh by overriding the default link behavior
-      setTimeout(() => {
-        const targetBtn = document.querySelector(`a[href*="${slug}"]`);
-        if (targetBtn) {
-          // Manually trigger the modal without reloading the page
-          targetBtn.click();
-          // Clean up the URL in the address bar so it doesn't loop on refresh
-          window.history.replaceState({}, '', '/');
-        }
-      }, 500);
-    }
-  });
-})();
+  if (path.startsWith('/intel/')) {
+    const slug = path.split('/').filter(Boolean).pop();
+    
+    // 1. Instantly change the URL to the homepage so Cloudflare stops redirecting
+    window.history.replaceState({}, '', '/');
+
+    // 2. Open the article modal manually
+    setTimeout(() => {
+      if (typeof window.openBlogModal === 'function') {
+        window.openBlogModal(slug);
+      } else {
+        // If the CMS isn't ready, find the specific link and trigger it
+        const link = document.querySelector(`a[href*="${slug}"]`);
+        if (link) link.click();
+      }
+    }, 300);
+  }
+});

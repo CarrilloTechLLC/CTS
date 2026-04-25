@@ -267,6 +267,9 @@ document.addEventListener("DOMContentLoaded", () => {
       
       // Force the modal to open
       modal.style.display = 'flex'; 
+      modal.style.opacity = '1';
+      modal.style.visibility = 'visible';
+      modal.classList.add('active');
     }
     
     // Clean the URL so the pop-up doesn't happen again on refresh

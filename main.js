@@ -335,7 +335,7 @@ function renderPosts(postsToRender) {
         card.innerHTML = `
             <div class="blog-tag">Intelligence</div>
             <h4>${displayTitle}</h4>
-            <p>Field dispatch retrieved from secure storage.</p>
+            <p id="desc-${fileName}">Decrypting secure data...</p>
             <div class="blog-meta">
                 <span><i class="fas fa-calendar"></i> ${displayDate}</span>
                 <a href="javascript:void(0)" onclick="openDispatch('${fileName}')" class="blog-read">
@@ -344,6 +344,29 @@ function renderPosts(postsToRender) {
             </div>
         `;
         blogGrid.appendChild(card);
+
+        // Fetch the actual file to grab the description
+        fetch(`/_posts/${post.name}`)
+            .then(res => res.text())
+            .then(text => {
+                let excerpt = "Field dispatch retrieved from secure storage.";
+
+                // 1. Try to find a "description" tag from the CMS
+                const descMatch = text.match(/description:\s*(.*)/i);
+                if (descMatch && descMatch[1]) {
+                    excerpt = descMatch[1].replace(/['"]/g, '').trim();
+                } else {
+                    // 2. Fallback: Strip formatting and grab the first 120 characters of the blog
+                    const cleanText = text.replace(/^---[\s\S]*?---/, '').replace(/[#*`_\[\]]/g, '').trim();
+                    if (cleanText) {
+                        excerpt = cleanText.substring(0, 120) + '...';
+                    }
+                }
+                
+                // Inject the real description into the card
+                document.getElementById(`desc-${fileName}`).textContent = excerpt;
+            })
+            .catch(err => console.error("Decryption failed", err));
     });
 }
 

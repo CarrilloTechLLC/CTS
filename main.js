@@ -211,26 +211,23 @@ window.addEventListener('load', () => {
   if (!headline) return;
   headline.style.animation = 'fadeSlideUp 1s ease both';
 });
-// ── Intel Hub Router (Zero-Loop Version) ─────────────
+// ── Intel Hub Deployment Router ──────────────────────
 window.addEventListener('load', () => {
-  const params = new URLSearchParams(window.location.search);
-  const path = window.location.pathname;
+  const urlParams = new URLSearchParams(window.location.search);
+  const dispatch = urlParams.get('dispatch');
 
-  if (path.startsWith('/intel/')) {
-    const slug = path.split('/').filter(Boolean).pop();
+  if (dispatch) {
+    console.log("Initializing Dispatch: " + dispatch);
     
-    // 1. Instantly change the URL to the homepage so Cloudflare stops redirecting
+    // 1. Clean the URL immediately so it looks professional
     window.history.replaceState({}, '', '/');
 
-    // 2. Open the article modal manually
+    // 2. Trigger the modal
     setTimeout(() => {
-      if (typeof window.openBlogModal === 'function') {
-        window.openBlogModal(slug);
-      } else {
-        // If the CMS isn't ready, find the specific link and trigger it
-        const link = document.querySelector(`a[href*="${slug}"]`);
-        if (link) link.click();
+      const targetBtn = document.querySelector(`a[href*="${dispatch}"]`);
+      if (targetBtn) {
+        targetBtn.click();
       }
-    }, 300);
+    }, 400);
   }
 });

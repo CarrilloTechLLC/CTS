@@ -1957,3 +1957,217 @@ section { position: relative; z-index: 2; }
     white-space: nowrap;
   }
 }
+
+/* ══════════════════════════════════════
+   SHAREABLE DISPATCH PAGE
+══════════════════════════════════════ */
+.dispatch-page {
+  position: relative;
+  z-index: 2;
+}
+
+.dispatch-hero {
+  padding: 8.5rem 0 3rem;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(155, 93, 229, 0.14), transparent 34%),
+    radial-gradient(circle at 78% 8%, rgba(0, 245, 212, 0.1), transparent 32%);
+}
+
+.dispatch-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  color: var(--cyan);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.dispatch-back:hover {
+  color: var(--purple);
+}
+
+.dispatch-page-card {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(1.5rem, 4vw, 3rem);
+  background: var(--bg-glass);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-cyan);
+  backdrop-filter: blur(14px);
+}
+
+.dispatch-page-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--cyan), var(--purple), transparent);
+}
+
+.dispatch-title {
+  margin: 1.25rem 0 1rem;
+  color: var(--text);
+  font-size: clamp(2rem, 5vw, 4rem);
+  line-height: 1.06;
+  letter-spacing: -0.04em;
+}
+
+.dispatch-excerpt {
+  max-width: 850px;
+  margin-bottom: 1.5rem;
+  color: var(--text-muted);
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  line-height: 1.75;
+}
+
+.dispatch-page-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border);
+  color: var(--text-dim);
+  font-family: var(--font-mono);
+  font-size: 0.86rem;
+}
+
+.dispatch-page-meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.dispatch-copy-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: rgba(0, 245, 212, 0.08);
+  border: 1px solid var(--cyan);
+  border-radius: 999px;
+  color: var(--cyan);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.dispatch-copy-btn:hover {
+  color: var(--bg);
+  background: var(--cyan);
+  box-shadow: var(--shadow-cyan);
+}
+
+.dispatch-content-section {
+  padding: 0 0 5rem;
+}
+
+.dispatch-article {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: clamp(1.5rem, 4vw, 3rem);
+  background: rgba(17, 24, 39, 0.7);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  backdrop-filter: blur(12px);
+}
+
+.dispatch-article h1,
+.dispatch-article h2,
+.dispatch-article h3,
+.dispatch-article h4 {
+  color: var(--cyan);
+  font-family: var(--font-head);
+  margin: 2rem 0 1rem;
+  line-height: 1.25;
+}
+
+.dispatch-article h1:first-child,
+.dispatch-article h2:first-child,
+.dispatch-article h3:first-child {
+  margin-top: 0;
+}
+
+.dispatch-article p,
+.dispatch-article li {
+  color: var(--text);
+  font-size: 1rem;
+  line-height: 1.85;
+}
+
+.dispatch-article p {
+  margin-bottom: 1.35rem;
+}
+
+.dispatch-article ul,
+.dispatch-article ol {
+  margin: 0 0 1.5rem 1.5rem;
+}
+
+.dispatch-article blockquote {
+  margin: 0 0 1.5rem;
+  padding: 1.25rem 1.4rem;
+  border-left: 3px solid var(--purple);
+  background: rgba(155, 93, 229, 0.08);
+  border-radius: 0 var(--r-sm) var(--r-sm) 0;
+}
+
+.dispatch-article strong {
+  color: var(--purple);
+}
+
+.dispatch-article a {
+  color: var(--cyan);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.dispatch-article code {
+  color: var(--cyan);
+  background: rgba(0, 245, 212, 0.08);
+  border: 1px solid rgba(0, 245, 212, 0.2);
+  border-radius: 6px;
+  padding: 0.12rem 0.35rem;
+  font-family: var(--font-mono);
+}
+
+.dispatch-article pre {
+  overflow-x: auto;
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+}
+
+.dispatch-article pre code {
+  padding: 0;
+  background: transparent;
+  border: 0;
+}
+
+@media (max-width: 640px) {
+  .dispatch-hero {
+    padding-top: 7rem;
+  }
+
+  .dispatch-page-meta {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .dispatch-copy-btn {
+    justify-content: center;
+    width: 100%;
+  }
+}

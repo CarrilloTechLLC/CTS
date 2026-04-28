@@ -1,7 +1,5 @@
-/* ═══════════════════════════════════════════════════
-   CARRILLO TECH SOLUTIONS — main.js
-   Canvas particle network + scroll behaviors + form
-   ═══════════════════════════════════════════════════ */
+// Carrillo Tech Solutions — main.js
+// Canvas particle network, scroll behaviors, and form handling
 
 // ── Canvas Particle Network ──────────────────────────
 (function initCanvas() {

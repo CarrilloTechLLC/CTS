@@ -13,6 +13,7 @@ Carrillo Tech Solutions is a Cleveland-based IT support and data analytics brand
 - **Infrastructure Portfolio:** Project-focused cards that highlight completed and active technical work.
 - **The Architect:** Professional owner profile with credentials, platform links, and business positioning.
 - **Intelligence Hub:** Technical writeups presented as field dispatches inside a custom modal reading experience.
+- **Creative Archive:** Lyrical manuscripts, beat references, draft notes, and finalized creative writing pieces rendered from CMS posts.
 - **Support Request Flow:** Branded contact section designed for visitors to submit technical needs clearly.
 - **Responsive Interface:** Mobile-friendly layout with animated background visuals, neon accents, and clean spacing.
 
@@ -30,6 +31,7 @@ Carrillo Tech Solutions is a Cleveland-based IT support and data analytics brand
 CTS-main/
 ├── index.html                  # Main website page
 ├── readme.html                 # Public README display page
+├── creative.html               # Creative Archive manuscript page
 ├── README.md                   # Project overview content
 ├── styles.css                  # Main site styling and responsive design
 ├── main.js                     # Website interactions and UI behavior
@@ -39,13 +41,13 @@ CTS-main/
 ├── admin/
 │   ├── index.html              # Admin portal entry page
 │   └── config.yml              # Content management configuration
-├── _posts/                     # Markdown-based technical writeups
+├── _posts/                     # Markdown-based technical writeups and creative manuscripts
 ├── _data/
 │   └── settings.yml            # Site settings data
 ├── functions/
 │   └── api/
 │       └── submit.js           # Support request submission endpoint
-└── assets/                     # CTS logos, icons, and visual brand files
+└── assets/                     # CTS logos, icons, uploads, and audio files
 ```
 
 ## Brand System

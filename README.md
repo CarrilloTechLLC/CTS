@@ -63,6 +63,8 @@ CTS-main/
 │   ├── 2026-03-20-vlan-segmentation-for-the-home-lab.md
 │   ├── 2026-04-14-a-forensic-breakdown-of-thermal-management-failures-in-modern-laptops-#U2014-and-how-to-surgically-fix-them-without-voiding-your-warranty.md
 │   └── 2026-04-28-the-ghost-in-the-machine-navigating-the-ethics-of-automated-labor.md
+├── _creative/
+│   └── .gitkeep                                    # CMS-managed Creative Archive entries
 ├── _portfolio/
 │   └── .gitkeep                                    # Placeholder for CMS-managed portfolio entries
 ├── _services/
@@ -78,8 +80,8 @@ CTS-main/
 
 | Collection | Folder | Purpose |
 |---|---|---|
-| Intelligence Hub / Blog | `_posts/` | Technical dispatches, social commentary, and Creative Archive entries |
-| Creative Archive | `_posts/` with `category: Creative Archive` | Lyrical manuscripts, beat sources, metadata, drafts, and finalized pieces |
+| Intelligence Hub / Blog | `_posts/` | Technical dispatches and social commentary |
+| Creative Archive | `_creative/` | Lyrical manuscripts, beat sources, metadata, drafts, and finalized pieces |
 | Infrastructure Portfolio | `_portfolio/` | CMS-managed technical project entries |
 | Enterprise Services | `_services/` | CMS-managed service cards and service details |
 | Site Settings | `_data/settings.yml` | Editable site identity, owner, platform, and hero content |
@@ -88,7 +90,6 @@ CTS-main/
 
 | Field | Use |
 |---|---|
-| `category` | Set to `Creative Archive` to route the post to the Creative Archive page |
 | `beat_source` | Accepts YouTube links, SoundCloud links, or direct audio paths |
 | `bpm` | Stores tempo metadata for the manuscript |
 | `musical_key` | Stores musical key metadata |

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project README | Carrillo Tech Solutions</title>
+  <meta name="description" content="Project overview for the Carrillo Tech Solutions website, including features, technology stack, brand system, and project notes." />
+
+  <link rel="icon" type="image/png" href="assets/cts-logo-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <canvas id="bgCanvas"></canvas>
+  <div class="scanlines"></div>
+
+  <header class="nav-header" id="mainNav">
+    <nav class="nav-container">
+      <a href="/" class="nav-logo" aria-label="Carrillo Tech Solutions Home">
+        <img src="/assets/cts-logo-icon.png" alt="CTS Logo" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+        <div class="logo-fallback">
+          <span class="logo-icon">⬡</span>
+          <div class="logo-text">
+            <span class="logo-cts">CTS</span>
+            <span class="logo-sub">Carrillo Tech Solutions</span>
+          </div>
+        </div>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="/#services" class="nav-link">Enterprise Services</a></li>
+        <li><a href="/#portfolio" class="nav-link">Infrastructure Portfolio</a></li>
+        <li><a href="/#architect" class="nav-link">The Architect</a></li>
+        <li><a href="/#intel" class="nav-link">Intelligence Hub</a></li>
+        <li><a href="/readme.html" class="nav-link active">Project README</a></li>
+        <li><a href="/#contact" class="nav-cta">
+          <i class="fas fa-terminal"></i> Deploy Support
+        </a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="project-page">
+    <section class="project-hero" id="project-readme">
+      <div class="hero-grid-overlay"></div>
+      <div class="project-hero-content">
+        <div class="hero-badge">
+          <span class="badge-dot"></span>
+          <span>PROJECT README // CTS WEBSITE</span>
+        </div>
+        <h1 class="hero-headline">
+          Carrillo Tech Solutions<br />
+          <span class="headline-accent">Website Overview.</span>
+        </h1>
+        <p class="hero-subheadline">
+          A public-facing project page for the Carrillo Tech Solutions website: a cyberpunk command-center brand experience built around IT support, system diagnostics, hardware architecture, network hardening, and data-focused services.
+        </p>
+        <div class="hero-actions">
+          <a href="/#contact" class="btn btn-primary">
+            <i class="fas fa-paper-plane"></i>
+            Request Support
+          </a>
+          <a href="/#services" class="btn btn-outline">
+            <i class="fas fa-layer-group"></i>
+            View Services
+          </a>
+        </div>
+      </div>
+      <div class="project-hero-panel">
+        <div class="readme-system-card">
+          <div class="readme-system-card-top">
+            <span>CTS</span>
+            <i class="fas fa-circle-nodes"></i>
+          </div>
+          <img src="/assets/cts-logo-icon.png" alt="Carrillo Tech Solutions logo" />
+          <p>Engineered for Performance. Secured for the Future.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="project-section">
+      <div class="section-container">
+        <div class="section-header">
+          <div class="section-eyebrow">
+            <span class="eyebrow-line"></span>
+            <span>SYSTEM OVERVIEW</span>
+            <span class="eyebrow-line"></span>
+          </div>
+          <h2 class="section-title">Built for a Technical<br /><span class="title-accent">Service Brand.</span></h2>
+          <p class="section-desc">The website presents Carrillo Tech Solutions as a Cleveland-based technical operation with a focused message, strong visual identity, and clear service pathways for visitors.</p>
+        </div>
+
+        <div class="readme-feature-grid">
+          <article class="readme-feature-card">
+            <div class="readme-icon"><i class="fas fa-server"></i></div>
+            <h3>Enterprise Services</h3>
+            <p>Service cards outline support for hardware repair, diagnostics, data analysis, network hardening, and practical IT consulting.</p>
+          </article>
+          <article class="readme-feature-card">
+            <div class="readme-icon"><i class="fas fa-folder-open"></i></div>
+            <h3>Infrastructure Portfolio</h3>
+            <p>Portfolio sections highlight technical work in a project-focused format that is easy for visitors to scan and understand.</p>
+          </article>
+          <article class="readme-feature-card">
+            <div class="readme-icon"><i class="fas fa-satellite-dish"></i></div>
+            <h3>Intelligence Hub</h3>
+            <p>Technical writeups are styled as field dispatches, giving the site a professional knowledge-base feel without losing the brand tone.</p>
+          </article>
+          <article class="readme-feature-card">
+            <div class="readme-icon"><i class="fas fa-paper-plane"></i></div>
+            <h3>Support Request Flow</h3>
+            <p>The contact experience is designed so visitors can describe their technical needs clearly and move toward direct support.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="project-section project-section-alt">
+      <div class="section-container">
+        <div class="readme-split">
+          <div>
+            <div class="section-eyebrow readme-left-eyebrow">
+              <span class="eyebrow-line"></span>
+              <span>TECH STACK</span>
+            </div>
+            <h2 class="section-title">Clean, Fast,<br /><span class="title-accent">Static Front End.</span></h2>
+            <p class="section-desc left-align">The project uses straightforward web technologies with custom styling, responsive layouts, animated details, and brand assets that keep the experience sharp across desktop and mobile screens.</p>
+          </div>
+
+          <div class="tech-stack-list">
+            <div class="tech-stack-item">
+              <span>01</span>
+              <div>
+                <h3>HTML</h3>
+                <p>Structured pages for the main site, legal pages, and project overview.</p>
+              </div>
+            </div>
+            <div class="tech-stack-item">
+              <span>02</span>
+              <div>
+                <h3>CSS</h3>
+                <p>Custom variables, responsive grids, neon effects, glass panels, and mobile-friendly spacing.</p>
+              </div>
+            </div>
+            <div class="tech-stack-item">
+              <span>03</span>
+              <div>
+                <h3>JavaScript</h3>
+                <p>Animated background canvas, navigation behavior, scroll reveal effects, and content display logic.</p>
+              </div>
+            </div>
+            <div class="tech-stack-item">
+              <span>04</span>
+              <div>
+                <h3>Markdown Content</h3>
+                <p>Technical writeups are stored as readable content files and presented through the site interface.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="project-section">
+      <div class="section-container">
+        <div class="section-header">
+          <div class="section-eyebrow">
+            <span class="eyebrow-line"></span>
+            <span>BRAND SYSTEM</span>
+            <span class="eyebrow-line"></span>
+          </div>
+          <h2 class="section-title">Command-Center<br /><span class="title-accent">Visual Identity.</span></h2>
+        </div>
+
+        <div class="readme-table-card">
+          <div class="readme-table-row">
+            <span>Visual Style</span>
+            <p>Deep-space cyberpunk command center</p>
+          </div>
+          <div class="readme-table-row">
+            <span>Accent Colors</span>
+            <p>Neon Purple and Electric Cyan</p>
+          </div>
+          <div class="readme-table-row">
+            <span>Typography</span>
+            <p>Orbitron, Rajdhani, and Share Tech Mono</p>
+          </div>
+          <div class="readme-table-row">
+            <span>Voice</span>
+            <p>Professional, technical, confident, and client-focused</p>
+          </div>
+          <div class="readme-table-row">
+            <span>Audience</span>
+            <p>Clients needing IT support, diagnostics, hardware help, network support, and data organization</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="project-section project-notes-section">
+      <div class="section-container">
+        <div class="project-notes-card">
+          <div class="section-eyebrow readme-left-eyebrow">
+            <span class="eyebrow-line"></span>
+            <span>PROJECT NOTES</span>
+          </div>
+          <h2>Purpose of the Site</h2>
+          <p>This website is designed to make Carrillo Tech Solutions feel sharp, reliable, and technically capable. The layout keeps the business message clear while using high-energy visuals to create a memorable brand experience. The content focuses on services, trust, capabilities, and client action.</p>
+          <a href="/" class="btn btn-outline"><i class="fas fa-arrow-left"></i> Return to Main Site</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="/" class="footer-logo-link">
+            <img src="/assets/cts-logo-icon.png" alt="CTS" class="footer-logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+            <span class="footer-logo-fallback">CTS</span>
+          </a>
+          <p class="footer-tagline">Carrillo Tech Solutions.<br />Engineered for Performance. Secured for the Future.</p>
+        </div>
+
+        <div class="footer-nav-col">
+          <h5>Command Links</h5>
+          <ul>
+            <li><a href="/#services">Enterprise Services</a></li>
+            <li><a href="/#portfolio">Infrastructure Portfolio</a></li>
+            <li><a href="/#architect">The Architect</a></li>
+            <li><a href="/#intel">Intelligence Hub</a></li>
+            <li><a href="/readme.html">Project README</a></li>
+            <li><a href="/#contact">Deploy Support</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-nav-col">
+          <h5>Legal</h5>
+          <ul>
+            <li><a href="/privacy">Privacy Policy</a></li>
+            <li><a href="/terms">Terms of Service</a></li>
+            <li><a href="/admin">Admin Portal</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-social-col">
+          <h5>Social Nodes</h5>
+          <div class="social-links">
+            <a href="https://twitch.tv/supergman2155" target="_blank" rel="noopener" class="social-node" aria-label="Twitch">
+              <i class="fab fa-twitch"></i>
+            </a>
+            <a href="https://youtube.com/@supergman215" target="_blank" rel="noopener" class="social-node" aria-label="YouTube">
+              <i class="fab fa-youtube"></i>
+            </a>
+            <a href="https://instagram.com/G.io215" target="_blank" rel="noopener" class="social-node" aria-label="Instagram">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://linkedin.com/in/giovanni-carrillo" target="_blank" rel="noopener" class="social-node" aria-label="LinkedIn">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2026 Carrillo Tech Solutions LLC. All rights reserved.</span>
+        <span class="footer-sig">// CLEVELAND, OH // SYSTEMS NOMINAL</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/main.js"></script>
+</body>
+</html>

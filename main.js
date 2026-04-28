@@ -223,6 +223,15 @@ function cleanFrontmatterValue(value = '') {
   return value.replace(/^['"]|['"]$/g, '').trim();
 }
 
+function normalizeMediaPath(value = '') {
+  const mediaPath = cleanFrontmatterValue(String(value || ''));
+  if (!mediaPath) return '';
+  if (/^(https?:)?\/\//i.test(mediaPath) || mediaPath.startsWith('data:') || mediaPath.startsWith('/')) {
+    return mediaPath;
+  }
+  return `/${mediaPath.replace(/^\.\//, '')}`;
+}
+
 function parseMarkdownDispatch(markdown, fallbackSlug = '') {
   const fmMatch = markdown.match(/^---\s*\n([\s\S]*?)\n---/);
   const data = {};
@@ -257,6 +266,7 @@ function parseMarkdownDispatch(markdown, fallbackSlug = '') {
     date: formattedDate,
     category: data.category || 'Intelligence',
     excerpt: data.excerpt || '',
+    image: normalizeMediaPath(data.image || data.featured_image || ''),
     content
   };
 }
@@ -303,6 +313,9 @@ function openDispatch(slug, updateUrl = true) {
             <p style="color: #a0a0a0; font-size: 0.8rem; text-transform: uppercase; margin: 0 0 5px 0;">Excerpt</p>
             <p style="color: #e0e0e0; font-style: italic; margin: 0;">${dispatch.excerpt}</p>
           </div>` : ''}
+
+          ${dispatch.image ? `
+          <img class="dispatch-modal-image" src="${dispatch.image}" alt="Featured dispatch image" loading="lazy">` : ''}
 
           <a href="${getDispatchUrl(slug)}" class="blog-read" style="width: fit-content;">
             Open Shareable Page <i class="fas fa-arrow-up-right-from-square"></i>
@@ -450,6 +463,7 @@ function renderPosts(postsToRender) {
         const card = document.createElement('article');
         card.className = 'blog-card';
         card.innerHTML = `
+            <div class="blog-card-image" id="image-${fileName}" hidden></div>
             <div class="blog-tag" id="tag-${fileName}">Intelligence</div>
             <h4 id="title-${fileName}">${displayTitle}</h4>
             <p id="desc-${fileName}">Decrypting secure data...</p>
@@ -473,6 +487,16 @@ function renderPosts(postsToRender) {
                 document.getElementById(`title-${fileName}`).textContent = dispatch.title;
                 document.getElementById(`desc-${fileName}`).textContent = excerpt;
                 document.getElementById(`tag-${fileName}`).textContent = category;
+
+                const imageSlot = document.getElementById(`image-${fileName}`);
+                if (imageSlot && dispatch.image) {
+                    const img = document.createElement('img');
+                    img.src = dispatch.image;
+                    img.alt = `${dispatch.title} featured image`;
+                    img.loading = 'lazy';
+                    imageSlot.replaceChildren(img);
+                    imageSlot.hidden = false;
+                }
             })
             .catch(err => console.error("Decryption failed", err));
     });

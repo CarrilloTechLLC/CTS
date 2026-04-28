@@ -90,12 +90,23 @@ CTS-main/
 
 | Field | Use |
 |---|---|
-| `beat_source` | Accepts YouTube links, SoundCloud links, or direct audio paths |
+| `beat_source` | Accepts YouTube links or SoundCloud links |
+| `beat_file` | Uploads an audio file directly through the admin portal and stores it in `/assets/music` |
 | `bpm` | Stores tempo metadata for the manuscript |
 | `musical_key` | Stores musical key metadata |
 | `genre` | Stores genre metadata |
 | `draft` | Separates Drafting Room entries from finalized published works |
 | `body` | Stores the lyrical manuscript with preserved line breaks |
+
+
+## Admin Audio Uploads
+
+Creative Archive entries now support two beat options:
+
+- Use `Beat Source Link (YouTube/SoundCloud)` for external beat links.
+- Use `Beat Audio Upload (MP3/WAV/M4A/OGG/FLAC)` to upload audio directly from the admin portal.
+
+If both fields are filled, the site uses the external `beat_source` link first. If the link field is blank, the uploaded `beat_file` is used and displayed with the built-in audio player.
 
 ## Brand System
 

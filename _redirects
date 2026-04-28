@@ -1,1 +1,3 @@
+/creative /creative.html 200
+/creative/* /creative.html?piece=:splat 200
 /intel/* /dispatch.html?post=:splat 301

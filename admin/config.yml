@@ -20,26 +20,46 @@ collections:
     folder: "_posts"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
-    preview_path: "intel/{{slug}}"
+    preview_path: "dispatch?post={{slug}}"
     fields:
-      - { label: "Title",       name: "title",       widget: "string",   hint: "Post headline" }
-      - { label: "Publish Date",name: "date",        widget: "datetime", date_format: "YYYY-MM-DD", time_format: false }
+      - { label: "Title", name: "title", widget: "string", hint: "Post headline" }
+      - { label: "Publish Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false }
       - label: "Category"
         name: "category"
         widget: "select"
-        options: ["Hardware", "Networking", "Data", "AI", "Security", "Tutorial", "Creative Archive"]
-      - { label: "Excerpt",     name: "excerpt",     widget: "text",     hint: "Short summary shown in cards and archive previews (1-2 sentences)" }
-      - { label: "Featured Image", name: "image",   widget: "image",    required: false }
-      - { label: "Beat Source (URL or File Path)", name: "beat_source", widget: "string", required: false, hint: "YouTube/SoundCloud URL or a direct file path like /assets/music/track.mp3" }
-      - { label: "BPM", name: "bpm", widget: "string", required: false, hint: "Example: 80 BPM" }
-      - { label: "Musical Key", name: "musical_key", widget: "string", required: false, hint: "Example: A Minor" }
-      - { label: "Genre", name: "genre", widget: "string", required: false, hint: "Example: Gaming Rap" }
-      - { label: "Body",        name: "body",        widget: "markdown", hint: "For Creative Archive entries, write/paste lyrics with line breaks exactly where they belong." }
+        options: ["Hardware", "Networking", "Data", "AI", "Security", "Tutorial", "Social Commentary"]
+      - { label: "Excerpt", name: "excerpt", widget: "text", hint: "Short summary shown in cards and archive previews (1-2 sentences)" }
+      - { label: "Featured Image", name: "image", widget: "image", required: false }
+      - { label: "Body", name: "body", widget: "markdown" }
       - label: "Draft"
         name: "draft"
         widget: "boolean"
         default: false
         hint: "Toggle to save without publishing"
+
+  # Creative Archive
+  - name: "creative"
+    label: "Creative Archive"
+    label_singular: "Creative Piece"
+    folder: "_creative"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    preview_path: "creative?piece={{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string", hint: "Song, poem, manuscript, or creative piece title" }
+      - { label: "Publish Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false }
+      - { label: "Excerpt", name: "excerpt", widget: "text", hint: "Short summary shown on the Creative Archive page" }
+      - { label: "Featured Image", name: "image", widget: "image", required: false }
+      - { label: "Beat Source (URL or File Path)", name: "beat_source", widget: "string", required: false, hint: "YouTube/SoundCloud URL or a direct file path like /assets/music/track.mp3" }
+      - { label: "BPM", name: "bpm", widget: "string", required: false, hint: "Example: 80 BPM" }
+      - { label: "Musical Key", name: "musical_key", widget: "string", required: false, hint: "Example: A Minor" }
+      - { label: "Genre", name: "genre", widget: "string", required: false, hint: "Example: Gaming Rap" }
+      - { label: "Body", name: "body", widget: "markdown", hint: "Paste lyrics or manuscript text exactly as the line breaks should appear." }
+      - label: "Draft"
+        name: "draft"
+        widget: "boolean"
+        default: false
+        hint: "On = appears in the Drafting Room. Off = finalized published piece."
 
   # Portfolio
   - name: "portfolio"
@@ -50,23 +70,23 @@ collections:
     slug: "{{slug}}"
     preview_path: "portfolio/{{slug}}"
     fields:
-      - { label: "Project Name",  name: "title",      widget: "string" }
-      - { label: "Category",      name: "category",   widget: "select", options: ["Hardware", "Network", "Data", "AI", "Security", "Consulting"] }
+      - { label: "Project Name", name: "title", widget: "string" }
+      - { label: "Category", name: "category", widget: "select", options: ["Hardware", "Network", "Data", "AI", "Security", "Consulting"] }
       - label: "Status"
         name: "status"
         widget: "select"
         options:
-          - { label: "Active",    value: "active" }
-          - { label: "Complete",  value: "complete" }
-          - { label: "Archived",  value: "archived" }
-      - { label: "Short Summary", name: "summary",    widget: "text",   hint: "2-3 sentence overview for the card" }
-      - { label: "Full Description", name: "body",   widget: "markdown" }
+          - { label: "Active", value: "active" }
+          - { label: "Complete", value: "complete" }
+          - { label: "Archived", value: "archived" }
+      - { label: "Short Summary", name: "summary", widget: "text", hint: "2-3 sentence overview for the card" }
+      - { label: "Full Description", name: "body", widget: "markdown" }
       - label: "Tech Stack Tags"
         name: "tags"
         widget: "list"
         allow_add: true
         hint: "e.g. OBS Studio, Capture Card, Python"
-      - { label: "Cover Image",   name: "image",      widget: "image",  required: false }
+      - { label: "Cover Image", name: "image", widget: "image", required: false }
       - label: "Featured"
         name: "featured"
         widget: "boolean"
@@ -81,11 +101,11 @@ collections:
     create: true
     slug: "{{slug}}"
     fields:
-      - { label: "Service Name",      name: "title",       widget: "string" }
-      - { label: "Sort Order",        name: "order",       widget: "number", value_type: "int", min: 1 }
+      - { label: "Service Name", name: "title", widget: "string" }
+      - { label: "Sort Order", name: "order", widget: "number", value_type: "int", min: 1 }
       - { label: "Icon (FontAwesome class)", name: "icon", widget: "string", hint: "e.g. fas fa-server" }
-      - { label: "Short Description", name: "summary",     widget: "text",   hint: "Shown on service card" }
-      - { label: "Full Details",      name: "body",        widget: "markdown" }
+      - { label: "Short Description", name: "summary", widget: "text", hint: "Shown on service card" }
+      - { label: "Full Details", name: "body", widget: "markdown" }
       - label: "Tags"
         name: "tags"
         widget: "list"

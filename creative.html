@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Creative Archive | Carrillo Tech Solutions</title>
+  <meta name="description" content="Creative Archive for Carrillo Tech Solutions featuring lyrical manuscripts, drafting notes, and multimedia writing pieces." />
+
+  <link rel="icon" type="image/png" href="/assets/cts-logo-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <canvas id="bgCanvas"></canvas>
+  <div class="scanlines"></div>
+
+  <header class="nav-header" id="mainNav">
+    <nav class="nav-container">
+      <a href="/" class="nav-logo" aria-label="Carrillo Tech Solutions Home">
+        <img src="/assets/cts-logo-icon.png" alt="CTS Logo" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+        <div class="logo-fallback">
+          <span class="logo-icon">⬡</span>
+          <div class="logo-text">
+            <span class="logo-cts">CTS</span>
+            <span class="logo-sub">Carrillo Tech Solutions</span>
+          </div>
+        </div>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="/#services" class="nav-link">Services</a></li>
+        <li><a href="/#portfolio" class="nav-link">Portfolio</a></li>
+        <li><a href="/#architect" class="nav-link">Architect</a></li>
+        <li><a href="/#intel" class="nav-link">Intel Hub</a></li>
+        <li><a href="/creative" class="nav-link active">Creative</a></li>
+        <li><a href="/readme.html" class="nav-link">README</a></li>
+        <li><a href="/#contact" class="nav-cta"><i class="fas fa-terminal"></i> Deploy Support</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="creative-page">
+    <section class="creative-hero">
+      <div class="section-container">
+        <div class="creative-hero-card">
+          <div class="section-eyebrow">
+            <span class="eyebrow-line"></span>
+            <span>CREATIVE ARCHIVE</span>
+            <span class="eyebrow-line"></span>
+          </div>
+          <h1 class="creative-title">Lyrical <span class="title-accent">Manuscripts.</span></h1>
+          <p class="creative-intro">A live archive of original writing, song drafts, multimedia beat references, and finalized lyric manuscripts published through the CTS command center.</p>
+          <div class="creative-badges">
+            <span><i class="fas fa-pen-nib"></i> Creative Writing Evidence</span>
+            <span><i class="fas fa-music"></i> Multimedia Manuscripts</span>
+            <span><i class="fas fa-code-branch"></i> CMS-Managed Archive</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="creative-reader-wrap" id="manuscriptView" hidden>
+      <div class="section-container">
+        <article class="creative-reader">
+          <div class="creative-reader-top">
+            <button type="button" class="creative-back" id="closeManuscript"><i class="fas fa-arrow-left"></i> Archive Index</button>
+            <button type="button" class="dispatch-copy-btn" id="copyCreativeLink"><i class="fas fa-link"></i> Copy Manuscript Link</button>
+          </div>
+
+          <div id="creativeMedia" class="creative-media"></div>
+
+          <div class="creative-reader-head">
+            <div>
+              <div class="creative-status-row">
+                <span id="creativeStatus" class="creative-status finalized">Draft Status: Finalized</span>
+                <span id="creativeDate" class="creative-timestamp">SYNCING</span>
+              </div>
+              <h2 id="creativeReaderTitle">Loading Manuscript...</h2>
+              <p id="creativeReaderExcerpt"></p>
+            </div>
+          </div>
+
+          <div id="creativeMeta" class="creative-meta-grid"></div>
+
+          <div class="manuscript-shell">
+            <div class="manuscript-toolbar">
+              <span><i class="fas fa-file-lines"></i> Manuscript View</span>
+              <span>LINE BREAKS PRESERVED</span>
+            </div>
+            <pre id="creativeManuscript" class="lyric-manuscript"></pre>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="creative-library-section">
+      <div class="section-container">
+        <div class="section-header">
+          <div class="section-eyebrow">
+            <span class="eyebrow-line"></span>
+            <span>FINALIZED WORK</span>
+            <span class="eyebrow-line"></span>
+          </div>
+          <h2 class="section-title">Published <span class="title-accent">Pieces.</span></h2>
+          <p class="section-desc">Creative Archive entries marked as published appear here with finalized status, timestamp, and available beat source.</p>
+        </div>
+        <div id="creativeGrid" class="creative-grid"></div>
+      </div>
+    </section>
+
+    <section class="creative-drafts-section">
+      <div class="section-container">
+        <div class="section-header">
+          <div class="section-eyebrow">
+            <span class="eyebrow-line"></span>
+            <span>DRAFTING ROOM</span>
+            <span class="eyebrow-line"></span>
+          </div>
+          <h2 class="section-title">Process <span class="title-accent">Evidence.</span></h2>
+          <p class="section-desc">Draft status entries and raw notes appear here to document the creative writing process from early concept to final manuscript.</p>
+        </div>
+        <div id="draftGrid" class="creative-grid draft-grid"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="/" class="footer-logo-link">
+            <img src="/assets/cts-logo-icon.png" alt="CTS" class="footer-logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+            <span class="footer-logo-fallback">CTS</span>
+          </a>
+          <p class="footer-tagline">Carrillo Tech Solutions.<br />Engineered for Performance. Secured for the Future.</p>
+        </div>
+
+        <div class="footer-nav-col">
+          <h5>Command Links</h5>
+          <ul>
+            <li><a href="/#services">Services</a></li>
+            <li><a href="/#portfolio">Portfolio</a></li>
+            <li><a href="/#architect">Architect</a></li>
+            <li><a href="/#intel">Intel Hub</a></li>
+            <li><a href="/creative">Creative Archive</a></li>
+            <li><a href="/readme.html">README</a></li>
+            <li><a href="/#contact">Deploy Support</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-nav-col">
+          <h5>Legal</h5>
+          <ul>
+            <li><a href="/privacy.html">Privacy Policy</a></li>
+            <li><a href="/terms.html">Terms of Service</a></li>
+            <li><a href="/admin">Admin Portal</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-social-col">
+          <h5>Social Nodes</h5>
+          <div class="social-links">
+            <a href="https://twitch.tv/supergman2155" target="_blank" rel="noopener" class="social-node" aria-label="Twitch"><i class="fab fa-twitch"></i></a>
+            <a href="https://youtube.com/@supergman215" target="_blank" rel="noopener" class="social-node" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            <a href="https://instagram.com/G.io215" target="_blank" rel="noopener" class="social-node" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://linkedin.com/in/giovanni-carrillo" target="_blank" rel="noopener" class="social-node" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2026 Carrillo Tech Solutions LLC. All rights reserved.</span>
+        <span class="footer-sig">// CLEVELAND, OH // SYSTEMS NOMINAL</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/main.js"></script>
+  <script>
+    const CREATIVE_CATEGORY = 'creative archive';
+    let creativePosts = [];
+
+    const $ = (id) => document.getElementById(id);
+    const esc = (value = '') => String(value).replace(/[&<>'"]/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[char]));
+
+    function formatMeta(post) {
+      const items = [
+        ['BPM', post.bpm],
+        ['KEY', post.musicalKey],
+        ['GENRE', post.genre]
+      ].filter(([, value]) => value);
+
+      if (!items.length) return '<span class="creative-meta-empty">No technical metadata entered yet.</span>';
+      return items.map(([label, value]) => `<div><span>${label}</span><strong>${esc(value)}</strong></div>`).join('');
+    }
+
+    function mediaKind(source = '') {
+      const value = source.trim();
+      if (!value) return { type: 'none' };
+      if (/youtu\.be|youtube\.com/i.test(value)) return { type: 'youtube', src: value };
+      if (/soundcloud\.com/i.test(value)) return { type: 'soundcloud', src: value };
+      if (/\.(mp3|wav|ogg|m4a|flac)(\?|#|$)/i.test(value) || value.startsWith('/')) return { type: 'audio', src: normalizeMediaPath(value) };
+      return { type: 'link', src: value };
+    }
+
+    function youtubeEmbed(url) {
+      try {
+        const parsed = new URL(url);
+        if (parsed.hostname.includes('youtu.be')) return parsed.pathname.slice(1);
+        if (parsed.searchParams.get('v')) return parsed.searchParams.get('v');
+        const parts = parsed.pathname.split('/').filter(Boolean);
+        const idx = parts.findIndex(part => ['embed', 'shorts', 'live'].includes(part));
+        return idx >= 0 ? parts[idx + 1] : '';
+      } catch {
+        const match = url.match(/(?:v=|youtu\.be\/|embed\/|shorts\/)([A-Za-z0-9_-]{6,})/);
+        return match ? match[1] : '';
+      }
+    }
+
+    function renderMedia(source) {
+      const media = mediaKind(source);
+      if (media.type === 'none') return '<div class="creative-media-empty"><i class="fas fa-wave-square"></i><span>No beat source attached.</span></div>';
+      if (media.type === 'youtube') {
+        const id = youtubeEmbed(media.src);
+        return id ? `<iframe src="https://www.youtube.com/embed/${esc(id)}" title="Beat source" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>` : '<div class="creative-media-empty">YouTube source could not be embedded.</div>';
+      }
+      if (media.type === 'soundcloud') {
+        return `<iframe src="https://w.soundcloud.com/player/?url=${encodeURIComponent(media.src)}&auto_play=false&hide_related=false&show_comments=false&show_user=true&show_reposts=false&visual=true" title="SoundCloud beat source" loading="lazy"></iframe>`;
+      }
+      if (media.type === 'audio') return `<audio controls preload="metadata" src="${esc(media.src)}"></audio>`;
+      return `<a class="creative-media-link" href="${esc(media.src)}" target="_blank" rel="noopener"><i class="fas fa-arrow-up-right-from-square"></i> Open Beat Source</a>`;
+    }
+
+    function postCard(post) {
+      const status = post.draft ? 'Draft Status: Draft' : 'Draft Status: Finalized';
+      const statusClass = post.draft ? 'draft' : 'finalized';
+      return `
+        <article class="creative-card ${post.draft ? 'is-draft' : ''}" data-slug="${esc(post.slug)}">
+          ${post.image ? `<div class="creative-card-image"><img src="${esc(post.image)}" alt="${esc(post.title)} cover" loading="lazy"></div>` : ''}
+          <div class="creative-card-status ${statusClass}">${status}</div>
+          <h3>${esc(post.title)}</h3>
+          <p>${esc(post.excerpt || 'Creative manuscript archived through the CTS writing system.')}</p>
+          <div class="creative-card-meta">
+            <span><i class="fas fa-calendar"></i> ${esc(post.date)}</span>
+            ${post.beatSource ? '<span><i class="fas fa-headphones"></i> Beat Attached</span>' : ''}
+          </div>
+          <button type="button" class="blog-read creative-open">Open Manuscript <i class="fas fa-arrow-right"></i></button>
+        </article>`;
+    }
+
+    function renderArchive() {
+      const published = creativePosts.filter(post => !post.draft);
+      const drafts = creativePosts.filter(post => post.draft);
+
+      $('creativeGrid').innerHTML = published.length
+        ? published.map(postCard).join('')
+        : '<div class="creative-empty">No finalized Creative Archive posts have been published yet.</div>';
+
+      $('draftGrid').innerHTML = drafts.length
+        ? drafts.map(postCard).join('')
+        : '<div class="creative-empty">No draft entries are currently marked for the Drafting Room.</div>';
+
+      document.querySelectorAll('.creative-card').forEach(card => {
+        card.addEventListener('click', () => openManuscript(card.dataset.slug, true));
+      });
+    }
+
+    function openManuscript(slug, push = false) {
+      const post = creativePosts.find(item => item.slug === slug);
+      if (!post) return;
+
+      if (push) history.pushState({ creative: slug }, '', `/creative?piece=${encodeURIComponent(slug)}`);
+
+      $('manuscriptView').hidden = false;
+      $('creativeMedia').innerHTML = renderMedia(post.beatSource);
+      $('creativeReaderTitle').textContent = post.title;
+      $('creativeReaderExcerpt').textContent = post.excerpt || '';
+      $('creativeDate').innerHTML = `<i class="fas fa-clock"></i> ${esc(post.date)}`;
+      $('creativeStatus').textContent = post.draft ? 'Draft Status: Draft' : 'Draft Status: Finalized';
+      $('creativeStatus').className = `creative-status ${post.draft ? 'draft' : 'finalized'}`;
+      $('creativeMeta').innerHTML = formatMeta(post);
+      $('creativeManuscript').textContent = post.content || 'No manuscript body entered yet.';
+      $('manuscriptView').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function closeManuscript() {
+      $('manuscriptView').hidden = true;
+      history.pushState({}, '', '/creative');
+      document.querySelector('.creative-library-section').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    async function loadCreativeArchive() {
+      try {
+        const response = await fetch('https://api.github.com/repos/CarrilloTechLLC/CTS/contents/_posts');
+        const files = await response.json();
+        const markdownFiles = files.filter(file => file.name.endsWith('.md'));
+
+        const loaded = await Promise.all(markdownFiles.map(async file => {
+          const slug = file.name.replace(/\.md$/, '');
+          const res = await fetch(getPostPath(slug));
+          if (!res.ok) return null;
+          return { slug, ...parseMarkdownDispatch(await res.text(), slug) };
+        }));
+
+        creativePosts = loaded
+          .filter(Boolean)
+          .filter(post => String(post.category || '').trim().toLowerCase() === CREATIVE_CATEGORY)
+          .sort((a, b) => b.slug.localeCompare(a.slug));
+
+        renderArchive();
+
+        const requested = new URLSearchParams(location.search).get('piece');
+        if (requested) openManuscript(requested, false);
+      } catch {
+        $('creativeGrid').innerHTML = '<div class="creative-empty error">Creative Archive could not be loaded.</div>';
+      }
+    }
+
+    $('closeManuscript').addEventListener('click', closeManuscript);
+    $('copyCreativeLink').addEventListener('click', async () => {
+      const btn = $('copyCreativeLink');
+      try {
+        await navigator.clipboard.writeText(location.href);
+        btn.innerHTML = '<i class="fas fa-check"></i> Link Copied';
+      } catch {
+        btn.innerHTML = '<i class="fas fa-triangle-exclamation"></i> Copy Failed';
+      }
+      setTimeout(() => { btn.innerHTML = '<i class="fas fa-link"></i> Copy Manuscript Link'; }, 2200);
+    });
+
+    window.addEventListener('popstate', () => {
+      const requested = new URLSearchParams(location.search).get('piece');
+      requested ? openManuscript(requested, false) : ($('manuscriptView').hidden = true);
+    });
+
+    loadCreativeArchive();
+  </script>
+</body>
+</html>

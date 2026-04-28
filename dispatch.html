@@ -61,6 +61,10 @@
           <h1 id="dispatchTitle" class="dispatch-title">Decrypting Dispatch...</h1>
           <p id="dispatchExcerpt" class="dispatch-excerpt">Loading technical intelligence from secure storage.</p>
 
+          <div id="dispatchImageFrame" class="dispatch-featured-image" hidden>
+            <img id="dispatchImage" src="" alt="" loading="lazy" />
+          </div>
+
           <div class="dispatch-page-meta">
             <span><i class="fas fa-calendar"></i> <span id="dispatchDate">SYNCING</span></span>
             <button type="button" class="dispatch-copy-btn" id="copyDispatchLink">
@@ -145,6 +149,8 @@
       document.getElementById('dispatchTitle').textContent = 'Dispatch Not Found';
       document.getElementById('dispatchExcerpt').textContent = message;
       document.getElementById('dispatchDate').textContent = 'UNAVAILABLE';
+      const imageFrame = document.getElementById('dispatchImageFrame');
+      if (imageFrame) imageFrame.hidden = true;
       document.getElementById('dispatchArticle').innerHTML = `
         <div class="readme-error">
           <h2>Unable to Load Dispatch</h2>
@@ -172,6 +178,17 @@
         document.getElementById('dispatchExcerpt').textContent = dispatch.excerpt || 'Technical field dispatch from Carrillo Tech Solutions.';
         document.getElementById('dispatchDate').textContent = dispatch.date;
         document.getElementById('dispatchCategory').textContent = dispatch.category;
+
+        const imageFrame = document.getElementById('dispatchImageFrame');
+        const image = document.getElementById('dispatchImage');
+        if (imageFrame && image && dispatch.image) {
+          image.src = dispatch.image;
+          image.alt = `${dispatch.title} featured image`;
+          imageFrame.hidden = false;
+        } else if (imageFrame) {
+          imageFrame.hidden = true;
+        }
+
         document.getElementById('dispatchArticle').innerHTML = marked.parse(dispatch.content);
       } catch (error) {
         setDispatchError('The requested dispatch could not be loaded. The file may have been moved, renamed, or removed.');

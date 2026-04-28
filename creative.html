@@ -185,7 +185,6 @@
 
   <script src="/main.js"></script>
   <script>
-    const CREATIVE_CATEGORY = 'creative archive';
     let creativePosts = [];
 
     const $ = (id) => document.getElementById(id);
@@ -299,20 +298,19 @@
 
     async function loadCreativeArchive() {
       try {
-        const response = await fetch('https://api.github.com/repos/CarrilloTechLLC/CTS/contents/_posts');
+        const response = await fetch('https://api.github.com/repos/CarrilloTechLLC/CTS/contents/_creative');
         const files = await response.json();
         const markdownFiles = files.filter(file => file.name.endsWith('.md'));
 
         const loaded = await Promise.all(markdownFiles.map(async file => {
           const slug = file.name.replace(/\.md$/, '');
-          const res = await fetch(getPostPath(slug));
+          const res = await fetch(`/_creative/${encodeURIComponent(slug)}.md`);
           if (!res.ok) return null;
           return { slug, ...parseMarkdownDispatch(await res.text(), slug) };
         }));
 
         creativePosts = loaded
           .filter(Boolean)
-          .filter(post => String(post.category || '').trim().toLowerCase() === CREATIVE_CATEGORY)
           .sort((a, b) => b.slug.localeCompare(a.slug));
 
         renderArchive();

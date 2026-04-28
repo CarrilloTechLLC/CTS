@@ -1,9 +1,10 @@
-# Carrillo Tech Solutions — Decap CMS Configuration
+# Carrillo Tech Solutions — Sveltia CMS Configuration
 
 backend:
   name: github
   repo: CarrilloTechLLC/CTS
   branch: main
+  base_url: https://carrillotech.pages.dev
 
 media_folder: "assets/uploads"
 public_folder: "/assets/uploads"

@@ -1,75 +1,64 @@
 # Carrillo Tech Solutions — Website
 
-**Cyberpunk command-center website for Carrillo Tech Solutions LLC**
+**Cyberpunk command-center website for Carrillo Tech Solutions LLC**  
 Engineered for Performance. Secured for the Future.
 
----
+## Overview
+
+Carrillo Tech Solutions is a Cleveland-based IT support and data analytics brand focused on practical technical support, system diagnostics, hardware architecture, network hardening, and clean digital presentation. The website presents the company as a polished technical operation with a futuristic visual identity and a direct path for visitors to request support.
+
+## Core Features
+
+- **Enterprise Services:** Clear service cards for hardware repair, system diagnostics, data analysis, network hardening, and IT consulting.
+- **Infrastructure Portfolio:** Project-focused cards that highlight completed and active technical work.
+- **The Architect:** Professional owner profile with credentials, platform links, and business positioning.
+- **Intelligence Hub:** Technical writeups presented as field dispatches inside a custom modal reading experience.
+- **Support Request Flow:** Branded contact section designed for visitors to submit technical needs clearly.
+- **Responsive Interface:** Mobile-friendly layout with animated background visuals, neon accents, and clean spacing.
+
+## Tech Stack
+
+- **Frontend:** HTML, CSS, and JavaScript
+- **Content:** Markdown-based technical writeups
+- **Styling:** Custom CSS variables, responsive grids, animated UI elements, and CTS brand assets
+- **Typography:** Orbitron, Rajdhani, and Share Tech Mono
+- **Media:** CTS logo assets, iconography, and visual effects built into the page design
 
 ## File Structure
 
+```text
+CTS-main/
+├── index.html              # Main website page
+├── readme.html             # Public project overview page
+├── styles.css              # Main site styling and responsive design
+├── main.js                 # Website interactions and UI behavior
+├── README.md               # Project overview content
+├── privacy.html            # Privacy policy page
+├── terms.html              # Terms of service page
+├── admin/                  # Admin-related files and dashboard structure
+├── posts/                  # Markdown-based technical writeups
+├── assets/                 # Images, logos, icons, and visual brand files
+└── public/                 # Public static files used by the website
 ```
-carrillo-tech/
-├── index.html          ← Homepage (all sections)
-├── styles.css          ← Master stylesheet (CSS variables, responsive)
-├── main.js             ← Particle canvas, scroll behaviors, form handler
-├── netlify.toml        ← Netlify deploy config + headers
-├── assets/
-│   ├── cts-logo.png    ← ← ADD YOUR LOGO HERE (transparent PNG, ~500px)
-│   └── uploads/        ← CMS media uploads go here
-└── admin/
-    ├── index.html      ← Decap CMS admin entry point
-    └── config.yml      ← CMS collections: Blog, Portfolio, Services, Settings
-```
 
----
+## Brand System
 
-## Deployment
+| Element | Direction |
+|---|---|
+| Visual Style | Deep-space cyberpunk command center |
+| Primary Background | Deep Space Black |
+| Accent Colors | Neon Purple and Electric Cyan |
+| Voice | Professional, technical, confident, and client-focused |
+| Audience | Clients needing IT support, diagnostics, hardware help, network support, and data organization |
 
-### Option A — Netlify (Recommended, enables CMS)
+## Project Notes
 
-1. Push this folder to a GitHub repo.
-2. Connect the repo to [Netlify](https://netlify.com).
-3. Set build settings: **Publish directory = `.`** (root), no build command.
-4. Enable **Netlify Identity** in Site Settings → Identity.
-5. Enable **Git Gateway** in Site Settings → Identity → Services.
-6. Invite yourself as a user with the "Owner" role.
-7. Visit `https://yoursite.netlify.app/admin` to log in and manage content.
+This site is designed to make Carrillo Tech Solutions feel sharp, reliable, and technically capable. The layout keeps the business message clear while using high-energy visuals to create a memorable brand experience. The content is written for public visitors, not developers, so each section focuses on services, trust, capabilities, and client action.
 
-### Option B — GitHub Pages (static only, no CMS login)
+## Location
 
-1. Push to GitHub, enable Pages from the `main` branch root.
-2. CMS admin UI will be visible at `/admin` but login requires Netlify Identity or a separate OAuth app.
-3. For GitHub Pages OAuth setup, see: https://decapcms.org/docs/github-backend/
+Carrillo Tech Solutions LLC is based in Cleveland, Ohio.
 
----
-
-## Adding Your Logo
-
-1. Place your `cts-logo.png` (transparent background recommended) in the `assets/` folder.
-2. The site automatically uses it in the navbar, hero, and footer.
-3. If no image is found, a styled text/icon fallback renders automatically.
-
----
-
-## CMS Collections
-
-| Collection | Folder | Purpose |
-|---|---|---|
-| Intelligence Hub (Blog) | `_posts/` | Technical writeups, dispatches |
-| Infrastructure Portfolio | `_portfolio/` | Completed project showcases |
-| Enterprise Services | `_services/` | Service card content |
-| Site Settings | `_data/settings.yml` | Global text, social links, availability |
-
----
-
-## Color Palette
-
-| Token | Value | Usage |
-|---|---|---|
-| `--bg` | `#0B0C10` | Deep Space Black background |
-| `--purple` | `#9B5DE5` | Neon Purple — primary accent |
-| `--cyan` | `#00F5D4` | Electric Cyan — secondary accent |
-
----
+## Copyright
 
 © 2026 Carrillo Tech Solutions LLC. Cleveland, Ohio.

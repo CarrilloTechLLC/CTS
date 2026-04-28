@@ -267,6 +267,11 @@ function parseMarkdownDispatch(markdown, fallbackSlug = '') {
     category: data.category || 'Intelligence',
     excerpt: data.excerpt || '',
     image: normalizeMediaPath(data.image || data.featured_image || ''),
+    beatSource: cleanFrontmatterValue(data.beat_source || data.beat || data.audio || ''),
+    bpm: cleanFrontmatterValue(data.bpm || ''),
+    musicalKey: cleanFrontmatterValue(data.musical_key || data.key || ''),
+    genre: cleanFrontmatterValue(data.genre || ''),
+    draft: /^true$/i.test(cleanFrontmatterValue(data.draft || 'false')),
     content
   };
 }
@@ -409,8 +414,25 @@ async function loadAutoDispatches() {
     try {
         const response = await fetch('https://api.github.com/repos/CarrilloTechLLC/CTS/contents/_posts');
         const files = await response.json();
-        
-        allPosts = files.filter(f => f.name.endsWith('.md')).reverse();
+        const markdownFiles = files.filter(f => f.name.endsWith('.md')).reverse();
+
+        const indexedPosts = await Promise.all(markdownFiles.map(async file => {
+            const slug = file.name.replace('.md', '');
+            try {
+                const res = await fetch(getPostPath(slug));
+                if (!res.ok) return null;
+                return { ...file, dispatch: parseMarkdownDispatch(await res.text(), slug) };
+            } catch {
+                return file;
+            }
+        }));
+
+        allPosts = indexedPosts
+            .filter(Boolean)
+            .filter(post => {
+                const category = String(post.dispatch?.category || '').trim().toLowerCase();
+                return category !== 'creative archive' && !post.dispatch?.draft;
+            });
 
         if (allPosts.length > POSTS_PER_PAGE) {
             expandContainer.style.display = 'block';
@@ -476,29 +498,33 @@ function renderPosts(postsToRender) {
         `;
         blogGrid.appendChild(card);
 
-        // Fetch the file to grab the exact CMS Excerpt and Category
-        fetch(`/_posts/${encodeURIComponent(post.name)}`)
-            .then(res => res.text())
-            .then(text => {
-                const dispatch = parseMarkdownDispatch(text, fileName);
-                const excerpt = dispatch.excerpt || "Field dispatch retrieved from secure storage.";
-                const category = dispatch.category || "Intelligence";
+        const applyDispatch = (dispatch) => {
+            const excerpt = dispatch.excerpt || "Field dispatch retrieved from secure storage.";
+            const category = dispatch.category || "Intelligence";
 
-                document.getElementById(`title-${fileName}`).textContent = dispatch.title;
-                document.getElementById(`desc-${fileName}`).textContent = excerpt;
-                document.getElementById(`tag-${fileName}`).textContent = category;
+            document.getElementById(`title-${fileName}`).textContent = dispatch.title;
+            document.getElementById(`desc-${fileName}`).textContent = excerpt;
+            document.getElementById(`tag-${fileName}`).textContent = category;
 
-                const imageSlot = document.getElementById(`image-${fileName}`);
-                if (imageSlot && dispatch.image) {
-                    const img = document.createElement('img');
-                    img.src = dispatch.image;
-                    img.alt = `${dispatch.title} featured image`;
-                    img.loading = 'lazy';
-                    imageSlot.replaceChildren(img);
-                    imageSlot.hidden = false;
-                }
-            })
-            .catch(err => console.error("Decryption failed", err));
+            const imageSlot = document.getElementById(`image-${fileName}`);
+            if (imageSlot && dispatch.image) {
+                const img = document.createElement('img');
+                img.src = dispatch.image;
+                img.alt = `${dispatch.title} featured image`;
+                img.loading = 'lazy';
+                imageSlot.replaceChildren(img);
+                imageSlot.hidden = false;
+            }
+        };
+
+        if (post.dispatch) {
+            applyDispatch(post.dispatch);
+        } else {
+            fetch(`/_posts/${encodeURIComponent(post.name)}`)
+                .then(res => res.text())
+                .then(text => applyDispatch(parseMarkdownDispatch(text, fileName)))
+                .catch(err => console.error("Decryption failed", err));
+        }
     });
 }
 

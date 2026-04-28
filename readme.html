@@ -5,13 +5,14 @@
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Project README | Carrillo Tech Solutions</title>
-  <meta name="description" content="Project overview for the Carrillo Tech Solutions website, including features, technology stack, brand system, and project notes." />
+  <meta name="description" content="Project README for the Carrillo Tech Solutions website, displayed as a polished public-facing project overview." />
 
   <link rel="icon" type="image/png" href="assets/cts-logo-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <link rel="stylesheet" href="/styles.css" />
 </head>
 <body>
@@ -49,36 +50,36 @@
   </header>
 
   <main class="project-page">
-    <section class="project-hero" id="project-readme">
+    <section class="project-hero readme-source-hero">
       <div class="hero-grid-overlay"></div>
       <div class="project-hero-content">
         <div class="hero-badge">
           <span class="badge-dot"></span>
-          <span>PROJECT README // CTS WEBSITE</span>
+          <span>PROJECT README // LIVE MARKDOWN VIEW</span>
         </div>
         <h1 class="hero-headline">
-          Carrillo Tech Solutions<br />
-          <span class="headline-accent">Website Overview.</span>
+          Project README<br />
+          <span class="headline-accent">Rendered From Source.</span>
         </h1>
         <p class="hero-subheadline">
-          A public-facing project page for the Carrillo Tech Solutions website: a cyberpunk command-center brand experience built around IT support, system diagnostics, hardware architecture, network hardening, and data-focused services.
+          This page displays the content from the project README file while keeping the same Carrillo Tech Solutions command-center style, spacing, typography, and responsive layout.
         </p>
         <div class="hero-actions">
           <a href="/#contact" class="btn btn-primary">
             <i class="fas fa-paper-plane"></i>
             Request Support
           </a>
-          <a href="/#services" class="btn btn-outline">
-            <i class="fas fa-layer-group"></i>
-            View Services
+          <a href="/" class="btn btn-outline">
+            <i class="fas fa-arrow-left"></i>
+            Main Site
           </a>
         </div>
       </div>
       <div class="project-hero-panel">
         <div class="readme-system-card">
           <div class="readme-system-card-top">
-            <span>CTS</span>
-            <i class="fas fa-circle-nodes"></i>
+            <span>README.MD</span>
+            <i class="fas fa-file-lines"></i>
           </div>
           <img src="/assets/cts-logo-icon.png" alt="Carrillo Tech Solutions logo" />
           <p>Engineered for Performance. Secured for the Future.</p>
@@ -86,136 +87,27 @@
       </div>
     </section>
 
-    <section class="project-section">
+    <section class="project-section readme-source-section">
       <div class="section-container">
         <div class="section-header">
           <div class="section-eyebrow">
             <span class="eyebrow-line"></span>
-            <span>SYSTEM OVERVIEW</span>
+            <span>README SOURCE</span>
             <span class="eyebrow-line"></span>
           </div>
-          <h2 class="section-title">Built for a Technical<br /><span class="title-accent">Service Brand.</span></h2>
-          <p class="section-desc">The website presents Carrillo Tech Solutions as a Cleveland-based technical operation with a focused message, strong visual identity, and clear service pathways for visitors.</p>
+          <h2 class="section-title">Project Details<br /><span class="title-accent">From README.md.</span></h2>
+          <p class="section-desc">The content below is loaded directly from the project README file and rendered inside a styled website page.</p>
         </div>
 
-        <div class="readme-feature-grid">
-          <article class="readme-feature-card">
-            <div class="readme-icon"><i class="fas fa-server"></i></div>
-            <h3>Enterprise Services</h3>
-            <p>Service cards outline support for hardware repair, diagnostics, data analysis, network hardening, and practical IT consulting.</p>
-          </article>
-          <article class="readme-feature-card">
-            <div class="readme-icon"><i class="fas fa-folder-open"></i></div>
-            <h3>Infrastructure Portfolio</h3>
-            <p>Portfolio sections highlight technical work in a project-focused format that is easy for visitors to scan and understand.</p>
-          </article>
-          <article class="readme-feature-card">
-            <div class="readme-icon"><i class="fas fa-satellite-dish"></i></div>
-            <h3>Intelligence Hub</h3>
-            <p>Technical writeups are styled as field dispatches, giving the site a professional knowledge-base feel without losing the brand tone.</p>
-          </article>
-          <article class="readme-feature-card">
-            <div class="readme-icon"><i class="fas fa-paper-plane"></i></div>
-            <h3>Support Request Flow</h3>
-            <p>The contact experience is designed so visitors can describe their technical needs clearly and move toward direct support.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="project-section project-section-alt">
-      <div class="section-container">
-        <div class="readme-split">
-          <div>
-            <div class="section-eyebrow readme-left-eyebrow">
-              <span class="eyebrow-line"></span>
-              <span>TECH STACK</span>
-            </div>
-            <h2 class="section-title">Clean, Fast,<br /><span class="title-accent">Static Front End.</span></h2>
-            <p class="section-desc left-align">The project uses straightforward web technologies with custom styling, responsive layouts, animated details, and brand assets that keep the experience sharp across desktop and mobile screens.</p>
+        <article class="readme-source-card">
+          <div class="readme-source-toolbar">
+            <span><i class="fas fa-code-branch"></i> README.md</span>
+            <span class="readme-source-status"><i class="fas fa-circle"></i> Source Loaded</span>
           </div>
-
-          <div class="tech-stack-list">
-            <div class="tech-stack-item">
-              <span>01</span>
-              <div>
-                <h3>HTML</h3>
-                <p>Structured pages for the main site, legal pages, and project overview.</p>
-              </div>
-            </div>
-            <div class="tech-stack-item">
-              <span>02</span>
-              <div>
-                <h3>CSS</h3>
-                <p>Custom variables, responsive grids, neon effects, glass panels, and mobile-friendly spacing.</p>
-              </div>
-            </div>
-            <div class="tech-stack-item">
-              <span>03</span>
-              <div>
-                <h3>JavaScript</h3>
-                <p>Animated background canvas, navigation behavior, scroll reveal effects, and content display logic.</p>
-              </div>
-            </div>
-            <div class="tech-stack-item">
-              <span>04</span>
-              <div>
-                <h3>Markdown Content</h3>
-                <p>Technical writeups are stored as readable content files and presented through the site interface.</p>
-              </div>
-            </div>
+          <div id="readmeContent" class="readme-markdown markdown-body" aria-live="polite">
+            <p class="readme-loading"><i class="fas fa-spinner fa-spin"></i> Loading project README...</p>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="project-section">
-      <div class="section-container">
-        <div class="section-header">
-          <div class="section-eyebrow">
-            <span class="eyebrow-line"></span>
-            <span>BRAND SYSTEM</span>
-            <span class="eyebrow-line"></span>
-          </div>
-          <h2 class="section-title">Command-Center<br /><span class="title-accent">Visual Identity.</span></h2>
-        </div>
-
-        <div class="readme-table-card">
-          <div class="readme-table-row">
-            <span>Visual Style</span>
-            <p>Deep-space cyberpunk command center</p>
-          </div>
-          <div class="readme-table-row">
-            <span>Accent Colors</span>
-            <p>Neon Purple and Electric Cyan</p>
-          </div>
-          <div class="readme-table-row">
-            <span>Typography</span>
-            <p>Orbitron, Rajdhani, and Share Tech Mono</p>
-          </div>
-          <div class="readme-table-row">
-            <span>Voice</span>
-            <p>Professional, technical, confident, and client-focused</p>
-          </div>
-          <div class="readme-table-row">
-            <span>Audience</span>
-            <p>Clients needing IT support, diagnostics, hardware help, network support, and data organization</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="project-section project-notes-section">
-      <div class="section-container">
-        <div class="project-notes-card">
-          <div class="section-eyebrow readme-left-eyebrow">
-            <span class="eyebrow-line"></span>
-            <span>PROJECT NOTES</span>
-          </div>
-          <h2>Purpose of the Site</h2>
-          <p>This website is designed to make Carrillo Tech Solutions feel sharp, reliable, and technically capable. The layout keeps the business message clear while using high-energy visuals to create a memorable brand experience. The content focuses on services, trust, capabilities, and client action.</p>
-          <a href="/" class="btn btn-outline"><i class="fas fa-arrow-left"></i> Return to Main Site</a>
-        </div>
+        </article>
       </div>
     </section>
   </main>
@@ -278,6 +170,37 @@
     </div>
   </footer>
 
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const container = document.getElementById('readmeContent');
+      const status = document.querySelector('.readme-source-status');
+
+      try {
+        const response = await fetch('/README.md', { cache: 'no-store' });
+        if (!response.ok) throw new Error('README.md could not be loaded');
+
+        const markdown = await response.text();
+        marked.setOptions({ breaks: true, gfm: true });
+        container.innerHTML = marked.parse(markdown);
+
+        container.querySelectorAll('a').forEach(link => {
+          link.setAttribute('target', '_blank');
+          link.setAttribute('rel', 'noopener');
+        });
+      } catch (error) {
+        container.innerHTML = `
+          <div class="readme-error">
+            <h2>README Unavailable</h2>
+            <p>The README content could not be loaded from the project source file.</p>
+          </div>
+        `;
+        if (status) {
+          status.innerHTML = '<i class="fas fa-triangle-exclamation"></i> Source Error';
+          status.classList.add('error');
+        }
+      }
+    });
+  </script>
   <script src="/main.js"></script>
 </body>
 </html>

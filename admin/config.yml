@@ -27,10 +27,14 @@ collections:
       - label: "Category"
         name: "category"
         widget: "select"
-        options: ["Hardware", "Networking", "Data", "AI", "Security", "Tutorial"]
-      - { label: "Excerpt",     name: "excerpt",     widget: "text",     hint: "Short summary shown in the hub grid (1-2 sentences)" }
+        options: ["Hardware", "Networking", "Data", "AI", "Security", "Tutorial", "Creative Archive"]
+      - { label: "Excerpt",     name: "excerpt",     widget: "text",     hint: "Short summary shown in cards and archive previews (1-2 sentences)" }
       - { label: "Featured Image", name: "image",   widget: "image",    required: false }
-      - { label: "Body",        name: "body",        widget: "markdown" }
+      - { label: "Beat Source (URL or File Path)", name: "beat_source", widget: "string", required: false, hint: "YouTube/SoundCloud URL or a direct file path like /assets/music/track.mp3" }
+      - { label: "BPM", name: "bpm", widget: "string", required: false, hint: "Example: 80 BPM" }
+      - { label: "Musical Key", name: "musical_key", widget: "string", required: false, hint: "Example: A Minor" }
+      - { label: "Genre", name: "genre", widget: "string", required: false, hint: "Example: Gaming Rap" }
+      - { label: "Body",        name: "body",        widget: "markdown", hint: "For Creative Archive entries, write/paste lyrics with line breaks exactly where they belong." }
       - label: "Draft"
         name: "draft"
         widget: "boolean"

@@ -28,17 +28,24 @@ Carrillo Tech Solutions is a Cleveland-based IT support and data analytics brand
 
 ```text
 CTS-main/
-├── index.html              # Main website page
-├── readme.html             # Public project overview page
-├── styles.css              # Main site styling and responsive design
-├── main.js                 # Website interactions and UI behavior
-├── README.md               # Project overview content
-├── privacy.html            # Privacy policy page
-├── terms.html              # Terms of service page
-├── admin/                  # Admin-related files and dashboard structure
-├── posts/                  # Markdown-based technical writeups
-├── assets/                 # Images, logos, icons, and visual brand files
-└── public/                 # Public static files used by the website
+├── index.html                  # Main website page
+├── readme.html                 # Public README display page
+├── README.md                   # Project overview content
+├── styles.css                  # Main site styling and responsive design
+├── main.js                     # Website interactions and UI behavior
+├── privacy.html                # Privacy policy page
+├── terms.html                  # Terms of service page
+├── _redirects                  # Site redirect rules
+├── admin/
+│   ├── index.html              # Admin portal entry page
+│   └── config.yml              # Content management configuration
+├── _posts/                     # Markdown-based technical writeups
+├── _data/
+│   └── settings.yml            # Site settings data
+├── functions/
+│   └── api/
+│       └── submit.js           # Support request submission endpoint
+└── assets/                     # CTS logos, icons, and visual brand files
 ```
 
 ## Brand System

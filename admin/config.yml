@@ -9,6 +9,12 @@ backend:
 media_folder: "assets/uploads"
 public_folder: "/assets/uploads"
 
+media_libraries:
+  default:
+    config:
+      max_file_size: 52428800
+      slugify_filename: true
+
 site_url: https://carrillotech.pages.dev
 
 collections:
@@ -50,7 +56,17 @@ collections:
       - { label: "Publish Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false }
       - { label: "Excerpt", name: "excerpt", widget: "text", hint: "Short summary shown on the Creative Archive page" }
       - { label: "Featured Image", name: "image", widget: "image", required: false }
-      - { label: "Beat Source (URL or File Path)", name: "beat_source", widget: "string", required: false, hint: "YouTube/SoundCloud URL or a direct file path like /assets/music/track.mp3" }
+      - { label: "Beat Source Link (YouTube/SoundCloud)", name: "beat_source", widget: "string", required: false, hint: "Paste a YouTube or SoundCloud URL here. Leave blank if you are uploading an audio file below." }
+      - label: "Beat Audio Upload (MP3/WAV/M4A/OGG/FLAC)"
+        name: "beat_file"
+        widget: "file"
+        required: false
+        multiple: false
+        choose_url: false
+        accept: "audio/mpeg,audio/wav,audio/wave,audio/x-wav,audio/ogg,audio/mp4,audio/x-m4a,audio/flac,.mp3,.wav,.ogg,.m4a,.flac"
+        media_folder: "/assets/music"
+        public_folder: "/assets/music"
+        hint: "Upload a beat or song file directly from the admin portal. Use this instead of GitHub manual uploads."
       - { label: "BPM", name: "bpm", widget: "string", required: false, hint: "Example: 80 BPM" }
       - { label: "Musical Key", name: "musical_key", widget: "string", required: false, hint: "Example: A Minor" }
       - { label: "Genre", name: "genre", widget: "string", required: false, hint: "Example: Gaming Rap" }

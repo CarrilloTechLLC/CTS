@@ -209,74 +209,110 @@ window.addEventListener('load', () => {
   if (!headline) return;
   headline.style.animation = 'fadeSlideUp 1s ease both';
 });
+
+// ── DISPATCH URL + FRONTMATTER HELPERS ──────────────────────
+function getPostPath(slug) {
+  return `/_posts/${encodeURIComponent(slug)}.md`;
+}
+
+function getDispatchUrl(slug) {
+  return `/dispatch.html?post=${encodeURIComponent(slug)}`;
+}
+
+function cleanFrontmatterValue(value = '') {
+  return value.replace(/^['"]|['"]$/g, '').trim();
+}
+
+function parseMarkdownDispatch(markdown, fallbackSlug = '') {
+  const fmMatch = markdown.match(/^---\s*\n([\s\S]*?)\n---/);
+  const data = {};
+
+  if (fmMatch && fmMatch[1]) {
+    let currentKey = null;
+    fmMatch[1].split(/\r?\n/).forEach(line => {
+      const keyMatch = line.match(/^([A-Za-z0-9_-]+):\s*(.*)$/);
+      if (keyMatch) {
+        currentKey = keyMatch[1].toLowerCase();
+        data[currentKey] = cleanFrontmatterValue(keyMatch[2] || '');
+      } else if (currentKey && /^\s+/.test(line)) {
+        data[currentKey] = `${data[currentKey]} ${cleanFrontmatterValue(line)}`.trim();
+      }
+    });
+  }
+
+  const rawDateParts = fallbackSlug.split('-').slice(0, 3);
+  const fallbackDate = rawDateParts.length === 3 ? `${rawDateParts[1]}/${rawDateParts[2]}/${rawDateParts[0]}` : 'UNKNOWN';
+  let formattedDate = fallbackDate;
+
+  if (data.date) {
+    const dateParts = data.date.split('T')[0].split('-');
+    if (dateParts.length >= 3) formattedDate = `${dateParts[1]}/${dateParts[2]}/${dateParts[0]}`;
+  }
+
+  const fallbackTitle = fallbackSlug.split('-').slice(3).join(' ').replace(/#U2014/gi, '—').toUpperCase() || 'NEW DISPATCH';
+  const content = markdown.replace(/^---[\s\S]*?---/, '').trim();
+
+  return {
+    title: data.title || fallbackTitle,
+    date: formattedDate,
+    category: data.category || 'Intelligence',
+    excerpt: data.excerpt || '',
+    content
+  };
+}
+
 // ── INTEL HUB: MODAL & MARKDOWN RENDERER ──────────────────────
-function openDispatch(slug) {
+function openDispatch(slug, updateUrl = true) {
   const modal = document.getElementById('dispatchModal');
   const body = document.getElementById('dispatchBody');
+  if (!modal || !body || !slug) return;
+
+  if (updateUrl) {
+    window.history.pushState({ dispatch: slug }, '', `/?dispatch=${encodeURIComponent(slug)}`);
+  }
+
   modal.classList.add('active');
   body.innerHTML = '<p style="text-align:center; color:#00F5D4;"><i class="fas fa-spinner fa-spin"></i> DECRYPTING DISPATCH...</p>';
 
-  fetch(`/_posts/${slug}.md`)
+  fetch(getPostPath(slug))
     .then(response => {
       if (!response.ok) throw new Error('File not found');
       return response.text();
     })
     .then(markdown => {
-      // Extract the CMS Frontmatter
-      const fmMatch = markdown.match(/^---\n([\s\S]*?)\n---/);
-      let title = slug.split('-').slice(3).join(' ').toUpperCase();
-      let date = slug.split('-').slice(0,3);
-      let formattedDate = `${date[1]}/${date[2]}/${date[0]}`;
-      let category = "Intelligence";
-      let excerpt = "";
+      const dispatch = parseMarkdownDispatch(markdown, slug);
 
-      if (fmMatch && fmMatch[1]) {
-        const fmText = fmMatch[1];
-        const titleMatch = fmText.match(/title:\s*(.+)/i);
-        const dateMatch = fmText.match(/date:\s*(.+)/i);
-        const catMatch = fmText.match(/category:\s*(.+)/i);
-        const excerptMatch = fmText.match(/excerpt:\s*(.+)/i);
-
-        if (titleMatch) title = titleMatch[1].replace(/^['"]|['"]$/g, '').trim();
-        if (catMatch) category = catMatch[1].replace(/^['"]|['"]$/g, '').trim();
-        if (excerptMatch) excerpt = excerptMatch[1].replace(/^['"]|['"]$/g, '').trim();
-        if (dateMatch) {
-            const rawDate = dateMatch[1].replace(/^['"]|['"]$/g, '').trim().split('T')[0].split('-');
-            if (rawDate.length >= 3) formattedDate = `${rawDate[1]}/${rawDate[2]}/${rawDate[0]}`;
-        }
-      }
-
-      // Get just the body text
-      const content = markdown.replace(/^---[\s\S]*?---/, '');
-
-      // Inject the structured layout
       body.innerHTML = `
         <div style="margin-bottom: 25px; border-bottom: 1px solid #333; padding-bottom: 20px;">
           <p style="color: #a0a0a0; font-size: 0.8rem; text-transform: uppercase; margin: 0 0 5px 0;">Title</p>
-          <h2 style="color: #00f0ff; margin: 0 0 20px 0; font-family: 'Orbitron', sans-serif;">${title}</h2>
+          <h2 style="color: #00f0ff; margin: 0 0 20px 0; font-family: 'Orbitron', sans-serif;">${dispatch.title}</h2>
           
-          <div style="display: flex; gap: 30px; margin-bottom: 20px;">
+          <div style="display: flex; gap: 30px; flex-wrap: wrap; margin-bottom: 20px;">
             <div>
               <p style="color: #a0a0a0; font-size: 0.8rem; text-transform: uppercase; margin: 0 0 5px 0;">Publish Date</p>
-              <p style="color: #e0e0e0; margin: 0; font-family: 'Share Tech Mono', monospace;">${formattedDate}</p>
+              <p style="color: #e0e0e0; margin: 0; font-family: 'Share Tech Mono', monospace;">${dispatch.date}</p>
             </div>
             <div>
               <p style="color: #a0a0a0; font-size: 0.8rem; text-transform: uppercase; margin: 0 0 5px 0;">Category</p>
-              <p style="color: #b026ff; margin: 0; font-weight: bold;">${category}</p>
+              <p style="color: #b026ff; margin: 0; font-weight: bold;">${dispatch.category}</p>
             </div>
           </div>
 
-          ${excerpt ? `
+          ${dispatch.excerpt ? `
           <div style="margin-bottom: 20px;">
             <p style="color: #a0a0a0; font-size: 0.8rem; text-transform: uppercase; margin: 0 0 5px 0;">Excerpt</p>
-            <p style="color: #e0e0e0; font-style: italic; margin: 0;">${excerpt}</p>
+            <p style="color: #e0e0e0; font-style: italic; margin: 0;">${dispatch.excerpt}</p>
           </div>` : ''}
+
+          <a href="${getDispatchUrl(slug)}" class="blog-read" style="width: fit-content;">
+            Open Shareable Page <i class="fas fa-arrow-up-right-from-square"></i>
+          </a>
         </div>
         
         <div>
           <p style="color: #a0a0a0; font-size: 0.8rem; text-transform: uppercase; margin: 0 0 10px 0;">Body</p>
           <div class="dispatch-markdown-content" style="color: #e0e0e0;">
-            ${marked.parse(content)}
+            ${marked.parse(dispatch.content)}
           </div>
         </div>
       `;
@@ -287,7 +323,13 @@ function openDispatch(slug) {
 }
 
 function closeDispatch() {
-  document.getElementById('dispatchModal').classList.remove('active');
+  const modal = document.getElementById('dispatchModal');
+  if (modal) modal.classList.remove('active');
+
+  const params = new URLSearchParams(window.location.search);
+  if (params.has('dispatch')) {
+    window.history.pushState({}, document.title, '/#intel');
+  }
 }
 
 // Catch the Cloudflare redirect and open the modal safely
@@ -296,8 +338,7 @@ window.addEventListener('load', () => {
   const dispatch = urlParams.get('dispatch');
 
   if (dispatch) {
-    window.history.replaceState({}, '', '/'); // Clean the URL instantly
-    setTimeout(() => openDispatch(dispatch), 300); // Open the modal
+    setTimeout(() => openDispatch(dispatch, false), 300); // Keep the shareable URL visible
   }
 });
 // Intercept success signal and trigger custom HTML modal
@@ -404,17 +445,17 @@ function renderPosts(postsToRender) {
             displayDate = `${dateParts[1]}/${dateParts[2]}/${dateParts[0]}`;
         }
 
-        const displayTitle = fileName.split('-').slice(3).join(' ').toUpperCase() || "NEW DISPATCH";
+        const displayTitle = fileName.split('-').slice(3).join(' ').replace(/#U2014/gi, '—').toUpperCase() || "NEW DISPATCH";
 
         const card = document.createElement('article');
         card.className = 'blog-card';
         card.innerHTML = `
             <div class="blog-tag" id="tag-${fileName}">Intelligence</div>
-            <h4>${displayTitle}</h4>
+            <h4 id="title-${fileName}">${displayTitle}</h4>
             <p id="desc-${fileName}">Decrypting secure data...</p>
             <div class="blog-meta">
                 <span><i class="fas fa-calendar"></i> ${displayDate}</span>
-                <a href="javascript:void(0)" onclick="openDispatch('${fileName}')" class="blog-read">
+                <a href="${getDispatchUrl(fileName)}" class="blog-read">
                     Read Dispatch <i class="fas fa-arrow-right"></i>
                 </a>
             </div>
@@ -422,24 +463,14 @@ function renderPosts(postsToRender) {
         blogGrid.appendChild(card);
 
         // Fetch the file to grab the exact CMS Excerpt and Category
-        fetch(`/_posts/${post.name}`)
+        fetch(`/_posts/${encodeURIComponent(post.name)}`)
             .then(res => res.text())
             .then(text => {
-                let excerpt = "Field dispatch retrieved from secure storage.";
-                let category = "Intelligence";
+                const dispatch = parseMarkdownDispatch(text, fileName);
+                const excerpt = dispatch.excerpt || "Field dispatch retrieved from secure storage.";
+                const category = dispatch.category || "Intelligence";
 
-                // Grab Excerpt (Strictly from the CMS field)
-                const excerptMatch = text.match(/excerpt:\s*(.+)/i);
-                if (excerptMatch && excerptMatch[1]) {
-                    excerpt = excerptMatch[1].replace(/^['"]|['"]$/g, '').trim();
-                }
-
-                // Grab Category to update the tag
-                const catMatch = text.match(/category:\s*(.+)/i);
-                if (catMatch && catMatch[1]) {
-                    category = catMatch[1].replace(/^['"]|['"]$/g, '').trim();
-                }
-
+                document.getElementById(`title-${fileName}`).textContent = dispatch.title;
                 document.getElementById(`desc-${fileName}`).textContent = excerpt;
                 document.getElementById(`tag-${fileName}`).textContent = category;
             })

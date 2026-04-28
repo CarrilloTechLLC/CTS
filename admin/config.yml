@@ -1,7 +1,4 @@
-# ═══════════════════════════════════════════════════════
-# CARRILLO TECH SOLUTIONS — Decap CMS Configuration
-# Replace YOUR_GITHUB_USERNAME and YOUR_REPO_NAME below
-# ═══════════════════════════════════════════════════════
+# Carrillo Tech Solutions — Decap CMS Configuration
 
 backend:
   name: github
@@ -11,15 +8,11 @@ backend:
 media_folder: "assets/uploads"
 public_folder: "/assets/uploads"
 
-# ── Site URL ──
 site_url: https://carrillotech.pages.dev
 
-# ─────────────────────────────────────
-# COLLECTIONS
-# ─────────────────────────────────────
 collections:
 
-  # ── BLOG / INTELLIGENCE HUB ──────────────────────────
+  # Blog / Intelligence Hub
   - name: "blog"
     label: "Intelligence Hub — Blog"
     label_singular: "Post"
@@ -43,7 +36,7 @@ collections:
         default: false
         hint: "Toggle to save without publishing"
 
-  # ── PORTFOLIO ─────────────────────────────────────────
+  # Portfolio
   - name: "portfolio"
     label: "Infrastructure Portfolio"
     label_singular: "Project"
@@ -75,7 +68,7 @@ collections:
         default: false
         hint: "Pin to top of portfolio grid"
 
-  # ── ENTERPRISE SERVICES ──────────────────────────────
+  # Enterprise Services
   - name: "services"
     label: "Enterprise Services"
     label_singular: "Service"
@@ -98,7 +91,7 @@ collections:
         widget: "boolean"
         default: false
 
-  # ── SITE SETTINGS (singleton) ────────────────────────
+  # Site Settings (singleton)
   - name: "settings"
     label: "Site Settings"
     files:

@@ -1373,3 +1373,315 @@ section { position: relative; z-index: 2; }
 }
 .markdown-body ul, .markdown-body ol { margin-left: 2rem; margin-bottom: 1.5rem; color: var(--text); line-height: 1.8; }
 .markdown-body strong { color: var(--purple); }
+
+/* ══════════════════════════════════════
+   PROJECT README PAGE
+══════════════════════════════════════ */
+.project-page {
+  position: relative;
+  z-index: 2;
+}
+
+.project-hero {
+  position: relative;
+  min-height: 78vh;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 8rem 2rem 4rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+  gap: 4rem;
+  align-items: center;
+}
+
+.project-hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.project-hero-panel {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.readme-system-card {
+  position: relative;
+  width: min(100%, 360px);
+  padding: 2rem;
+  background: linear-gradient(145deg, rgba(19, 23, 32, 0.95), rgba(15, 17, 23, 0.72));
+  border: 1px solid var(--border-cyan);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-cyan), inset 0 0 40px rgba(0, 245, 212, 0.04);
+  text-align: center;
+  overflow: hidden;
+}
+
+.readme-system-card::before {
+  content: '';
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  background: radial-gradient(circle, var(--purple-glow), transparent 68%);
+  filter: blur(10px);
+  opacity: 0.5;
+  transform: translate(60px, -80px);
+  pointer-events: none;
+}
+
+.readme-system-card-top {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  color: var(--cyan);
+}
+
+.readme-system-card img {
+  position: relative;
+  z-index: 1;
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+  margin: 0 auto 1.5rem;
+  filter: drop-shadow(0 0 25px var(--purple-glow));
+}
+
+.readme-system-card p {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-head);
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  color: var(--text);
+  text-transform: uppercase;
+}
+
+.project-section {
+  position: relative;
+  z-index: 2;
+}
+
+.project-section-alt {
+  background: linear-gradient(180deg, rgba(155, 93, 229, 0.04), rgba(0, 245, 212, 0.025));
+  border-top: 1px solid rgba(155, 93, 229, 0.08);
+  border-bottom: 1px solid rgba(0, 245, 212, 0.08);
+}
+
+.readme-feature-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+.readme-feature-card {
+  position: relative;
+  padding: 1.6rem;
+  min-height: 260px;
+  background: var(--bg-glass);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  overflow: hidden;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.readme-feature-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--purple);
+  box-shadow: var(--shadow-purple);
+}
+
+.readme-feature-card::after {
+  content: '';
+  position: absolute;
+  inset: auto -20% -45% -20%;
+  height: 140px;
+  background: radial-gradient(circle, var(--cyan-dim), transparent 70%);
+  pointer-events: none;
+}
+
+.readme-icon {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--purple-dim);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  color: var(--cyan);
+  font-size: 1.1rem;
+  box-shadow: inset 0 0 16px rgba(155, 93, 229, 0.08);
+}
+
+.readme-feature-card h3,
+.tech-stack-item h3 {
+  color: var(--text);
+  margin-bottom: 0.8rem;
+}
+
+.readme-feature-card p,
+.tech-stack-item p {
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+.readme-split {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(320px, 1.15fr);
+  gap: 3rem;
+  align-items: start;
+}
+
+.readme-left-eyebrow {
+  justify-content: flex-start;
+  margin-bottom: 1.25rem;
+}
+
+.left-align {
+  text-align: left;
+  margin-left: 0;
+  max-width: 560px;
+}
+
+.tech-stack-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.tech-stack-item {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: 1rem;
+  padding: 1.25rem;
+  background: rgba(15, 17, 23, 0.8);
+  border: 1px solid var(--border-cyan);
+  border-radius: var(--r-md);
+}
+
+.tech-stack-item > span {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-3);
+  border: 1px solid var(--purple);
+  border-radius: 10px;
+  color: var(--purple);
+  font-family: var(--font-head);
+  font-size: 0.8rem;
+  font-weight: 800;
+  box-shadow: 0 0 18px var(--purple-glow);
+}
+
+.readme-table-card {
+  max-width: 980px;
+  margin: 0 auto;
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  background: var(--bg-glass);
+  box-shadow: var(--shadow-purple);
+}
+
+.readme-table-row {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 1.25rem;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.readme-table-row:last-child {
+  border-bottom: 0;
+}
+
+.readme-table-row span {
+  font-family: var(--font-head);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cyan);
+}
+
+.readme-table-row p {
+  margin: 0;
+  color: var(--text-muted);
+}
+
+.project-notes-section .section-container {
+  padding-top: 2rem;
+}
+
+.project-notes-card {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: linear-gradient(145deg, rgba(155, 93, 229, 0.09), rgba(0, 245, 212, 0.055));
+  border: 1px solid var(--border-cyan);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-cyan);
+}
+
+.project-notes-card h2 {
+  color: var(--text);
+  margin-bottom: 1rem;
+}
+
+.project-notes-card p {
+  margin-bottom: 1.75rem;
+}
+
+.nav-link.active {
+  color: var(--cyan);
+  background: var(--cyan-dim);
+}
+
+@media (max-width: 1100px) {
+  .project-hero,
+  .readme-split {
+    grid-template-columns: 1fr;
+  }
+
+  .project-hero-panel {
+    justify-content: flex-start;
+  }
+
+  .readme-feature-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .project-hero {
+    padding: 7rem 1.25rem 3rem;
+    min-height: auto;
+  }
+
+  .readme-feature-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tech-stack-item,
+  .readme-table-row {
+    grid-template-columns: 1fr;
+  }
+
+  .readme-table-row {
+    gap: 0.4rem;
+  }
+
+  .project-notes-card,
+  .readme-system-card {
+    padding: 1.4rem;
+  }
+}

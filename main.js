@@ -267,7 +267,7 @@ function parseMarkdownDispatch(markdown, fallbackSlug = '') {
     category: data.category || 'Intelligence',
     excerpt: data.excerpt || '',
     image: normalizeMediaPath(data.image || data.featured_image || ''),
-    beatSource: cleanFrontmatterValue(data.beat_source || data.beat || data.audio || ''),
+    beatSource: cleanFrontmatterValue(data.beat_source || data.beat_file || data.beat || data.audio || ''),
     bpm: cleanFrontmatterValue(data.bpm || ''),
     musicalKey: cleanFrontmatterValue(data.musical_key || data.key || ''),
     genre: cleanFrontmatterValue(data.genre || ''),

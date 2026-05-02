@@ -40,8 +40,8 @@
         <li><a href="/#portfolio" class="nav-link">Portfolio</a></li>
         <li><a href="/#architect" class="nav-link">Architect</a></li>
         <li><a href="/#intel" class="nav-link">Intel Hub</a></li>
-        <li><a href="/creative" class="nav-link active">Creative</a></li>
-        <li><a href="/readme.html" class="nav-link">README</a></li>
+        <li><a href="/creative/" class="nav-link active">Creative</a></li>
+        <li><a href="/readme/" class="nav-link">README</a></li>
         <li><a href="/#contact" class="nav-cta"><i class="fas fa-terminal"></i> Deploy Support</a></li>
       </ul>
     </nav>
@@ -150,8 +150,8 @@
             <li><a href="/#portfolio">Portfolio</a></li>
             <li><a href="/#architect">Architect</a></li>
             <li><a href="/#intel">Intel Hub</a></li>
-            <li><a href="/creative">Creative Archive</a></li>
-            <li><a href="/readme.html">README</a></li>
+            <li><a href="/creative/">Creative Archive</a></li>
+            <li><a href="/readme/">README</a></li>
             <li><a href="/#contact">Deploy Support</a></li>
           </ul>
         </div>
@@ -276,7 +276,7 @@
       const post = creativePosts.find(item => item.slug === slug);
       if (!post) return;
 
-      if (push) history.pushState({ creative: slug }, '', `/creative?piece=${encodeURIComponent(slug)}`);
+      if (push) history.pushState({ creative: slug }, '', `/creative/?piece=${encodeURIComponent(slug)}`);
 
       $('manuscriptView').hidden = false;
       $('creativeMedia').innerHTML = renderMedia(post.beatSource);
@@ -292,19 +292,31 @@
 
     function closeManuscript() {
       $('manuscriptView').hidden = true;
-      history.pushState({}, '', '/creative');
+      history.pushState({}, '', '/creative/');
       document.querySelector('.creative-library-section').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    async function getCreativeMarkdownFiles() {
+      try {
+        const response = await fetch('https://api.github.com/repos/CarrilloTechLLC/CTS/contents/_creative', { cache: 'no-store' });
+        if (!response.ok) throw new Error('GitHub file list failed');
+        const files = await response.json();
+        return files.filter(file => file.name && file.name.endsWith('.md'));
+      } catch {
+        const localResponse = await fetch('/creative-index.json', { cache: 'no-store' });
+        if (!localResponse.ok) throw new Error('Local creative index failed');
+        const localFiles = await localResponse.json();
+        return localFiles.map(name => ({ name }));
+      }
     }
 
     async function loadCreativeArchive() {
       try {
-        const response = await fetch('https://api.github.com/repos/CarrilloTechLLC/CTS/contents/_creative');
-        const files = await response.json();
-        const markdownFiles = files.filter(file => file.name.endsWith('.md'));
+        const markdownFiles = await getCreativeMarkdownFiles();
 
         const loaded = await Promise.all(markdownFiles.map(async file => {
           const slug = file.name.replace(/\.md$/, '');
-          const res = await fetch(`/_creative/${encodeURIComponent(slug)}.md`);
+          const res = await fetch(`/_creative/${encodeURIComponent(slug)}.md`, { cache: 'no-store' });
           if (!res.ok) return null;
           return { slug, ...parseMarkdownDispatch(await res.text(), slug) };
         }));

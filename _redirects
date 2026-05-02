@@ -1,1 +1,5 @@
+/creative /creative.html 200
+/creative/* /creative.html 200
+/dispatch /dispatch.html 200
+/readme /readme.html 200
 /intel/* /dispatch.html?post=:splat 301

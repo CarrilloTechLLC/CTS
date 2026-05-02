@@ -4,7 +4,7 @@ date: 2025-09-07
 excerpt: A dark emotional hip-hop track about feeling drained, carrying pressure for everyone else, and trying to make it through the night when your own battery is almost gone.
 image: /assets/uploads/low-battery.png
 beat_source: ''
-beat_file: /assets/music/low-battery.wav
+beat_file: /assets/music/215to216.mp3
 bpm: '70'
 musical_key: C# Minor
 genre: Melodic Hip-Hop / Sad Trap

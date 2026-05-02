@@ -11,7 +11,7 @@ genre: Gaming Rap / Cinematic Hip-Hop
 draft: false
 ---
 
-[Intro]
+#### [Intro]
 
 Yeah
 
@@ -19,7 +19,7 @@ Looking out the window, 95 North
 
 We really leaving it all behind...
 
-[Verse 1]
+#### [Verse 1]
 
 Cruisin' up 95, staring through the back glass
 
@@ -41,7 +41,7 @@ Yeah the city was the pulse, kept us loud and alive
 
 Now we just surviving on the road, tryna arrive...
 
-[Chorus]
+#### [Chorus]
 
 Bitter cold Ohio wind biting at the bone
 
@@ -57,7 +57,7 @@ Nine years deep, gotta learn new tricks
 
 Yeah, we looking for a way out
 
-[Verse 2]
+#### [Verse 2]
 
 Squished in the backseat, Eric to my right
 
@@ -83,7 +83,7 @@ Sharing a room with Aixa, sharing space with the cold
 
 Learning how to hide before I even get old
 
-[Chorus]
+#### [Chorus]
 
 Bitter cold Ohio wind biting at the bone
 
@@ -99,7 +99,7 @@ Nine years deep, gotta learn new tricks
 
 Yeah, we looking for a way out
 
-[Bridge]
+#### [Bridge]
 
 Yeah... shifting the gravity
 
@@ -109,7 +109,7 @@ Trying to fix the tragedy
 
 Lost inside the galaxy
 
-[Verse 3]
+#### [Verse 3]
 
 Uncle brought the Wii, yeah he opened up the box
 
@@ -135,7 +135,7 @@ Music was the bridge and the tech was the key
 
 Finally felt human, finally felt like me
 
-[Chorus]
+#### [Chorus]
 
 Bitter cold Ohio wind biting at the bone
 
@@ -151,7 +151,7 @@ Nine years deep, gotta learn new tricks
 
 Yeah, we found a way out
 
-[Outro]
+#### [Outro]
 
 Yo, nine-year-old me... listen up.
 

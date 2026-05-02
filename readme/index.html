@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project README | Carrillo Tech Solutions</title>
+  <meta name="description" content="Project README for the Carrillo Tech Solutions website, displayed as a polished public-facing project overview." />
+
+  <link rel="icon" type="image/png" href="assets/cts-logo-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <canvas id="bgCanvas"></canvas>
+  <div class="scanlines"></div>
+
+  <header class="nav-header" id="mainNav">
+    <nav class="nav-container">
+      <a href="/" class="nav-logo" aria-label="Carrillo Tech Solutions Home">
+        <img src="/assets/cts-logo-icon.png" alt="CTS Logo" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+        <div class="logo-fallback">
+          <span class="logo-icon">⬡</span>
+          <div class="logo-text">
+            <span class="logo-cts">CTS</span>
+            <span class="logo-sub">Carrillo Tech Solutions</span>
+          </div>
+        </div>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="/#services" class="nav-link">Services</a></li>
+        <li><a href="/#portfolio" class="nav-link">Portfolio</a></li>
+        <li><a href="/#architect" class="nav-link">Architect</a></li>
+        <li><a href="/#intel" class="nav-link">Intel Hub</a></li>
+        <li><a href="/creative/" class="nav-link">Creative</a></li>
+        <li><a href="/readme/" class="nav-link active">README</a></li>
+        <li><a href="/#contact" class="nav-cta">
+          <i class="fas fa-terminal"></i> Deploy Support
+        </a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="project-page">
+    <section class="project-hero readme-source-hero">
+      <div class="hero-grid-overlay"></div>
+      <div class="project-hero-content">
+        <div class="hero-badge">
+          <span class="badge-dot"></span>
+          <span>PROJECT README // LIVE MARKDOWN VIEW</span>
+        </div>
+        <h1 class="hero-headline">
+          Project README<br />
+          <span class="headline-accent">Rendered From Source.</span>
+        </h1>
+        <p class="hero-subheadline">
+          This page displays the content from the project README file while keeping the same Carrillo Tech Solutions command-center style, spacing, typography, and responsive layout.
+        </p>
+        <div class="hero-actions">
+          <a href="/#contact" class="btn btn-primary">
+            <i class="fas fa-paper-plane"></i>
+            Request Support
+          </a>
+          <a href="/" class="btn btn-outline">
+            <i class="fas fa-arrow-left"></i>
+            Main Site
+          </a>
+        </div>
+      </div>
+      <div class="project-hero-panel">
+        <div class="readme-system-card">
+          <div class="readme-system-card-top">
+            <span>README.MD</span>
+            <i class="fas fa-file-lines"></i>
+          </div>
+          <img src="/assets/cts-logo-icon.png" alt="Carrillo Tech Solutions logo" />
+          <p>Engineered for Performance. Secured for the Future.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="project-section readme-source-section">
+      <div class="section-container">
+        <div class="section-header">
+          <div class="section-eyebrow">
+            <span class="eyebrow-line"></span>
+            <span>README SOURCE</span>
+            <span class="eyebrow-line"></span>
+          </div>
+          <h2 class="section-title">Project Details<br /><span class="title-accent">From README.md.</span></h2>
+          <p class="section-desc">The content below is loaded directly from the project README file and rendered inside a styled website page.</p>
+        </div>
+
+        <article class="readme-source-card">
+          <div class="readme-source-toolbar">
+            <span><i class="fas fa-code-branch"></i> README.md</span>
+            <span class="readme-source-status"><i class="fas fa-circle"></i> Source Loaded</span>
+          </div>
+          <div id="readmeContent" class="readme-markdown markdown-body" aria-live="polite">
+            <p class="readme-loading"><i class="fas fa-spinner fa-spin"></i> Loading project README...</p>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="/" class="footer-logo-link">
+            <img src="/assets/cts-logo-icon.png" alt="CTS" class="footer-logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+            <span class="footer-logo-fallback">CTS</span>
+          </a>
+          <p class="footer-tagline">Carrillo Tech Solutions.<br />Engineered for Performance. Secured for the Future.</p>
+        </div>
+
+        <div class="footer-nav-col">
+          <h5>Command Links</h5>
+          <ul>
+            <li><a href="/#services">Services</a></li>
+            <li><a href="/#portfolio">Portfolio</a></li>
+            <li><a href="/#architect">Architect</a></li>
+            <li><a href="/#intel">Intel Hub</a></li>
+            <li><a href="/creative/">Creative Archive</a></li>
+            <li><a href="/readme/">README</a></li>
+            <li><a href="/#contact">Deploy Support</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-nav-col">
+          <h5>Legal</h5>
+          <ul>
+            <li><a href="/privacy">Privacy Policy</a></li>
+            <li><a href="/terms">Terms of Service</a></li>
+            <li><a href="/admin">Admin Portal</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-social-col">
+          <h5>Social Nodes</h5>
+          <div class="social-links">
+            <a href="https://twitch.tv/supergman2155" target="_blank" rel="noopener" class="social-node" aria-label="Twitch">
+              <i class="fab fa-twitch"></i>
+            </a>
+            <a href="https://youtube.com/@supergman215" target="_blank" rel="noopener" class="social-node" aria-label="YouTube">
+              <i class="fab fa-youtube"></i>
+            </a>
+            <a href="https://instagram.com/G.io215" target="_blank" rel="noopener" class="social-node" aria-label="Instagram">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://linkedin.com/in/giovanni-carrillo" target="_blank" rel="noopener" class="social-node" aria-label="LinkedIn">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2026 Carrillo Tech Solutions LLC. All rights reserved.</span>
+        <span class="footer-sig">// CLEVELAND, OH // SYSTEMS NOMINAL</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const container = document.getElementById('readmeContent');
+      const status = document.querySelector('.readme-source-status');
+
+      try {
+        const response = await fetch('/README.md', { cache: 'no-store' });
+        if (!response.ok) throw new Error('README.md could not be loaded');
+
+        const markdown = await response.text();
+        marked.setOptions({ breaks: true, gfm: true });
+        container.innerHTML = marked.parse(markdown);
+
+        container.querySelectorAll('a').forEach(link => {
+          link.setAttribute('target', '_blank');
+          link.setAttribute('rel', 'noopener');
+        });
+      } catch (error) {
+        container.innerHTML = `
+          <div class="readme-error">
+            <h2>README Unavailable</h2>
+            <p>The README content could not be loaded from the project source file.</p>
+          </div>
+        `;
+        if (status) {
+          status.innerHTML = '<i class="fas fa-triangle-exclamation"></i> Source Error';
+          status.classList.add('error');
+        }
+      }
+    });
+  </script>
+  <script src="/main.js"></script>
+</body>
+</html>

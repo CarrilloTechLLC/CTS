@@ -21,7 +21,7 @@ draft: false
 
 “Low Battery” is an emotional song about being exhausted from carrying everybody else while silently falling apart. The track captures late-night overthinking, pressure, family expectations, school stress, love, guilt, and the feeling of trying to keep going even when your energy is almost gone.
 
----
+***
 
 ### Lyrics
 

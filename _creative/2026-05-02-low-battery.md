@@ -11,9 +11,9 @@ genre: Melodic Hip-Hop / Sad Trap
 draft: false
 ---
 
-“Low Battery”
+# **“Low Battery”**
 
-[Intro]
+#### [Intro]
 
 Engine cut off, but I’m still sitting here
 
@@ -25,7 +25,7 @@ Everybody need me, but I don’t feel right
 
 I don’t feel right…
 
-[Hook]
+#### [Hook]
 
 I’m tired of being the anchor when I’m the one that’s sinking
 
@@ -43,7 +43,7 @@ And I don’t need a speech, I don’t need nobody mad
 
 I just need one night where I don’t gotta act like I’m not sad
 
-[Verse 1]
+#### [Verse 1]
 
 I moved states to get away, but I brought the ghost with me
 
@@ -79,7 +79,7 @@ Siblings looking at me like I’m supposed to be the guide
 
 But I’m tired…
 
-[Hook]
+#### [Hook]
 
 I’m tired of being the anchor when I’m the one that’s sinking
 
@@ -97,7 +97,7 @@ And I don’t need a speech, I don’t need nobody mad
 
 I just need one night where I don’t gotta act like I’m not sad
 
-[Verse 2]
+#### [Verse 2]
 
 They see the school, see the grind, see the plans on paper
 
@@ -131,7 +131,7 @@ And maybe I’m not broken, maybe I’m just worn
 
 Maybe I been carrying weight I wasn’t built to hold anymore
 
-[Bridge]
+#### [Bridge]
 
 So let me sit here in the silence
 
@@ -149,7 +149,7 @@ And if tomorrow all I do is wake up
 
 Maybe that’s enough, maybe that’s enough
 
-[Final Hook]
+#### [Final Hook]
 
 I’m tired of being the anchor when I’m the one that’s sinking
 
@@ -167,7 +167,7 @@ No big win, no applause, no perfect ending scene
 
 Just me in this car, still trying to breathe
 
-[Outro]
+#### [Outro]
 
 Engine off…
 

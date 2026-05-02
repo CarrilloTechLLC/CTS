@@ -12,6 +12,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <link rel="stylesheet" href="/styles.css" />
 </head>
 <body>
@@ -95,7 +96,7 @@
               <span><i class="fas fa-file-lines"></i> Manuscript View</span>
               <span>LINE BREAKS PRESERVED</span>
             </div>
-            <pre id="creativeManuscript" class="lyric-manuscript"></pre>
+            <div id="creativeManuscript" class="lyric-manuscript markdown-body"></div>
           </div>
         </article>
       </div>
@@ -286,7 +287,13 @@
       $('creativeStatus').textContent = post.draft ? 'Draft Status: Draft' : 'Draft Status: Finalized';
       $('creativeStatus').className = `creative-status ${post.draft ? 'draft' : 'finalized'}`;
       $('creativeMeta').innerHTML = formatMeta(post);
-      $('creativeManuscript').textContent = post.content || 'No manuscript body entered yet.';
+      const manuscript = post.content || 'No manuscript body entered yet.';
+      if (window.marked) {
+        marked.setOptions({ breaks: true, gfm: true });
+        $('creativeManuscript').innerHTML = marked.parse(manuscript);
+      } else {
+        $('creativeManuscript').textContent = manuscript;
+      }
       $('manuscriptView').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 

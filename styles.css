@@ -1656,9 +1656,41 @@ section { position: relative; z-index: 2; }
   font-family: var(--font-mono);
   font-size: clamp(0.92rem, 1.5vw, 1.06rem);
   line-height: 1.85;
-  white-space: pre-wrap;
+  white-space: normal;
   word-break: break-word;
   overflow-x: auto;
+}
+
+.lyric-manuscript h1,
+.lyric-manuscript h2,
+.lyric-manuscript h3,
+.lyric-manuscript h4 {
+  color: var(--cyan);
+  font-family: var(--font-head);
+  letter-spacing: 0.04em;
+  line-height: 1.25;
+  margin: 1.35rem 0 0.7rem;
+}
+
+.lyric-manuscript h1:first-child,
+.lyric-manuscript h2:first-child,
+.lyric-manuscript h3:first-child,
+.lyric-manuscript h4:first-child {
+  margin-top: 0;
+}
+
+.lyric-manuscript h1 { font-size: clamp(1.5rem, 3vw, 2.4rem); }
+.lyric-manuscript h2 { font-size: clamp(1.25rem, 2.4vw, 1.85rem); }
+.lyric-manuscript h3,
+.lyric-manuscript h4 { font-size: clamp(1rem, 1.8vw, 1.25rem); }
+
+.lyric-manuscript p {
+  margin: 0 0 1rem;
+}
+
+.lyric-manuscript strong {
+  color: var(--gold);
+  font-weight: 700;
 }
 
 @media (max-width: 1180px) {

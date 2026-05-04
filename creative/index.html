@@ -16,13 +16,13 @@
   <link rel="stylesheet" href="/styles.css" />
 </head>
 <body>
-  <canvas id="bgCanvas"></canvas>
-  <div class="scanlines"></div>
+  <canvas id="bgCanvas" aria-hidden="true"></canvas>
+  <div class="scanlines" aria-hidden="true"></div>
 
   <header class="nav-header" id="mainNav">
-    <nav class="nav-container">
+    <nav class="nav-container" aria-label="Primary navigation">
       <a href="/" class="nav-logo" aria-label="Carrillo Tech Solutions Home">
-        <img src="/assets/cts-logo-icon.png" alt="CTS Logo" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+        <img src="/assets/cts-logo-icon.png" alt="Carrillo Tech Solutions CTS logo" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
         <div class="logo-fallback">
           <span class="logo-icon">⬡</span>
           <div class="logo-text">
@@ -32,7 +32,7 @@
         </div>
       </a>
 
-      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-controls="navLinks" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
 
@@ -48,7 +48,7 @@
     </nav>
   </header>
 
-  <main class="creative-page">
+  <main id="main-content" class="creative-page">
     <section class="creative-hero">
       <div class="section-container">
         <div class="creative-hero-card">
@@ -138,7 +138,7 @@
       <div class="footer-top">
         <div class="footer-brand">
           <a href="/" class="footer-logo-link">
-            <img src="/assets/cts-logo-icon.png" alt="CTS" class="footer-logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+            <img src="/assets/cts-logo-icon.png" alt="Carrillo Tech Solutions CTS logo" class="footer-logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
             <span class="footer-logo-fallback">CTS</span>
           </a>
           <p class="footer-tagline">Carrillo Tech Solutions.<br />Engineered for Performance. Secured for the Future.</p>
@@ -230,12 +230,12 @@
       if (media.type === 'none') return '<div class="creative-media-empty"><i class="fas fa-wave-square"></i><span>No beat source attached.</span></div>';
       if (media.type === 'youtube') {
         const id = youtubeEmbed(media.src);
-        return id ? `<iframe src="https://www.youtube.com/embed/${esc(id)}" title="Beat source" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>` : '<div class="creative-media-empty">YouTube source could not be embedded.</div>';
+        return id ? `<iframe src="https://www.youtube.com/embed/${esc(id)}" title="Beat source" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe><div class="media-transcript-note" role="note"><strong>Caption note:</strong> Use captions inside the video player when available. The written manuscript below also supports users who cannot hear the audio.</div>` : '<div class="creative-media-empty">YouTube source could not be embedded.</div>';
       }
       if (media.type === 'soundcloud') {
-        return `<iframe src="https://w.soundcloud.com/player/?url=${encodeURIComponent(media.src)}&auto_play=false&hide_related=false&show_comments=false&show_user=true&show_reposts=false&visual=true" title="SoundCloud beat source" loading="lazy"></iframe>`;
+        return `<iframe src="https://w.soundcloud.com/player/?url=${encodeURIComponent(media.src)}&auto_play=false&hide_related=false&show_comments=false&show_user=true&show_reposts=false&visual=true" title="SoundCloud beat source" loading="lazy"></iframe><div class="media-transcript-note" role="note"><strong>Transcript note:</strong> The written manuscript below supports users who cannot hear the audio.</div>`;
       }
-      if (media.type === 'audio') return `<audio controls preload="metadata" src="${esc(media.src)}"></audio>`;
+      if (media.type === 'audio') return `<div class="creative-audio-wrap"><audio controls preload="metadata" src="${esc(media.src)}" aria-label="Audio for this creative manuscript" aria-describedby="creativeAudioTranscriptNote"></audio><div id="creativeAudioTranscriptNote" class="media-transcript-note" role="note"><strong>Transcript / lyrics:</strong> The written manuscript below is the text version for this audio content.</div></div>`;
       return `<a class="creative-media-link" href="${esc(media.src)}" target="_blank" rel="noopener"><i class="fas fa-arrow-up-right-from-square"></i> Open Beat Source</a>`;
     }
 
@@ -243,7 +243,7 @@
       const status = post.draft ? 'Draft Status: Draft' : 'Draft Status: Finalized';
       const statusClass = post.draft ? 'draft' : 'finalized';
       return `
-        <article class="creative-card ${post.draft ? 'is-draft' : ''}" data-slug="${esc(post.slug)}">
+        <article class="creative-card ${post.draft ? 'is-draft' : ''}" data-slug="${esc(post.slug)}" role="button" tabindex="0" aria-label="Open manuscript: ${esc(post.title)}">
           ${post.image ? `<div class="creative-card-image"><img src="${esc(post.image)}" alt="${esc(post.title)} cover" loading="lazy"></div>` : ''}
           <div class="creative-card-status ${statusClass}">${status}</div>
           <h3>${esc(post.title)}</h3>
@@ -270,6 +270,12 @@
 
       document.querySelectorAll('.creative-card').forEach(card => {
         card.addEventListener('click', () => openManuscript(card.dataset.slug, true));
+        card.addEventListener('keydown', (event) => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            openManuscript(card.dataset.slug, true);
+          }
+        });
       });
     }
 
@@ -294,13 +300,15 @@
       } else {
         $('creativeManuscript').textContent = manuscript;
       }
-      $('manuscriptView').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      $('creativeReaderTitle').setAttribute('tabindex', '-1');
+      $('manuscriptView').scrollIntoView({ behavior: document.body.classList.contains('a11y-reduce-motion') ? 'auto' : 'smooth', block: 'start' });
+      $('creativeReaderTitle').focus({ preventScroll: true });
     }
 
     function closeManuscript() {
       $('manuscriptView').hidden = true;
       history.pushState({}, '', '/creative/');
-      document.querySelector('.creative-library-section').scrollIntoView({ behavior: 'smooth' });
+      document.querySelector('.creative-library-section').scrollIntoView({ behavior: document.body.classList.contains('a11y-reduce-motion') ? 'auto' : 'smooth' });
     }
 
     async function getCreativeMarkdownFiles() {

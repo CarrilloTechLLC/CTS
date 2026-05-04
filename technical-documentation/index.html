@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Technical Documentation | Carrillo Tech Solutions</title>
+  <meta name="description" content="Technical Documentation evidence page for Carrillo Tech Solutions, including hardware configuration, cable management, workstation notes, and end-user communication." />
+  <link rel="icon" type="image/png" href="assets/cts-logo-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <canvas id="bgCanvas" aria-hidden="true"></canvas>
+  <div class="scanlines" aria-hidden="true"></div>
+
+  <header class="nav-header" id="mainNav">
+    <nav class="nav-container" aria-label="Primary navigation">
+      <a href="/" class="nav-logo" aria-label="Carrillo Tech Solutions Home">
+        <img src="/assets/cts-logo-icon.png" alt="Carrillo Tech Solutions CTS logo" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+        <div class="logo-fallback">
+          <span class="logo-icon">⬡</span>
+          <div class="logo-text">
+            <span class="logo-cts">CTS</span>
+            <span class="logo-sub">Carrillo Tech Solutions</span>
+          </div>
+        </div>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-controls="navLinks" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="/#services" class="nav-link">Services</a></li>
+        <li><a href="/#portfolio" class="nav-link">Portfolio</a></li>
+        <li><a href="/digital-media-integration/" class="nav-link">Media</a></li>
+        <li><a href="/technical-documentation/" class="nav-link active">Docs</a></li>
+        <li><a href="/#architect" class="nav-link">Architect</a></li>
+        <li><a href="/#intel" class="nav-link">Intel Hub</a></li>
+        <li><a href="/instructional-use/" class="nav-link">Guides</a></li>
+        <li><a href="/creative/" class="nav-link">Creative</a></li>
+        <li><a href="/readme/" class="nav-link">README</a></li>
+        <li><a href="/#contact" class="nav-cta"><i class="fas fa-terminal"></i> Deploy Support</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <section class="evidence-page-hero" id="technical-documentation">
+      <div class="section-container">
+        <a href="/#hardware-config" class="page-return"><i class="fas fa-arrow-left" aria-hidden="true"></i> Back to homepage technical section</a>
+        <div class="section-eyebrow">
+          <span class="eyebrow-line"></span>
+          <span>TECHNICAL DOCUMENTATION</span>
+          <span class="eyebrow-line"></span>
+        </div>
+        <h1 class="section-title">Technical <span class="title-accent">Documentation.</span></h1>
+        <p class="section-desc evidence-page-desc">This page gives the hardware and setup documentation its own space. It can show PC builds, workstation layouts, cable management, airflow choices, setup captions, troubleshooting notes, and the benefit to the end user.</p>
+        <div class="evidence-page-actions">
+          <a href="/admin" class="btn btn-primary"><i class="fas fa-pen-to-square" aria-hidden="true"></i> Add Docs in Admin</a>
+          <a href="/instructional-use/" class="btn btn-outline"><i class="fas fa-book-open" aria-hidden="true"></i> Open Instructional Use</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="hardware-docs evidence-page-section" id="hardware-config">
+      <div class="section-container">
+        <div class="section-header">
+          <div class="section-eyebrow">
+            <span class="eyebrow-line"></span>
+            <span>HARDWARE CONFIGURATION</span>
+            <span class="eyebrow-line"></span>
+          </div>
+          <h2 class="section-title">Hardware <span class="title-accent">Configuration.</span></h2>
+          <p class="section-desc">CMS-managed documentation cards for hardware photos, specs, cable routing, setup organization, repair notes, and client-friendly explanations.</p>
+        </div>
+
+        <div class="evidence-split">
+          <div class="evidence-panel">
+            <span class="evidence-kicker">Technical Documentation</span>
+            <h3>Clear Setup Notes</h3>
+            <p>Each entry can document specs, setup decisions, troubleshooting context, and what the viewer is looking at.</p>
+          </div>
+          <div class="evidence-panel alt">
+            <span class="evidence-kicker">End-User Communication</span>
+            <h3>Why the Setup Matters</h3>
+            <p>The documentation explains the benefit, like better airflow, cleaner repairs, safer use, or easier future maintenance.</p>
+          </div>
+        </div>
+
+        <div class="hardware-grid" id="hardwareConfigGrid" aria-live="polite">
+          <div class="portfolio-card cms-placeholder">
+            <div class="placeholder-inner">
+              <i class="fas fa-screwdriver-wrench" aria-hidden="true"></i>
+              <span>Hardware docs load from the CMS</span>
+              <a href="/admin" class="placeholder-link">Open Admin Portal</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="/" class="footer-logo-link">
+            <img src="/assets/cts-logo-icon.png" alt="Carrillo Tech Solutions CTS logo" class="footer-logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+            <span class="footer-logo-fallback">CTS</span>
+          </a>
+          <p class="footer-tagline">Carrillo Tech Solutions.<br />Engineered for Performance. Secured for the Future.</p>
+        </div>
+
+        <div class="footer-nav-col">
+          <h5>Command Links</h5>
+          <ul>
+            <li><a href="/#services">Services</a></li>
+            <li><a href="/#portfolio">Portfolio</a></li>
+            <li><a href="/digital-media-integration/">Digital Media Integration</a></li>
+            <li><a href="/technical-documentation/">Technical Documentation</a></li>
+            <li><a href="/#architect">Architect</a></li>
+            <li><a href="/#intel">Intel Hub</a></li>
+            <li><a href="/instructional-use/">Instructional Use</a></li>
+            <li><a href="/creative/">Creative Archive</a></li>
+            <li><a href="/readme/">README</a></li>
+            <li><a href="/#contact">Deploy Support</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-nav-col">
+          <h5>Legal</h5>
+          <ul>
+            <li><a href="/privacy">Privacy Policy</a></li>
+            <li><a href="/terms">Terms of Service</a></li>
+            <li><a href="/admin">Admin Portal</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-social-col">
+          <h5>Social Nodes</h5>
+          <div class="social-links">
+            <a href="https://twitch.tv/supergman2155" target="_blank" rel="noopener" class="social-node" aria-label="Twitch"><i class="fab fa-twitch"></i></a>
+            <a href="https://youtube.com/@supergman215" target="_blank" rel="noopener" class="social-node" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            <a href="https://instagram.com/G.io215" target="_blank" rel="noopener" class="social-node" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://linkedin.com/in/giovanni-carrillo" target="_blank" rel="noopener" class="social-node" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2026 Carrillo Tech Solutions LLC. All rights reserved.</span>
+        <span class="footer-sig">// CLEVELAND, OH // SYSTEMS NOMINAL</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/main.js"></script>
+</body>
+</html>

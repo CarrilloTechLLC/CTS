@@ -1,13 +1,14 @@
 ---
-title: "i5-9400F / GTX 1650 Super Workstation Layout"
+title: i5-9400F / GTX 1650 Super Workstation Cable Management
 date: 2026-05-04
-hardware_type: "Desktop PC"
-specs: "Windows 11 desktop with Intel i5-9400F CPU and GTX 1650 Super GPU. Used for IT work, web development, troubleshooting, OBS/streaming setup, and project testing."
-image: "/assets/cts-logo-icon.png"
-alt_text: "Carrillo Tech Solutions icon used as a placeholder for a future desktop PC build photo"
-caption: "Hardware documentation entry for the i5-9400F and GTX 1650 Super workstation. Replace this placeholder image with a real internal build photo from the admin portal."
-organization_note: "The setup should be documented with clear photos, captions, cable routing notes, airflow notes, and layout choices so another person can understand how the machine is organized."
-end_user_benefit: "Good hardware documentation makes future troubleshooting faster because the user can identify parts, cable paths, and upgrade points without guessing."
+hardware_type: Desktop PC
+specs: Windows 11 desktop workstation with an Intel i5-9400F CPU and GTX 1650 Super GPU. This system is used for IT support work, web development, troubleshooting, OBS/streaming setup, project testing, and hardware documentation.
+image: /assets/uploads/workstation-cable-management.png
+alt_text: Back side of my desktop PC case showing organized black cable routing behind the motherboard tray.
+caption: Cable management photo of my i5-9400F and GTX 1650 Super workstation showing how the cables are routed and secured behind the motherboard tray.
+organization_note: This photo shows the back side of my desktop PC case where the cables are routed behind the motherboard tray. The cables are grouped, tied down, and kept away from open service areas. This makes the system easier to inspect, clean, repair, and upgrade later.
+end_user_benefit: Good cable management makes future troubleshooting faster because the cable paths are easier to follow. It helps identify power connections, reduce clutter, improve service access, and keep the inside of the PC easier to maintain.
 draft: false
 ---
-This entry is designed to support the preparation and organization requirement. When real photos are added, each caption should explain what was organized, why it was organized that way, and how that helps the person using or maintaining the system.
+
+This entry supports the preparation and organization requirement by showing how my workstation is physically arranged and documented. The photo shows that the cables are not just hidden, but intentionally routed in a way that supports maintenance, airflow, and future upgrades. This connects to audio-visual methods because the image, caption, alt text, and technical notes work together to explain the hardware setup clearly.

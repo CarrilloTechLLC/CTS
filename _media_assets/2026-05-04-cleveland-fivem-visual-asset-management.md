@@ -3,7 +3,7 @@ title: Cleveland FiveM Visual Asset Management
 date: 2026-05-04
 project: FiveM Cleveland RP Server
 asset_type: Cleveland-Themed Asset
-image: /assets/uploads/cleveland-fivem-visual-asset-management.png
+image: /assets/uploads/cleveland-fivem-visual-asset-management-1.png
 video_url: ''
 alt_text: Cleveland-themed FiveM roleplay server visual asset management mockup showing Playhouse Square, Euclid Ave, E 14th St, police vehicles, server UI, departments, featured assets, and roleplay showcase panels.
 caption: This media entry shows a Cleveland-themed FiveM roleplay visual asset management concept. It combines server branding, UI/HUD planning, Cleveland-inspired locations, department assets, featured vehicles, character previews, and roleplay showcase media into one organized presentation asset.

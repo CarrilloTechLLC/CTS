@@ -33,7 +33,7 @@ collections:
       - label: "Category"
         name: "category"
         widget: "select"
-        options: ["Hardware", "Networking", "Data", "AI", "Security", "Tutorial", "Social Commentary"]
+        options: ["Hardware", "Networking", "Data", "AI", "Security", "Tutorial", "Service Guide", "Social Commentary"]
       - { label: "Excerpt", name: "excerpt", widget: "text", hint: "Short summary shown in cards and archive previews (1-2 sentences)" }
       - { label: "Featured Image", name: "image", widget: "image", required: false }
       - { label: "Body", name: "body", widget: "markdown" }
@@ -129,6 +129,82 @@ collections:
         hint: "e.g. Workstations, Component Repair"
       - label: "Featured (Highlighted Card)"
         name: "featured"
+        widget: "boolean"
+        default: false
+
+
+  # Project Media & Assets
+  - name: "media_assets"
+    label: "Project Media & Assets"
+    label_singular: "Media Asset"
+    folder: "_media_assets"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string", hint: "Example: Cleveland FiveM Police Livery Preview" }
+      - { label: "Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false }
+      - { label: "Related Project", name: "project", widget: "string", hint: "Example: FiveM Cleveland RP Server" }
+      - label: "Asset Type"
+        name: "asset_type"
+        widget: "select"
+        options: ["Cleveland-Themed Asset", "FiveM Livery", "UI Configuration", "Server Trailer", "Screenshot", "Brand Asset", "Documentation Image", "Other"]
+      - { label: "Media Image", name: "image", widget: "image", required: false, hint: "Upload the screenshot, livery preview, UI capture, or project visual." }
+      - { label: "Video / Trailer Link", name: "video_url", widget: "string", required: false, hint: "Optional YouTube, Twitch, or video URL." }
+      - { label: "Alt Text", name: "alt_text", widget: "text", required: false, hint: "Describe the image for blind or low-vision visitors." }
+      - { label: "Caption", name: "caption", widget: "text", hint: "Brief caption explaining what the viewer is looking at." }
+      - { label: "Purpose / Why This Media Was Selected", name: "purpose", widget: "text", hint: "Explain how the visual supports communication, training, environment design, or user experience." }
+      - { label: "Detailed Notes", name: "body", widget: "markdown", required: false }
+      - label: "Draft"
+        name: "draft"
+        widget: "boolean"
+        default: false
+        hint: "Turn on to save without showing it on the live site."
+
+  # Hardware Configuration Documentation
+  - name: "hardware_configurations"
+    label: "Hardware Configuration Docs"
+    label_singular: "Hardware Configuration"
+    folder: "_hardware_configurations"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string", hint: "Example: i5-9400F / GTX 1650 Super Workstation Layout" }
+      - { label: "Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false }
+      - { label: "Hardware Type", name: "hardware_type", widget: "select", options: ["Desktop PC", "Laptop", "Streaming Setup", "Network Setup", "Peripheral Setup", "Repair Documentation", "Other"] }
+      - { label: "Core Specs", name: "specs", widget: "text", hint: "CPU, GPU, RAM, storage, OS, and other key specs." }
+      - { label: "Photo", name: "image", widget: "image", required: false, hint: "Upload a real photo or screenshot of the build/configuration." }
+      - { label: "Alt Text", name: "alt_text", widget: "text", required: false, hint: "Describe the image for screen readers." }
+      - { label: "Caption", name: "caption", widget: "text", hint: "Explain what the photo shows." }
+      - { label: "Preparation / Organization Note", name: "organization_note", widget: "text", hint: "Explain cable management, layout, airflow, labeling, file organization, or setup choices." }
+      - { label: "End-User Benefit", name: "end_user_benefit", widget: "text", hint: "Explain how the setup helps the user: easier maintenance, better airflow, cleaner troubleshooting, safer use, etc." }
+      - { label: "Full Documentation", name: "body", widget: "markdown", required: false }
+      - label: "Draft"
+        name: "draft"
+        widget: "boolean"
+        default: false
+
+  # Instructional Use / Service Guides
+  - name: "service_guides"
+    label: "Instructional Use — Service Guides"
+    label_singular: "Service Guide"
+    folder: "_service_guides"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Guide Title", name: "title", widget: "string", hint: "Example: How to Document a Basic IT Support Issue" }
+      - { label: "Publish Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false }
+      - label: "Guide Type"
+        name: "guide_type"
+        widget: "select"
+        options: ["How-To", "Service Guide", "Troubleshooting", "Client Instructions", "School Evidence", "Checklist"]
+      - { label: "Skill Area", name: "skill_area", widget: "string", hint: "Example: Windows Support, Hardware, Networking, OBS, GitHub Pages" }
+      - { label: "Featured Image / Screenshot", name: "image", widget: "image", required: false }
+      - { label: "Alt Text", name: "alt_text", widget: "text", required: false, hint: "Describe the screenshot or image for blind users." }
+      - { label: "Short Summary", name: "summary", widget: "text", hint: "Shown on the live Service Guides section." }
+      - { label: "Audio-Visual Method Used", name: "av_method", widget: "text", hint: "Example: Text instructions with screenshots, captions, and visual callouts." }
+      - { label: "Body", name: "body", widget: "markdown", hint: "Write the full guide here. Use headings, steps, screenshots, captions, and links." }
+      - label: "Draft"
+        name: "draft"
         widget: "boolean"
         default: false
 

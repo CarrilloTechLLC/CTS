@@ -89,13 +89,16 @@
   const toggle = document.getElementById('navToggle');
   const links  = document.getElementById('navLinks');
 
+  if (!nav || !toggle || !links) return;
+
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 60);
   }, { passive: true });
 
   toggle.addEventListener('click', () => {
-    links.classList.toggle('open');
-    toggle.classList.toggle('active');
+    const isOpen = links.classList.toggle('open');
+    toggle.classList.toggle('active', isOpen);
+    toggle.setAttribute('aria-expanded', String(isOpen));
   });
 
   // Close on link click
@@ -103,6 +106,7 @@
     a.addEventListener('click', () => {
       links.classList.remove('open');
       toggle.classList.remove('active');
+      toggle.setAttribute('aria-expanded', 'false');
     });
   });
 
@@ -287,6 +291,7 @@ function openDispatch(slug, updateUrl = true) {
   }
 
   modal.classList.add('active');
+  modal.setAttribute('aria-hidden', 'false');
   body.innerHTML = '<p style="text-align:center; color:#00F5D4;"><i class="fas fa-spinner fa-spin"></i> DECRYPTING DISPATCH...</p>';
 
   fetch(getPostPath(slug))
@@ -342,7 +347,10 @@ function openDispatch(slug, updateUrl = true) {
 
 function closeDispatch() {
   const modal = document.getElementById('dispatchModal');
-  if (modal) modal.classList.remove('active');
+  if (modal) {
+    modal.classList.remove('active');
+    modal.setAttribute('aria-hidden', 'true');
+  }
 
   const params = new URLSearchParams(window.location.search);
   if (params.has('dispatch')) {
@@ -380,6 +388,7 @@ document.addEventListener("DOMContentLoaded", () => {
       modal.style.opacity = '1';
       modal.style.visibility = 'visible';
       modal.classList.add('active');
+      modal.setAttribute('aria-hidden', 'false');
 
       // Wire a dedicated kill switch to the X button
       const closeBtn = modal.querySelector('.modal-close');
@@ -389,6 +398,7 @@ document.addEventListener("DOMContentLoaded", () => {
           modal.style.opacity = '0';
           modal.style.visibility = 'hidden';
           modal.classList.remove('active');
+          modal.setAttribute('aria-hidden', 'true');
         });
       }
     }
@@ -529,3 +539,166 @@ function renderPosts(postsToRender) {
 }
 
 document.addEventListener('DOMContentLoaded', loadAutoDispatches);
+
+
+// ── ACCESSIBILITY ASSIST MODE ─────────────────────────────
+(function initAccessibilityTools() {
+  const STORAGE_KEY = 'ctsAccessibilityPrefs';
+  const defaults = {
+    enabled: false,
+    contrast: false,
+    largeText: false,
+    reduceMotion: false,
+    readableFont: false,
+    transcripts: false
+  };
+
+  function readPrefs() {
+    try {
+      return { ...defaults, ...JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}') };
+    } catch {
+      return { ...defaults };
+    }
+  }
+
+  function writePrefs(prefs) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(prefs));
+  }
+
+  function announce(message) {
+    const live = document.getElementById('a11yStatus');
+    if (live) live.textContent = message;
+  }
+
+  function applyPrefs(prefs, announceChange = false) {
+    const active = Boolean(prefs.enabled);
+    document.body.classList.toggle('a11y-enabled', active);
+    document.body.classList.toggle('a11y-high-contrast', active && prefs.contrast);
+    document.body.classList.toggle('a11y-large-text', active && prefs.largeText);
+    document.body.classList.toggle('a11y-reduce-motion', active && prefs.reduceMotion);
+    document.body.classList.toggle('a11y-readable-font', active && prefs.readableFont);
+    document.body.classList.toggle('a11y-transcripts', active && prefs.transcripts);
+    document.documentElement.style.scrollBehavior = active && prefs.reduceMotion ? 'auto' : '';
+    document.dispatchEvent(new CustomEvent('ctsA11yChanged', { detail: { ...prefs, active } }));
+    if (announceChange) announce(active ? 'Accessibility assist mode updated.' : 'Accessibility assist mode is off.');
+  }
+
+  function controlMarkup(id, label, description, checked) {
+    return `
+      <label class="a11y-switch" for="${id}">
+        <span>
+          <strong>${label}</strong>
+          <small>${description}</small>
+        </span>
+        <input type="checkbox" id="${id}" ${checked ? 'checked' : ''} />
+      </label>`;
+  }
+
+  function addSkipLink() {
+    if (document.getElementById('main-content') && !document.querySelector('.skip-link')) {
+      document.body.insertAdjacentHTML('afterbegin', '<a class="skip-link" href="#main-content">Skip to main content</a>');
+    }
+  }
+
+  function addPageSummary() {
+    const main = document.getElementById('main-content');
+    if (!main || document.querySelector('.a11y-page-summary')) return;
+    const summary = document.createElement('section');
+    summary.className = 'a11y-page-summary';
+    summary.setAttribute('aria-label', 'Accessibility summary');
+    summary.innerHTML = `
+      <h2>Accessibility Assist Mode</h2>
+      <p>This page supports keyboard navigation, visible focus, descriptive image text, readable layout options, reduced motion, and transcript notes for media when available.</p>
+    `;
+    main.prepend(summary);
+  }
+
+  function addAccessibilityWidget() {
+    if (document.getElementById('a11yLauncher')) return;
+    const prefs = readPrefs();
+    const widget = document.createElement('div');
+    widget.className = 'a11y-widget';
+    widget.innerHTML = `
+      <div id="a11yStatus" class="sr-only" aria-live="polite"></div>
+      <button type="button" class="a11y-launcher" id="a11yLauncher" aria-expanded="false" aria-controls="a11yPanel">
+        <i class="fas fa-universal-access" aria-hidden="true"></i>
+        <span>Access</span>
+      </button>
+      <section class="a11y-panel" id="a11yPanel" aria-labelledby="a11yPanelTitle" hidden>
+        <div class="a11y-panel-head">
+          <div>
+            <h2 id="a11yPanelTitle">Accessibility Assist</h2>
+            <p>Turn on support features without changing the default CTS design for everyone.</p>
+          </div>
+          <button type="button" class="a11y-close" id="a11yClose" aria-label="Close accessibility panel">×</button>
+        </div>
+        ${controlMarkup('a11yEnabled', 'Assist mode', 'Master switch for the features below.', prefs.enabled)}
+        ${controlMarkup('a11yContrast', 'High contrast', 'Brighter text, stronger borders, and darker backgrounds.', prefs.contrast)}
+        ${controlMarkup('a11yLargeText', 'Larger text', 'Increases reading size across the site.', prefs.largeText)}
+        ${controlMarkup('a11yReadableFont', 'Readable font', 'Uses a simpler system font for easier reading.', prefs.readableFont)}
+        ${controlMarkup('a11yReduceMotion', 'Reduce motion', 'Turns off animated backgrounds, spins, pulses, and smooth scroll.', prefs.reduceMotion)}
+        ${controlMarkup('a11yTranscripts', 'Show transcript notes', 'Keeps audio/video transcript guidance visible for deaf or hard-of-hearing users.', prefs.transcripts)}
+      </section>
+    `;
+    document.body.appendChild(widget);
+
+    const launcher = document.getElementById('a11yLauncher');
+    const panel = document.getElementById('a11yPanel');
+    const close = document.getElementById('a11yClose');
+
+    function setPanel(open) {
+      panel.hidden = !open;
+      launcher.setAttribute('aria-expanded', String(open));
+      if (open) document.getElementById('a11yEnabled').focus();
+    }
+
+    launcher.addEventListener('click', () => setPanel(panel.hidden));
+    close.addEventListener('click', () => setPanel(false));
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && !panel.hidden) setPanel(false);
+    });
+
+    const map = {
+      a11yEnabled: 'enabled',
+      a11yContrast: 'contrast',
+      a11yLargeText: 'largeText',
+      a11yReadableFont: 'readableFont',
+      a11yReduceMotion: 'reduceMotion',
+      a11yTranscripts: 'transcripts'
+    };
+
+    Object.entries(map).forEach(([id, key]) => {
+      const input = document.getElementById(id);
+      input.addEventListener('change', () => {
+        const next = readPrefs();
+        next[key] = input.checked;
+        writePrefs(next);
+        applyPrefs(next, true);
+      });
+    });
+
+    applyPrefs(prefs, false);
+  }
+
+  function polishAssistiveMarkup() {
+    document.querySelectorAll('i[class*="fa-"]').forEach(icon => {
+      if (!icon.hasAttribute('aria-label')) icon.setAttribute('aria-hidden', 'true');
+    });
+
+    document.querySelectorAll('a[target="_blank"]').forEach(link => {
+      if (!link.getAttribute('aria-label') && link.textContent.trim()) {
+        link.setAttribute('aria-label', `${link.textContent.trim()} opens in a new tab`);
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    addSkipLink();
+    addPageSummary();
+    addAccessibilityWidget();
+    polishAssistiveMarkup();
+
+    const observer = new MutationObserver(() => polishAssistiveMarkup());
+    observer.observe(document.body, { childList: true, subtree: true });
+  });
+})();

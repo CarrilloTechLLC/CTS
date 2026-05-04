@@ -19,16 +19,16 @@
 </head>
 <body>
   <!-- Animated Background Canvas -->
-  <canvas id="bgCanvas"></canvas>
+  <canvas id="bgCanvas" aria-hidden="true"></canvas>
 
   <!-- Scanline Overlay -->
-  <div class="scanlines"></div>
+  <div class="scanlines" aria-hidden="true"></div>
 
   <!-- ═══════════════ NAVIGATION ═══════════════ -->
   <header class="nav-header" id="mainNav">
-    <nav class="nav-container">
+    <nav class="nav-container" aria-label="Primary navigation">
       <a href="#" class="nav-logo" aria-label="Carrillo Tech Solutions Home">
-        <img src="/assets/cts-logo-icon.png" alt="CTS Logo" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+        <img src="/assets/cts-logo-icon.png" alt="Carrillo Tech Solutions CTS logo" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
         <div class="logo-fallback">
           <span class="logo-icon">⬡</span>
           <div class="logo-text">
@@ -38,7 +38,7 @@
         </div>
       </a>
 
-      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-controls="navLinks" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
 
@@ -56,7 +56,7 @@
     </nav>
   </header>
 
-  <main>
+  <main id="main-content">
     <!-- ═══════════════ HERO ═══════════════ -->
     <section class="hero" id="home">
       <div class="hero-grid-overlay"></div>
@@ -103,7 +103,7 @@
       <div class="hero-visual">
         <div class="hex-ring">
           <div class="hex-core">
-            <img src="/assets/cts-logo-icon.png" alt="CTS" class="hero-logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+            <img src="/assets/cts-logo-icon.png" alt="Carrillo Tech Solutions CTS shield logo" class="hero-logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
             <span class="hero-logo-fallback">CTS</span>
           </div>
           <div class="hex-orbit hex-orbit-1">
@@ -236,7 +236,7 @@
             <div class="architect-profile-card">
               <div class="profile-avatar">
                 <div class="avatar-hex" style="background: transparent; box-shadow: none; border: 2px solid var(--purple);">
-                  <img src="/assets/cts-logo-icon.png" alt="CTS Logo" style="width: 80%; height: 80%; object-fit: contain;" />
+                  <img src="/assets/cts-logo-icon.png" alt="Carrillo Tech Solutions CTS logo" style="width: 80%; height: 80%; object-fit: contain;" />
                 </div>
                 <div class="profile-status">
                   <span class="status-dot"></span>
@@ -521,18 +521,18 @@
                   <i class="fas fa-paper-plane"></i>
                   Submit Deployment Request
                 </button>
-                <div id="formMsg" class="form-message" style="display:none;"></div>
+                <div id="formMsg" class="form-message" role="status" aria-live="polite" style="display:none;"></div>
               </form>
             </div>
           </div>
         </div>
       </div>
     </section>
-  <div id="dispatchModal" class="modal-overlay">
+  <div id="dispatchModal" class="modal-overlay" role="dialog" aria-modal="true" aria-label="Field dispatch modal" aria-hidden="true">
   <div class="modal-content">
-    <button class="modal-close" onclick="closeDispatch()"><i class="fas fa-times"></i></button>
+    <button class="modal-close" onclick="closeDispatch()" aria-label="Close dispatch modal"><i class="fas fa-times" aria-hidden="true"></i></button>
     <div id="dispatchBody" class="markdown-body">
-      <p class="admin-splash"><i class="fas fa-spinner fa-spin"></i> DECRYPTING DISPATCH...</p>
+      <p class="admin-splash"><i class="fas fa-spinner fa-spin" aria-hidden="true"></i> DECRYPTING DISPATCH...</p>
     </div>
   </div>
 </div>
@@ -544,7 +544,7 @@
       <div class="footer-top">
         <div class="footer-brand">
           <a href="#" class="footer-logo-link">
-            <img src="/assets/cts-logo-icon.png" alt="CTS" class="footer-logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+            <img src="/assets/cts-logo-icon.png" alt="Carrillo Tech Solutions CTS logo" class="footer-logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
             <span class="footer-logo-fallback">CTS</span>
           </a>
           <p class="footer-tagline">Carrillo Tech Solutions.<br />Engineered for Performance. Secured for the Future.</p>

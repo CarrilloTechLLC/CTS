@@ -65,6 +65,20 @@ The site is designed to do five things:
 - Uses Markdown rendering through Marked.js.
 - Matches the rest of the CTS site design.
 
+
+### Audio-Visual Evidence Sections
+
+These sections were added to support the Audio-Visual Methods and Materials course requirements without changing the original CTS design direction.
+
+- **Media & Assets** section on the homepage for project screenshots, Cleveland-themed FiveM assets, liveries, UI configurations, server trailer links, and brand visuals.
+- **Hardware Configuration** section for PC build photos, workstation layout notes, cable management notes, airflow decisions, captions, and end-user benefits.
+- **Service Guides & How-To Docs** section for instructional content that uses text, screenshots, captions, and clear steps to explain IT support tasks.
+- All three sections are CMS-managed so new proof can be added from the Admin Portal instead of hardcoding every update.
+
+### Audio-Visual Course Language
+
+The site now uses clearer course-aligned headings such as **Digital Media Integration**, **Visual Asset Management**, **User Interface Design**, **Technical Documentation**, and **Instructional Use**. This makes the website stronger as school evidence because it shows media selection, preparation, organization, communication, and audio-visual aids in direct language.
+
 ### Accessibility Assist Mode
 
 - Floating **Access** button appears on site pages that load `main.js`.
@@ -77,6 +91,10 @@ The site is designed to do five things:
 ### Admin Portal
 
 - Sveltia CMS admin dashboard at `/admin`.
+
+- Project Media & Assets collection for visual asset management, FiveM media, UI captures, trailers, screenshots, captions, and alt text.
+- Hardware Configuration Docs collection for PC build photos, specs, organization notes, and end-user benefits.
+- Instructional Use — Service Guides collection for how-to guides, troubleshooting steps, screenshots, and audio-visual method notes.
 - GitHub-backed content management.
 - Admin-managed collections for blog posts, creative pieces, portfolio items, services, and site settings.
 - Upload support for images and optimized audio files.
@@ -503,3 +521,14 @@ These rules help clean URLs load correctly.
 ## Copyright
 
 © 2026 Carrillo Tech Solutions LLC. Cleveland, Ohio. All rights reserved.
+
+
+## New CMS Evidence Folders
+
+```text
+_media_assets/              # Media & Assets entries for project visuals, FiveM screenshots, UI captures, and trailer links
+_hardware_configurations/   # Hardware documentation entries with photos, specs, captions, and organization notes
+_service_guides/            # Instructional how-to guides using steps, screenshots, and AV communication notes
+```
+
+When a new live-site feature allows content to be added or edited, it should also have a matching Admin Portal/CMS section so it can be managed from the admin side.

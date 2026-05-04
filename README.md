@@ -65,6 +65,15 @@ The site is designed to do five things:
 - Uses Markdown rendering through Marked.js.
 - Matches the rest of the CTS site design.
 
+### Accessibility Assist Mode
+
+- Floating **Access** button appears on site pages that load `main.js`.
+- The original CTS design stays active by default. Visitors can turn Assist Mode on only when they need it.
+- Toggle options include high contrast, larger text, readable font, reduced motion, and transcript notes.
+- Keyboard users get a skip link, visible focus outlines, and improved menu button state.
+- Screen reader support was improved with clearer landmarks, better alt text, decorative icon hiding, modal labels, live form messages, and keyboard-friendly Creative Archive cards.
+- Deaf or hard-of-hearing users can turn on transcript notes for audio and media. Creative manuscripts already provide the written version of the audio content.
+
 ### Admin Portal
 
 - Sveltia CMS admin dashboard at `/admin`.

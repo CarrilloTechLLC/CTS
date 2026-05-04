@@ -128,7 +128,7 @@
 // ── Scroll Reveal ────────────────────────────────────
 (function initReveal() {
   const revealEls = document.querySelectorAll(
-    '.service-card, .portfolio-card, .blog-card, .cred-item, .architect-profile-card, .cred-panel, .creator-panel, .contact-info-item'
+    '.service-card, .portfolio-card, .blog-card, .asset-card, .hardware-card, .guide-card, .cred-item, .architect-profile-card, .cred-panel, .creator-panel, .contact-info-item'
   );
   revealEls.forEach(el => el.classList.add('reveal'));
 
@@ -539,6 +539,197 @@ function renderPosts(postsToRender) {
 }
 
 document.addEventListener('DOMContentLoaded', loadAutoDispatches);
+
+
+// ── CMS EVIDENCE SECTIONS: MEDIA, HARDWARE, SERVICE GUIDES ──────────────────────
+const CMS_COLLECTION_FALLBACKS = {
+  '_media_assets': ['2026-05-04-cleveland-fivem-visual-asset-management.md'],
+  '_hardware_configurations': ['2026-05-04-i5-9400f-gtx-1650-super-workstation-layout.md'],
+  '_service_guides': ['2026-05-04-basic-it-support-screenshot-guide.md']
+};
+
+function escapeHtml(value = '') {
+  return String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
+function formatCmsDate(value = '', fallbackSlug = '') {
+  const raw = cleanFrontmatterValue(String(value || '')).split('T')[0];
+  const parts = raw ? raw.split('-') : fallbackSlug.split('-').slice(0, 3);
+  if (parts.length >= 3) return `${parts[1]}/${parts[2]}/${parts[0]}`;
+  return 'CMS ENTRY';
+}
+
+function parseCmsEvidenceEntry(markdown, fallbackSlug = '') {
+  const fmMatch = markdown.match(/^---\s*\n([\s\S]*?)\n---/);
+  const data = {};
+
+  if (fmMatch && fmMatch[1]) {
+    let currentKey = null;
+    fmMatch[1].split(/\r?\n/).forEach(line => {
+      const keyMatch = line.match(/^([A-Za-z0-9_-]+):\s*(.*)$/);
+      if (keyMatch) {
+        currentKey = keyMatch[1].toLowerCase();
+        data[currentKey] = cleanFrontmatterValue(keyMatch[2] || '');
+      } else if (currentKey && /^\s+/.test(line)) {
+        data[currentKey] = `${data[currentKey]} ${cleanFrontmatterValue(line)}`.trim();
+      }
+    });
+  }
+
+  const content = markdown.replace(/^---[\s\S]*?---/, '').trim();
+  const fallbackTitle = fallbackSlug.split('-').slice(3).join(' ').replace(/-/g, ' ') || 'CMS Evidence Entry';
+
+  return {
+    title: data.title || fallbackTitle,
+    date: formatCmsDate(data.date, fallbackSlug),
+    project: data.project || '',
+    assetType: data.asset_type || data.category || '',
+    hardwareType: data.hardware_type || '',
+    guideType: data.guide_type || '',
+    skillArea: data.skill_area || '',
+    image: normalizeMediaPath(data.image || data.featured_image || ''),
+    videoUrl: cleanFrontmatterValue(data.video_url || data.video || ''),
+    altText: data.alt_text || '',
+    caption: data.caption || '',
+    purpose: data.purpose || '',
+    specs: data.specs || '',
+    organizationNote: data.organization_note || '',
+    endUserBenefit: data.end_user_benefit || '',
+    summary: data.summary || data.excerpt || '',
+    avMethod: data.av_method || '',
+    draft: /^true$/i.test(cleanFrontmatterValue(data.draft || 'false')),
+    content
+  };
+}
+
+async function fetchCmsEvidenceCollection(folder) {
+  let files = [];
+
+  try {
+    const response = await fetch(`https://api.github.com/repos/CarrilloTechLLC/CTS/contents/${folder}`);
+    if (!response.ok) throw new Error(`GitHub list failed for ${folder}`);
+    const listed = await response.json();
+    files = listed.filter(file => file.name && file.name.endsWith('.md')).map(file => file.name).reverse();
+  } catch (error) {
+    files = CMS_COLLECTION_FALLBACKS[folder] || [];
+  }
+
+  const entries = await Promise.all(files.map(async fileName => {
+    const slug = fileName.replace(/\.md$/i, '');
+    try {
+      const response = await fetch(`/${folder}/${encodeURIComponent(fileName)}`);
+      if (!response.ok) throw new Error(`Entry not found: ${fileName}`);
+      return parseCmsEvidenceEntry(await response.text(), slug);
+    } catch (error) {
+      return null;
+    }
+  }));
+
+  return entries.filter(Boolean).filter(entry => !entry.draft);
+}
+
+function renderMediaAssetCard(item) {
+  const title = escapeHtml(item.title);
+  const assetType = escapeHtml(item.assetType || 'Media Asset');
+  const project = escapeHtml(item.project || 'Project Evidence');
+  const caption = escapeHtml(item.caption || 'Media asset managed through the CTS admin portal.');
+  const purpose = escapeHtml(item.purpose || 'Selected to communicate project details visually.');
+  const image = item.image ? `<div class="asset-image"><img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.altText || item.caption || item.title)}" loading="lazy"></div>` : `<div class="asset-image"><div class="asset-placeholder">Upload media in Admin Portal</div></div>`;
+  const video = item.videoUrl ? `<a href="${escapeHtml(item.videoUrl)}" target="_blank" rel="noopener" class="cms-card-link">Open video/trailer <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></a>` : '';
+
+  return `
+    <article class="asset-card">
+      ${image}
+      <div class="asset-meta"><span>${assetType}</span><span>${project}</span></div>
+      <h4>${title}</h4>
+      <div class="asset-caption">${caption}</div>
+      <p class="asset-purpose"><strong>Why this media:</strong> ${purpose}</p>
+      ${video}
+    </article>`;
+}
+
+function renderHardwareCard(item) {
+  const title = escapeHtml(item.title);
+  const hardwareType = escapeHtml(item.hardwareType || 'Hardware');
+  const specs = escapeHtml(item.specs || 'Specs managed through the CTS admin portal.');
+  const caption = escapeHtml(item.caption || 'Hardware photo and documentation entry.');
+  const orgNote = escapeHtml(item.organizationNote || 'Preparation and organization notes can be added in the admin portal.');
+  const benefit = escapeHtml(item.endUserBenefit || 'Clear documentation makes support and maintenance easier for the end user.');
+  const image = item.image ? `<div class="hardware-image"><img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.altText || item.caption || item.title)}" loading="lazy"></div>` : `<div class="hardware-image"><div class="hardware-placeholder">Upload hardware photo in Admin Portal</div></div>`;
+
+  return `
+    <article class="hardware-card">
+      ${image}
+      <div class="hardware-meta"><span>${hardwareType}</span><span>${escapeHtml(item.date)}</span></div>
+      <h4>${title}</h4>
+      <p><strong>Core specs:</strong> ${specs}</p>
+      <div class="hardware-caption">${caption}</div>
+      <p><strong>Organization:</strong> ${orgNote}</p>
+      <p class="hardware-benefit"><strong>End-user benefit:</strong> ${benefit}</p>
+    </article>`;
+}
+
+function renderServiceGuideCard(item) {
+  const title = escapeHtml(item.title);
+  const guideType = escapeHtml(item.guideType || 'Service Guide');
+  const skillArea = escapeHtml(item.skillArea || 'IT Support');
+  const summary = escapeHtml(item.summary || 'Step-by-step instructional content managed through the admin portal.');
+  const avMethod = escapeHtml(item.avMethod || 'Uses written steps with screenshots, captions, and structured visual support.');
+  const image = item.image ? `<div class="guide-image"><img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.altText || item.summary || item.title)}" loading="lazy"></div>` : `<div class="guide-image"><div class="guide-placeholder">Upload guide screenshot in Admin Portal</div></div>`;
+  const bodyPreview = item.content ? `<p>${escapeHtml(item.content.replace(/[#*_>`]/g, '').slice(0, 180))}${item.content.length > 180 ? '...' : ''}</p>` : '';
+
+  return `
+    <article class="guide-card">
+      ${image}
+      <div class="guide-meta"><span>${guideType}</span><span>${skillArea}</span></div>
+      <h4>${title}</h4>
+      <p>${summary}</p>
+      <div class="guide-av-method"><strong>AV Method:</strong> ${avMethod}</div>
+      ${bodyPreview}
+    </article>`;
+}
+
+function renderEmptyCmsState(container, label, iconClass) {
+  container.innerHTML = `
+    <div class="portfolio-card cms-placeholder">
+      <div class="placeholder-inner">
+        <i class="${iconClass}" aria-hidden="true"></i>
+        <span>No ${label} published yet</span>
+        <a href="/admin" class="placeholder-link">Add one in Admin Portal</a>
+      </div>
+    </div>`;
+}
+
+async function loadEvidenceSections() {
+  const mediaGrid = document.getElementById('mediaAssetGrid');
+  const hardwareGrid = document.getElementById('hardwareConfigGrid');
+  const guideGrid = document.getElementById('serviceGuideGrid');
+
+  if (mediaGrid) {
+    const assets = await fetchCmsEvidenceCollection('_media_assets');
+    if (assets.length) mediaGrid.innerHTML = assets.map(renderMediaAssetCard).join('');
+    else renderEmptyCmsState(mediaGrid, 'media assets', 'fas fa-photo-film');
+  }
+
+  if (hardwareGrid) {
+    const hardware = await fetchCmsEvidenceCollection('_hardware_configurations');
+    if (hardware.length) hardwareGrid.innerHTML = hardware.map(renderHardwareCard).join('');
+    else renderEmptyCmsState(hardwareGrid, 'hardware docs', 'fas fa-screwdriver-wrench');
+  }
+
+  if (guideGrid) {
+    const guides = await fetchCmsEvidenceCollection('_service_guides');
+    if (guides.length) guideGrid.innerHTML = guides.map(renderServiceGuideCard).join('');
+    else renderEmptyCmsState(guideGrid, 'service guides', 'fas fa-book-open');
+  }
+}
+
+document.addEventListener('DOMContentLoaded', loadEvidenceSections);
 
 
 // ── ACCESSIBILITY ASSIST MODE ─────────────────────────────

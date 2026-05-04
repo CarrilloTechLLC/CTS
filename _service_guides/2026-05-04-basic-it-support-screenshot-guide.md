@@ -1,6 +1,6 @@
 ---
 title: How to Document a Basic IT Support Issue
-date: 2026-04-21
+date: 2026-04-28
 guide_type: How-To
 skill_area: IT Support Documentation
 image: /assets/uploads/basic-it-support-troubleshooting-guide.png

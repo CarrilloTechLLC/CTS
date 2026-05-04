@@ -1,7 +1,8 @@
 /creative /creative/ 301
 /readme /readme/ 301
-/dispatch /dispatch.html 200
-/intel/* /dispatch.html?post=:splat 301
+/dispatch /dispatch/ 301
+/dispatch.html /dispatch/ 301
+/intel/* /dispatch/?post=:splat 301
 
 /digital-media-integration /digital-media-integration/ 301
 /technical-documentation /technical-documentation/ 301

@@ -110,14 +110,18 @@
     });
   });
 
-  // Active link highlight
+  // Active link highlight for same-page anchors only.
+  // Page links like /digital-media-integration/ keep their active class on standalone pages.
   const sections = document.querySelectorAll('section[id]');
   const navLinkEls = document.querySelectorAll('.nav-link');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {
         navLinkEls.forEach(l => {
-          l.classList.toggle('active', l.getAttribute('href') === '#' + e.target.id);
+          const href = l.getAttribute('href') || '';
+          if (href.startsWith('#')) {
+            l.classList.toggle('active', href === '#' + e.target.id);
+          }
         });
       }
     });

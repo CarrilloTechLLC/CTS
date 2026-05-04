@@ -16,13 +16,13 @@
   <link rel="stylesheet" href="/styles.css" />
 </head>
 <body>
-  <canvas id="bgCanvas"></canvas>
-  <div class="scanlines"></div>
+  <canvas id="bgCanvas" aria-hidden="true"></canvas>
+  <div class="scanlines" aria-hidden="true"></div>
 
   <header class="nav-header" id="mainNav">
-    <nav class="nav-container">
+    <nav class="nav-container" aria-label="Primary navigation">
       <a href="/" class="nav-logo" aria-label="Carrillo Tech Solutions Home">
-        <img src="/assets/cts-logo-icon.png" alt="CTS Logo" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+        <img src="/assets/cts-logo-icon.png" alt="Carrillo Tech Solutions CTS logo" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
         <div class="logo-fallback">
           <span class="logo-icon">⬡</span>
           <div class="logo-text">
@@ -32,7 +32,7 @@
         </div>
       </a>
 
-      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-controls="navLinks" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
 
@@ -48,7 +48,7 @@
     </nav>
   </header>
 
-  <main class="dispatch-page">
+  <main id="main-content" class="dispatch-page">
     <section class="dispatch-hero" id="dispatch">
       <div class="section-container">
         <a href="/#intel" class="dispatch-back"><i class="fas fa-arrow-left"></i> Back to Intel Hub</a>
@@ -79,7 +79,7 @@
     <section class="dispatch-content-section">
       <div class="section-container">
         <article id="dispatchArticle" class="dispatch-article markdown-body">
-          <p class="admin-splash"><i class="fas fa-spinner fa-spin"></i> DECRYPTING DISPATCH...</p>
+          <p class="admin-splash"><i class="fas fa-spinner fa-spin" aria-hidden="true"></i> DECRYPTING DISPATCH...</p>
         </article>
       </div>
     </section>
@@ -90,7 +90,7 @@
       <div class="footer-top">
         <div class="footer-brand">
           <a href="/" class="footer-logo-link">
-            <img src="/assets/cts-logo-icon.png" alt="CTS" class="footer-logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+            <img src="/assets/cts-logo-icon.png" alt="Carrillo Tech Solutions CTS logo" class="footer-logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
             <span class="footer-logo-fallback">CTS</span>
           </a>
           <p class="footer-tagline">Carrillo Tech Solutions.<br />Engineered for Performance. Secured for the Future.</p>

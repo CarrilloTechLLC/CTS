@@ -3,7 +3,7 @@ title: i5-9400F / GTX 1650 Super Workstation Cable Management
 date: 2026-04-30
 hardware_type: Desktop PC
 specs: Windows 11 desktop workstation with an Intel i5-9400F CPU and GTX 1650 Super GPU. This system is used for IT support work, web development, troubleshooting, OBS/streaming setup, project testing, and hardware documentation.
-image: /assets/uploads/workstation-cable-management.png
+image: /assets/uploads/workstation-cable-management-1.png
 alt_text: Back side of my desktop PC case showing organized black cable routing behind the motherboard tray.
 caption: Cable management photo of my i5-9400F and GTX 1650 Super workstation showing how the cables are routed and secured behind the motherboard tray.
 organization_note: This photo shows the back side of my desktop PC case where the cables are routed behind the motherboard tray. The cables are grouped, tied down, and kept away from open service areas. This makes the system easier to inspect, clean, repair, and upgrade later.

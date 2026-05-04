@@ -224,7 +224,7 @@ function getPostPath(slug) {
 }
 
 function getDispatchUrl(slug) {
-  return `/dispatch.html?post=${encodeURIComponent(slug)}`;
+  return `/dispatch/?post=${encodeURIComponent(slug)}`;
 }
 
 function cleanFrontmatterValue(value = '') {
@@ -552,6 +552,36 @@ const CMS_COLLECTION_FALLBACKS = {
   '_service_guides': ['2026-05-04-basic-it-support-screenshot-guide.md']
 };
 
+const CMS_SECTION_CONFIG = {
+  '_media_assets': {
+    label: 'Digital Media Integration',
+    icon: 'fas fa-photo-film',
+    query: 'media',
+    bodyLabel: 'Media Notes',
+    titleLabel: 'Asset Title'
+  },
+  '_hardware_configurations': {
+    label: 'Technical Documentation',
+    icon: 'fas fa-screwdriver-wrench',
+    query: 'docs',
+    bodyLabel: 'Technical Documentation',
+    titleLabel: 'Documentation Title'
+  },
+  '_service_guides': {
+    label: 'Instructional Use',
+    icon: 'fas fa-book-open',
+    query: 'guide',
+    bodyLabel: 'Instructional Steps',
+    titleLabel: 'Guide Title'
+  }
+};
+
+const cmsEvidenceCache = new Map();
+
+function getEvidenceKey(folder, slug) {
+  return `${folder}/${slug}`;
+}
+
 function escapeHtml(value = '') {
   return String(value)
     .replace(/&/g, '&amp;')
@@ -628,7 +658,10 @@ async function fetchCmsEvidenceCollection(folder) {
     try {
       const response = await fetch(`/${folder}/${encodeURIComponent(fileName)}`);
       if (!response.ok) throw new Error(`Entry not found: ${fileName}`);
-      return parseCmsEvidenceEntry(await response.text(), slug);
+      const entry = parseCmsEvidenceEntry(await response.text(), slug);
+      const enrichedEntry = { ...entry, folder, slug };
+      cmsEvidenceCache.set(getEvidenceKey(folder, slug), enrichedEntry);
+      return enrichedEntry;
     } catch (error) {
       return null;
     }
@@ -643,17 +676,20 @@ function renderMediaAssetCard(item) {
   const project = escapeHtml(item.project || 'Project Evidence');
   const caption = escapeHtml(item.caption || 'Media asset managed through the CTS admin portal.');
   const purpose = escapeHtml(item.purpose || 'Selected to communicate project details visually.');
+  const folder = escapeHtml(item.folder || '_media_assets');
+  const slug = escapeHtml(item.slug || '');
   const image = item.image ? `<div class="asset-image"><img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.altText || item.caption || item.title)}" loading="lazy"></div>` : `<div class="asset-image"><div class="asset-placeholder">Upload media in Admin Portal</div></div>`;
   const video = item.videoUrl ? `<a href="${escapeHtml(item.videoUrl)}" target="_blank" rel="noopener" class="cms-card-link">Open video/trailer <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></a>` : '';
 
   return `
-    <article class="asset-card">
+    <article class="asset-card cms-evidence-card" data-evidence-folder="${folder}" data-evidence-slug="${slug}" tabindex="0" aria-label="Open ${title} evidence popup">
       ${image}
       <div class="asset-meta"><span>${assetType}</span><span>${project}</span></div>
       <h4>${title}</h4>
       <div class="asset-caption">${caption}</div>
       <p class="asset-purpose"><strong>Why this media:</strong> ${purpose}</p>
       ${video}
+      <div class="cms-card-action"><span>View Full Entry <i class="fas fa-up-right-and-down-left-from-center" aria-hidden="true"></i></span></div>
     </article>`;
 }
 
@@ -664,10 +700,12 @@ function renderHardwareCard(item) {
   const caption = escapeHtml(item.caption || 'Hardware photo and documentation entry.');
   const orgNote = escapeHtml(item.organizationNote || 'Preparation and organization notes can be added in the admin portal.');
   const benefit = escapeHtml(item.endUserBenefit || 'Clear documentation makes support and maintenance easier for the end user.');
+  const folder = escapeHtml(item.folder || '_hardware_configurations');
+  const slug = escapeHtml(item.slug || '');
   const image = item.image ? `<div class="hardware-image"><img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.altText || item.caption || item.title)}" loading="lazy"></div>` : `<div class="hardware-image"><div class="hardware-placeholder">Upload hardware photo in Admin Portal</div></div>`;
 
   return `
-    <article class="hardware-card">
+    <article class="hardware-card cms-evidence-card" data-evidence-folder="${folder}" data-evidence-slug="${slug}" tabindex="0" aria-label="Open ${title} documentation popup">
       ${image}
       <div class="hardware-meta"><span>${hardwareType}</span><span>${escapeHtml(item.date)}</span></div>
       <h4>${title}</h4>
@@ -675,6 +713,7 @@ function renderHardwareCard(item) {
       <div class="hardware-caption">${caption}</div>
       <p><strong>Organization:</strong> ${orgNote}</p>
       <p class="hardware-benefit"><strong>End-user benefit:</strong> ${benefit}</p>
+      <div class="cms-card-action"><span>View Full Entry <i class="fas fa-up-right-and-down-left-from-center" aria-hidden="true"></i></span></div>
     </article>`;
 }
 
@@ -684,19 +723,216 @@ function renderServiceGuideCard(item) {
   const skillArea = escapeHtml(item.skillArea || 'IT Support');
   const summary = escapeHtml(item.summary || 'Step-by-step instructional content managed through the admin portal.');
   const avMethod = escapeHtml(item.avMethod || 'Uses written steps with screenshots, captions, and structured visual support.');
+  const folder = escapeHtml(item.folder || '_service_guides');
+  const slug = escapeHtml(item.slug || '');
   const image = item.image ? `<div class="guide-image"><img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.altText || item.summary || item.title)}" loading="lazy"></div>` : `<div class="guide-image"><div class="guide-placeholder">Upload guide screenshot in Admin Portal</div></div>`;
   const bodyPreview = item.content ? `<p>${escapeHtml(item.content.replace(/[#*_>`]/g, '').slice(0, 180))}${item.content.length > 180 ? '...' : ''}</p>` : '';
 
   return `
-    <article class="guide-card">
+    <article class="guide-card cms-evidence-card" data-evidence-folder="${folder}" data-evidence-slug="${slug}" tabindex="0" aria-label="Open ${title} instructional popup">
       ${image}
       <div class="guide-meta"><span>${guideType}</span><span>${skillArea}</span></div>
       <h4>${title}</h4>
       <p>${summary}</p>
       <div class="guide-av-method"><strong>AV Method:</strong> ${avMethod}</div>
       ${bodyPreview}
+      <div class="cms-card-action"><span>View Full Entry <i class="fas fa-up-right-and-down-left-from-center" aria-hidden="true"></i></span></div>
     </article>`;
 }
+
+function buildEvidenceMetaRows(item) {
+  const rows = [
+    ['Section', CMS_SECTION_CONFIG[item.folder]?.label || 'Evidence'],
+    ['Date', item.date || 'CMS ENTRY']
+  ];
+
+  if (item.project) rows.push(['Project', item.project]);
+  if (item.assetType) rows.push(['Asset Type', item.assetType]);
+  if (item.hardwareType) rows.push(['Hardware Type', item.hardwareType]);
+  if (item.guideType) rows.push(['Guide Type', item.guideType]);
+  if (item.skillArea) rows.push(['Skill Area', item.skillArea]);
+  if (item.specs) rows.push(['Core Specs', item.specs]);
+  if (item.avMethod) rows.push(['AV Method', item.avMethod]);
+
+  return rows
+    .filter(([, value]) => String(value || '').trim())
+    .map(([label, value]) => `
+      <div class="evidence-meta-item">
+        <span>${escapeHtml(label)}</span>
+        <strong>${escapeHtml(value)}</strong>
+      </div>
+    `).join('');
+}
+
+function buildEvidenceHighlights(item) {
+  const highlights = [
+    ['Caption', item.caption],
+    ['Purpose', item.purpose],
+    ['Organization', item.organizationNote],
+    ['End-user Benefit', item.endUserBenefit],
+    ['Summary', item.summary]
+  ].filter(([, value]) => String(value || '').trim());
+
+  if (!highlights.length) return '';
+
+  return `
+    <div class="evidence-highlight-grid">
+      ${highlights.map(([label, value]) => `
+        <div class="evidence-highlight">
+          <span>${escapeHtml(label)}</span>
+          <p>${escapeHtml(value)}</p>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+function ensureEvidenceModal() {
+  let modal = document.getElementById('evidenceModal');
+  if (modal) return modal;
+
+  document.body.insertAdjacentHTML('beforeend', `
+    <div id="evidenceModal" class="modal-overlay evidence-modal-overlay" role="dialog" aria-modal="true" aria-label="Evidence entry modal" aria-hidden="true">
+      <div class="modal-content evidence-modal-content">
+        <button class="modal-close" type="button" onclick="closeEvidenceModal()" aria-label="Close evidence popup"><i class="fas fa-times" aria-hidden="true"></i></button>
+        <div id="evidenceBody" class="markdown-body evidence-modal-body">
+          <p style="text-align:center; color:#00F5D4;"><i class="fas fa-spinner fa-spin" aria-hidden="true"></i> LOADING EVIDENCE ENTRY...</p>
+        </div>
+      </div>
+    </div>
+  `);
+
+  modal = document.getElementById('evidenceModal');
+  modal.addEventListener('click', (event) => {
+    if (event.target === modal) closeEvidenceModal();
+  });
+
+  return modal;
+}
+
+async function getEvidenceEntry(folder, slug) {
+  const key = getEvidenceKey(folder, slug);
+  if (cmsEvidenceCache.has(key)) return cmsEvidenceCache.get(key);
+
+  const response = await fetch(`/${folder}/${encodeURIComponent(slug)}.md`);
+  if (!response.ok) throw new Error('Evidence entry not found');
+  const entry = parseCmsEvidenceEntry(await response.text(), slug);
+  const enrichedEntry = { ...entry, folder, slug };
+  cmsEvidenceCache.set(key, enrichedEntry);
+  return enrichedEntry;
+}
+
+function updateEvidenceUrl(folder, slug) {
+  const url = new URL(window.location.href);
+  url.searchParams.set('evidence', getEvidenceKey(folder, slug));
+  window.history.pushState({ evidence: getEvidenceKey(folder, slug) }, '', `${url.pathname}${url.search}${url.hash}`);
+}
+
+function clearEvidenceUrl() {
+  const url = new URL(window.location.href);
+  if (!url.searchParams.has('evidence')) return;
+  url.searchParams.delete('evidence');
+  const search = url.searchParams.toString();
+  window.history.pushState({}, document.title, `${url.pathname}${search ? `?${search}` : ''}${url.hash}`);
+}
+
+async function openEvidenceEntry(folder, slug, updateUrl = true) {
+  const modal = ensureEvidenceModal();
+  const body = document.getElementById('evidenceBody');
+  if (!modal || !body || !folder || !slug) return;
+
+  modal.classList.add('active');
+  modal.setAttribute('aria-hidden', 'false');
+  document.body.classList.add('modal-open');
+  body.innerHTML = '<p style="text-align:center; color:#00F5D4;"><i class="fas fa-spinner fa-spin" aria-hidden="true"></i> LOADING EVIDENCE ENTRY...</p>';
+
+  try {
+    const item = await getEvidenceEntry(folder, slug);
+    const config = CMS_SECTION_CONFIG[folder] || { label: 'Evidence Entry', icon: 'fas fa-file-lines', bodyLabel: 'Entry Notes', titleLabel: 'Title' };
+    const image = item.image ? `
+      <div class="evidence-modal-image">
+        <img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.altText || item.caption || item.title)}" loading="lazy">
+      </div>
+    ` : '';
+    const video = item.videoUrl ? `
+      <a href="${escapeHtml(item.videoUrl)}" target="_blank" rel="noopener" class="cms-card-link evidence-video-link">
+        Open attached video/trailer <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>
+      </a>
+    ` : '';
+    const bodyContent = item.content ? marked.parse(item.content) : '<p>No long-form body content has been added yet. Add more details in the admin portal to expand this popup.</p>';
+
+    body.innerHTML = `
+      <div class="evidence-modal-head">
+        <div class="evidence-modal-kicker"><i class="${config.icon}" aria-hidden="true"></i> ${escapeHtml(config.label)}</div>
+        <p class="evidence-modal-label">${escapeHtml(config.titleLabel)}</p>
+        <h2>${escapeHtml(item.title)}</h2>
+      </div>
+      ${image}
+      <div class="evidence-meta-grid">
+        ${buildEvidenceMetaRows(item)}
+      </div>
+      ${buildEvidenceHighlights(item)}
+      ${video}
+      <div class="evidence-modal-section">
+        <p class="evidence-modal-label">${escapeHtml(config.bodyLabel)}</p>
+        <div class="dispatch-markdown-content evidence-markdown-content">
+          ${bodyContent}
+        </div>
+      </div>
+    `;
+
+    if (updateUrl) updateEvidenceUrl(folder, slug);
+  } catch (error) {
+    body.innerHTML = `
+      <h3 style="color:#ef4444;">ERROR: EVIDENCE ENTRY NOT FOUND</h3>
+      <p>The requested evidence entry could not be loaded. The file may have been renamed, moved, or deleted.</p>
+    `;
+  }
+}
+
+function closeEvidenceModal() {
+  const modal = document.getElementById('evidenceModal');
+  if (modal) {
+    modal.classList.remove('active');
+    modal.setAttribute('aria-hidden', 'true');
+  }
+  document.body.classList.remove('modal-open');
+  clearEvidenceUrl();
+}
+
+function bindEvidencePopupTriggers() {
+  document.addEventListener('click', (event) => {
+    const trigger = event.target.closest('[data-evidence-folder][data-evidence-slug]');
+    if (!trigger || event.target.closest('a')) return;
+    openEvidenceEntry(trigger.dataset.evidenceFolder, trigger.dataset.evidenceSlug);
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && document.getElementById('evidenceModal')?.classList.contains('active')) {
+      closeEvidenceModal();
+      return;
+    }
+
+    const trigger = event.target.closest?.('[data-evidence-folder][data-evidence-slug]');
+    if (!trigger || event.target.closest('a')) return;
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      openEvidenceEntry(trigger.dataset.evidenceFolder, trigger.dataset.evidenceSlug);
+    }
+  });
+}
+
+function openEvidenceFromUrl() {
+  const params = new URLSearchParams(window.location.search);
+  const raw = params.get('evidence');
+  if (!raw) return;
+  const [folder, ...slugParts] = raw.split('/');
+  const slug = slugParts.join('/');
+  if (CMS_SECTION_CONFIG[folder] && slug) {
+    openEvidenceEntry(folder, slug, false);
+  }
+}
+
 
 function renderEmptyCmsState(container, label, iconClass) {
   container.innerHTML = `
@@ -731,9 +967,14 @@ async function loadEvidenceSections() {
     if (guides.length) guideGrid.innerHTML = guides.map(renderServiceGuideCard).join('');
     else renderEmptyCmsState(guideGrid, 'service guides', 'fas fa-book-open');
   }
+
+  openEvidenceFromUrl();
 }
 
-document.addEventListener('DOMContentLoaded', loadEvidenceSections);
+document.addEventListener('DOMContentLoaded', () => {
+  bindEvidencePopupTriggers();
+  loadEvidenceSections();
+});
 
 
 // ── ACCESSIBILITY ASSIST MODE ─────────────────────────────

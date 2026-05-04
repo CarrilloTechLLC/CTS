@@ -1,6 +1,6 @@
 ---
 title: i5-9400F / GTX 1650 Super Workstation Cable Management
-date: 2026-05-04
+date: 2026-04-30
 hardware_type: Desktop PC
 specs: Windows 11 desktop workstation with an Intel i5-9400F CPU and GTX 1650 Super GPU. This system is used for IT support work, web development, troubleshooting, OBS/streaming setup, project testing, and hardware documentation.
 image: /assets/uploads/workstation-cable-management.png

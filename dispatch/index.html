@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Field Dispatch | Carrillo Tech Solutions</title>
+  <meta name="description" content="Read field dispatches from Carrillo Tech Solutions covering IT support, hardware diagnostics, networking, data, and technical systems." />
+
+  <link rel="icon" type="image/png" href="/assets/cts-logo-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <canvas id="bgCanvas" aria-hidden="true"></canvas>
+  <div class="scanlines" aria-hidden="true"></div>
+
+  <header class="nav-header" id="mainNav">
+    <nav class="nav-container" aria-label="Primary navigation">
+      <a href="/" class="nav-logo" aria-label="Carrillo Tech Solutions Home">
+        <img src="/assets/cts-logo-icon.png" alt="Carrillo Tech Solutions CTS logo" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+        <div class="logo-fallback">
+          <span class="logo-icon">⬡</span>
+          <div class="logo-text">
+            <span class="logo-cts">CTS</span>
+            <span class="logo-sub">Carrillo Tech Solutions</span>
+          </div>
+        </div>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-controls="navLinks" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="/#services" class="nav-link">Services</a></li>
+        <li><a href="/#portfolio" class="nav-link">Portfolio</a></li>
+        <li><a href="/digital-media-integration/" class="nav-link">Media</a></li>
+        <li><a href="/#architect" class="nav-link">Architect</a></li>
+        <li><a href="/#intel" class="nav-link active">Intel Hub</a></li>
+        <li><a href="/instructional-use/" class="nav-link">Guides</a></li>
+        <li><a href="/creative/" class="nav-link">Creative</a></li>
+        <li><a href="/readme/" class="nav-link">README</a></li>
+        <li><a href="/#contact" class="nav-cta"><i class="fas fa-terminal"></i> Deploy Support</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main-content" class="dispatch-page">
+    <section class="dispatch-hero" id="dispatch">
+      <div class="section-container">
+        <a href="/#intel" class="dispatch-back"><i class="fas fa-arrow-left"></i> Back to Intel Hub</a>
+
+        <div class="dispatch-page-card">
+          <div class="section-eyebrow">
+            <span class="eyebrow-line"></span>
+            <span id="dispatchCategory">FIELD DISPATCH</span>
+            <span class="eyebrow-line"></span>
+          </div>
+          <h1 id="dispatchTitle" class="dispatch-title">Decrypting Dispatch...</h1>
+          <p id="dispatchExcerpt" class="dispatch-excerpt">Loading technical intelligence from secure storage.</p>
+
+          <div id="dispatchImageFrame" class="dispatch-featured-image" hidden>
+            <img id="dispatchImage" src="" alt="" loading="lazy" />
+          </div>
+
+          <div class="dispatch-page-meta">
+            <span><i class="fas fa-calendar"></i> <span id="dispatchDate">SYNCING</span></span>
+            <button type="button" class="dispatch-copy-btn" id="copyDispatchLink">
+              <i class="fas fa-link"></i> Copy Share Link
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="dispatch-content-section">
+      <div class="section-container">
+        <article id="dispatchArticle" class="dispatch-article markdown-body">
+          <p class="admin-splash"><i class="fas fa-spinner fa-spin" aria-hidden="true"></i> DECRYPTING DISPATCH...</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="/" class="footer-logo-link">
+            <img src="/assets/cts-logo-icon.png" alt="Carrillo Tech Solutions CTS logo" class="footer-logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+            <span class="footer-logo-fallback">CTS</span>
+          </a>
+          <p class="footer-tagline">Carrillo Tech Solutions.<br />Engineered for Performance. Secured for the Future.</p>
+        </div>
+
+        <div class="footer-nav-col">
+          <h5>Command Links</h5>
+          <ul>
+            <li><a href="/#services">Services</a></li>
+            <li><a href="/#portfolio">Portfolio</a></li>
+            <li><a href="/digital-media-integration/">Digital Media Integration</a></li>
+            <li><a href="/technical-documentation/">Technical Documentation</a></li>
+            <li><a href="/#architect">Architect</a></li>
+            <li><a href="/#intel">Intel Hub</a></li>
+            <li><a href="/instructional-use/">Instructional Use</a></li>
+            <li><a href="/creative/">Creative Archive</a></li>
+            <li><a href="/readme/">README</a></li>
+            <li><a href="/#contact">Deploy Support</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-nav-col">
+          <h5>Legal</h5>
+          <ul>
+            <li><a href="/privacy.html">Privacy Policy</a></li>
+            <li><a href="/terms.html">Terms of Service</a></li>
+            <li><a href="/admin">Admin Portal</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-social-col">
+          <h5>Social Nodes</h5>
+          <div class="social-links">
+            <a href="https://twitch.tv/supergman2155" target="_blank" rel="noopener" class="social-node" aria-label="Twitch"><i class="fab fa-twitch"></i></a>
+            <a href="https://youtube.com/@supergman215" target="_blank" rel="noopener" class="social-node" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            <a href="https://instagram.com/G.io215" target="_blank" rel="noopener" class="social-node" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://linkedin.com/in/giovanni-carrillo" target="_blank" rel="noopener" class="social-node" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2026 Carrillo Tech Solutions LLC. All rights reserved.</span>
+        <span class="footer-sig">// CLEVELAND, OH // SYSTEMS NOMINAL</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/main.js"></script>
+  <script>
+    function getRequestedPostSlug() {
+      const params = new URLSearchParams(window.location.search);
+      const querySlug = params.get('post') || params.get('dispatch');
+      if (querySlug) return querySlug;
+
+      const match = window.location.pathname.match(/^\/intel\/(.+)$/);
+      return match ? decodeURIComponent(match[1].replace(/\/$/, '')) : '';
+    }
+
+    function setDispatchError(message) {
+      document.getElementById('dispatchTitle').textContent = 'Dispatch Not Found';
+      document.getElementById('dispatchExcerpt').textContent = message;
+      document.getElementById('dispatchDate').textContent = 'UNAVAILABLE';
+      const imageFrame = document.getElementById('dispatchImageFrame');
+      if (imageFrame) imageFrame.hidden = true;
+      document.getElementById('dispatchArticle').innerHTML = `
+        <div class="readme-error">
+          <h2>Unable to Load Dispatch</h2>
+          <p>${message}</p>
+          <a href="/#intel" class="btn btn-outline"><i class="fas fa-arrow-left"></i> Return to Intel Hub</a>
+        </div>
+      `;
+    }
+
+    async function loadDispatchPage() {
+      const slug = getRequestedPostSlug();
+      if (!slug) {
+        setDispatchError('No dispatch was selected. Return to the Intel Hub and choose a writeup.');
+        return;
+      }
+
+      try {
+        const response = await fetch(getPostPath(slug));
+        if (!response.ok) throw new Error('File not found');
+        const markdown = await response.text();
+        const dispatch = parseMarkdownDispatch(markdown, slug);
+
+        document.title = `${dispatch.title} | Carrillo Tech Solutions`;
+        document.getElementById('dispatchTitle').textContent = dispatch.title;
+        document.getElementById('dispatchExcerpt').textContent = dispatch.excerpt || 'Technical field dispatch from Carrillo Tech Solutions.';
+        document.getElementById('dispatchDate').textContent = dispatch.date;
+        document.getElementById('dispatchCategory').textContent = dispatch.category;
+
+        const imageFrame = document.getElementById('dispatchImageFrame');
+        const image = document.getElementById('dispatchImage');
+        if (imageFrame && image && dispatch.image) {
+          image.src = dispatch.image;
+          image.alt = `${dispatch.title} featured image`;
+          imageFrame.hidden = false;
+        } else if (imageFrame) {
+          imageFrame.hidden = true;
+        }
+
+        document.getElementById('dispatchArticle').innerHTML = marked.parse(dispatch.content);
+      } catch (error) {
+        setDispatchError('The requested dispatch could not be loaded. The file may have been moved, renamed, or removed.');
+      }
+    }
+
+    document.getElementById('copyDispatchLink').addEventListener('click', async () => {
+      const button = document.getElementById('copyDispatchLink');
+      try {
+        await navigator.clipboard.writeText(window.location.href);
+        button.innerHTML = '<i class="fas fa-check"></i> Link Copied';
+      } catch (error) {
+        button.innerHTML = '<i class="fas fa-triangle-exclamation"></i> Copy Failed';
+      }
+      setTimeout(() => { button.innerHTML = '<i class="fas fa-link"></i> Copy Share Link'; }, 2200);
+    });
+
+    loadDispatchPage();
+  </script>
+</body>
+</html>

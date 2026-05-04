@@ -132,7 +132,7 @@
 // ── Scroll Reveal ────────────────────────────────────
 (function initReveal() {
   const revealEls = document.querySelectorAll(
-    '.service-card, .portfolio-card, .blog-card, .asset-card, .hardware-card, .guide-card, .cred-item, .architect-profile-card, .cred-panel, .creator-panel, .contact-info-item'
+    '.service-card, .portfolio-card, .blog-card, .asset-card, .hardware-card, .guide-card, .proof-card, .evidence-hub-card, .cred-item, .architect-profile-card, .cred-panel, .creator-panel, .contact-info-item'
   );
   revealEls.forEach(el => el.classList.add('reveal'));
 
